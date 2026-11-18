@@ -92,6 +92,30 @@ None yet.
 
 ## Replies
 
+Handoff, for a session that takes the module up again. The module holds a material's description in
+glTF's terms with its file of its own and its import from glTF, the pictures' roles, layouts and
+color spaces, a KTX2 reader and decoders of RGBA8, BC1, BC4, BC5 and every mode of BC7, a material's
+means through `IMaterialFiles` with the engine's `Decode` for PNG or JPEG, the one prototype table,
+the surface response's terms with both hit forms and the integrated split sum that RadianceCascades'
+table is held to, a texture collection's manifest read in C#, and `scripts/textures.py`, the one
+encoder of BC7 modes 6, 1 and 7, BC5 and BC4. Modeling and Vegetation still take from it the
+encoder, rebuilding their sets by the commands of the Reply on the BC7 start vector, Modeling its
+material import, dropping its `Look` for `MaterialImport.FromGltf`, and Vegetation
+`TextureCollection` in place of its manifest parser. A fresh session reads AGENTS.md, this file's
+head, its Decisions and the newest Replies down to this one, then README.md and CHEATSHEET.md, and
+builds through the shared lock with a restore first, as NORM.md's N 7.9 asks.
+
+The C# encoder measured and held, not built, until the owner or an engine needs textures made at run
+time. BC7's mode 6 ported in a throwaway test with the script's arithmetic in its order writes all
+65,536 blocks of Modeling's carpet at its top level as the script does, 0 differing, at 0.0124 ms a
+block against the script's 0.12 on a quiet machine, and Pillow's halving of a level is two passes
+each rounding half up, `(a + b + 1) >> 1` across and then down, which 1,048,576 of 1,048,576
+channels of the carpet's second level match, so a C# encoder writes the script's bytes for sides of
+even length, an odd side taking Pillow's general box coefficients, unmeasured. The proposal as it
+stands is `Ktx2Writer.Encode(rgba, width, height, role)` for BC7 in sRGB or linear, BC5 and BC4 with
+the plain mip chain, about 700 lines with 200 of tests, held to a reference the script writes from a
+drawn tile, the recipes staying in Python.
+
 The second of the next three in the commit carrying this line, `TextureCollection.Read`, a
 collection's `textures.json` read in C# to its entries, each a `TextureEntry` of its `TextureKind`,
 its albedo, normal and surface as pictures in a folder of its name beside the manifest or in its
