@@ -92,6 +92,33 @@ None yet.
 
 ## Replies
 
+The third of the three in the commit carrying this line, `MaterialImport.FromGltf`, a glTF's
+materials read into descriptions, from its JSON or from a root already parsed with a material's
+index, taking over the material work of Modeling's reader. It reads what that reader reads, glTF's
+defaults with a metallic and a roughness of one, the emissive factor times
+`KHR_materials_emissive_strength` as `Unitless`, the alpha mode and cutoff, double-sided and the
+base color, metallic-roughness, normal, occlusion and emissive textures, an image in a data URI
+giving no picture, and adds `KHR_materials_ior` as the reflectance and
+`KHR_materials_diffuse_transmission` with its texture's alpha. Roles of one image are one picture
+where their channels do not meet, so an ORM texture is one picture of occlusion, roughness and
+metallic. Modeling's reader then drops its `Look` and the `Image` inside it and calls the import
+with its root, the material's index and the file's path, keeping its `Joined` for its buffers. Three
+things it does change for Modeling's files. A factor out of glTF's range is refused with the rule
+where the reader clamped it, an alpha mode glTF does not name is refused where the reader took it as
+opaque, and an image whose path holds a space keeps its picture where the reader dropped it. The
+tests failed first at the build, the type being absent, and the test of a rooted image's path came
+with its mend in the same pass. The strict build is clean with 132 tests passing (`dotnet test
+Materials.Tests`).
+
+Mode 5 measured and left out. A trial of it, one subset with seven-bit color and eight-bit alpha
+ends each on indices of its own, its bits checked against Pillow, was set against modes 6 and 7 with
+the best kept for each block of 64 by 64 texels. On lettering over a see-through ground modes 6 and
+7 give 35.75 dB in color and 35.42 in alpha and mode 5 adds nothing, 0% of the blocks taking it, and
+on a smooth see-through glass whose color runs one way and its opacity another mode 6 alone gives
+50.85 and 46.37 dB and 0% take mode 5. Its one line of color loses more where strokes cross a varied
+ground than its finer alpha gains, and mode 7 holds the see-through ground where it needed help, so
+the module carries no mode 5.
+
 The second of the three in the commit carrying this line, BC7's mode 7 for a block with alpha.
 Measured first, Vegetation's leaf sets decoded and encoded again come back at 63 to 68 dB, which
 measures nothing, their blocks being mode 6's lines already, and its manifest records their first

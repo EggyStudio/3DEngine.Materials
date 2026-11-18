@@ -88,6 +88,10 @@ string Extension = ".material.json";                     // The extension a mate
 MaterialDescription Read(string json, string path);      // Reads a material from its file's text
 string Write(MaterialDescription material, string path);  // Writes a material as its file's text, each field the description holds
 
+class MaterialImport                                     // The materials of a glTF 2.0 file read into descriptions, its factors, its alpha mode and its textures by the roles glTF gives them, with the extensions the description holds
+IReadOnlyList<MaterialDescription> FromGltf(string json, string path);  // Every material of a glTF file, in the order of its materials
+MaterialDescription FromGltf(JsonElement root, int index, string path);  // A material of a glTF file already parsed, by its index
+
 record struct MaterialMeans                              // A material's means over its surface, which a far card, a picture of many surfaces at once, or a field of the scene's light is painted with where the pictures themselves are too fine to read
 int LongestSide = 64;                                    // The longest side of the level the means are read from, the first level of each picture that fits it, so a picture's cost is a few thousand texels whatever its size
 MaterialMeans(Vector3 Color, float Opacity, float Occlusion, float Roughness, float Metallic, float DiffuseTransmission);
