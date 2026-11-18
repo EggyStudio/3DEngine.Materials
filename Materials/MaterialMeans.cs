@@ -97,7 +97,7 @@ public readonly record struct MaterialMeans(Vector3 Color, float Opacity, float 
             double weights = 0;
             foreach (var (x, y, w) in Texelwise(picture, Weight))
             {
-                sum += (float)w * new Vector3(Linear(picture.Byte(x, y, 0)), Linear(picture.Byte(x, y, 1)), Linear(picture.Byte(x, y, 2)));
+                sum += (float)w * new Vector3(Srgb.Decode(picture.Byte(x, y, 0) / 255f), Srgb.Decode(picture.Byte(x, y, 1) / 255f), Srgb.Decode(picture.Byte(x, y, 2) / 255f));
                 weights += w;
             }
 
@@ -132,13 +132,6 @@ public readonly record struct MaterialMeans(Vector3 Color, float Opacity, float 
         for (int y = 0; y < picture.Height; y++)
         for (int x = 0; x < picture.Width; x++)
             yield return (x, y, total > 0 ? weights[y * picture.Width + x] : 1.0);
-    }
-
-    // An sRGB byte decoded to linear light by the sRGB transfer function.
-    private static float Linear(byte value)
-    {
-        var c = value / 255f;
-        return c <= 0.04045f ? c / 12.92f : MathF.Pow((c + 0.055f) / 1.055f, 2.4f);
     }
 
     // A decoded level, four bytes a texel, and the channel a role stands in.

@@ -92,6 +92,17 @@ None yet.
 
 ## Replies
 
+Part 4 in the commit carrying this line, `Prototypes`, one table of the seven parts' colors, the
+grid of a meter's cell, a prototype's picture tinted in linear light and a prototype as a
+`MaterialDescription`, rough at 0.85 and not metal. The table and the grid's tones proposed are
+BevyCSharp's, whose remarks give their reason, and the seven pictures at 512 pixels are BevyCSharp's
+level editor pictures byte for byte, held by their hashes. The reading `2026-11-18-item-3-prototype-
+tables.webp` sets both engines' tables side by side for the owner, stairs, door, window and hazard
+one color in both and darker in 3DEngine's for its grid face of 230 against 252, floor, wall and
+ceiling its grays of 79, 181 and 209 against near whites of 0.90, 0.90 and 0.95. No table is final
+until the owner has seen it, and neither engine changes its prototypes before. The strict build is
+clean with 94 tests passing (`dotnet test Materials.Tests`).
+
 Part 3 in the commit carrying this line. `MaterialDescription` holds glTF's factors with the
 reflectance at normal incidence, 0.04 where nothing is given, the emitted light in candelas a square
 meter and its pictures, and says every rule it breaks, a factor out of its range or a role two

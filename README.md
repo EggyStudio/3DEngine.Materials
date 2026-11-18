@@ -18,6 +18,7 @@ its own textures and materials.
 | `Reflectance` | A dielectric's reflectance at normal incidence, 0.04 by default, with glTF's index of refraction and the perceptual reflectance whose square times 0.16 it is as functions of it |
 | `MaterialMeans` | A material's mean color in linear light and its mean surface over what its opacity covers, read through `IMaterialFiles` from a level of 64 texels a side at most |
 | `IMaterialFiles` | The one thing the module asks of an engine, a file's bytes by its path |
+| `Prototypes` | The prototype materials a level is blocked out with, seven parts of a level by name, their colors, the grid of a meter's cells with its lines and its `1m` mark, a prototype's picture tinted in linear light as a level editor shows it, and a prototype as a `MaterialDescription` |
 | `ColorSpace` | Whether a picture's red, green and blue are sRGB or linear, its alpha linear in either |
 | `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
 | `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
