@@ -9,6 +9,7 @@ folder, names, by the recipe the manifest gives each entry.
     scripts/textures.py --sample DIR                # write an entry of no source, for the tests
     scripts/textures.py --repeat FILE DX DY         # the shift near DX, DY where a scan repeats
     scripts/textures.py --encode RGBA W H OUT       # a raw picture as BC7 with its levels, as it is
+                                                    # (--format bc5 or bc4 for red and green or red)
 
 An entry is three KTX2 files with their mipmaps, and a fourth for a bark, each level's blocks kept
 as they are with no supercompression, so a reader on .NET alone and a GPU take them with no step
@@ -157,6 +158,7 @@ def main():
     parser.add_argument("--repeat", nargs=3, metavar=("FILE", "DX", "DY"), help="print the shift near DX, DY at which the scan in FILE best matches itself")
     parser.add_argument("--encode", nargs=4, metavar=("RGBA", "WIDTH", "HEIGHT", "OUT"), help="write a raw picture, four bytes a texel, as a KTX2 file of BC7 with its levels, neither bled nor cut")
     parser.add_argument("--linear", action="store_true", help="name the --encode file's color space linear rather than sRGB")
+    parser.add_argument("--format", choices=("bc7", "bc5", "bc4"), default="bc7", help="the --encode file's format, BC7, BC5 of red and green, or BC4 of red")
     arguments = parser.parse_args()
 
     if arguments.sample:
@@ -168,9 +170,17 @@ def main():
         source, width, height, out = arguments.encode
         with open(source, "rb") as file:
             image = Image.frombytes("RGBA", (int(width), int(height)), file.read())
-        levels = mip_chain(image, bled=False)
+        if arguments.format == "bc4":
+            levels = mip_chain(image.getchannel("R"), bled=False)
+            data = ktx2(BC4_UNORM, levels, [bc4(level) for level in levels])
+        elif arguments.format == "bc5":
+            levels = mip_chain(image, bled=False)
+            data = ktx2(BC5_UNORM, levels, [bc5(level) for level in levels])
+        else:
+            levels = mip_chain(image, bled=False)
+            data = ktx2(BC7_UNORM if arguments.linear else BC7_SRGB, levels, [bc7(level) for level in levels])
         with open(out, "wb") as file:
-            file.write(ktx2(BC7_UNORM if arguments.linear else BC7_SRGB, levels, [bc7(level) for level in levels]))
+            file.write(data)
         return 0
 
     if arguments.repeat:

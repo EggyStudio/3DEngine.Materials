@@ -179,6 +179,7 @@ Ktx2 Read(ReadOnlySpan<byte> file);                      // Reads a KTX2 file fr
 
 class Ktx2Writer                                         // A picture written as a KTX2 file of BC7 blocks with its levels down to a texel, the bytes scripts/textures.py writes for the same picture, so an engine makes a texture at run time without the script
 byte[] Encode(byte[] rgba, int width, int height, ColorSpace colorSpace);  // A picture as a KTX2 file of BC7 blocks with all its levels
+byte[] Encode(byte[] rgba, int width, int height, PictureFormat format, ColorSpace colorSpace);  // A picture as a KTX2 file of BC7, of BC5 of its red and green as a normal holds them, or of BC4 of its red as a depth does, with all its levels
 
 class Texels                                             // A picture's texels in a PictureFormat, their size and their decoding to four bytes a texel
 int BlockBytes(PictureFormat format);                    // How many bytes a block of the format holds, or 4 for a texel of Rgba8

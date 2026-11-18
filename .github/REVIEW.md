@@ -92,6 +92,14 @@ None yet.
 
 ## Replies
 
+The C# encoder's third step in the commit carrying this line, BC5 and BC4 in `Ktx2Writer`, `Encode`
+with a format, BC5 of a picture's red and green as a normal holds them and BC4 of its red as a depth
+does, each block its high value first as the script's `bc4_block` writes it, and their data format
+descriptors. It writes the script's bytes for the drawn picture in both, `references/encoder/modes-
+bc5.ktx2` and `modes-bc4.ktx2`, which `scripts/textures.py --encode` with `--format bc5` or `bc4`
+writes, its BC4 reading red where the build reads a depth's one channel. The tests failed first at
+the build. The strict build is clean with 149 tests passing (`dotnet test Materials.Tests`).
+
 The C# encoder's second step in the commit carrying this line, modes 1 and 7 in `Ktx2Writer`, ported
 from the script's functions. It writes the script's bytes for a drawn 16 by 16 picture whose top
 level holds blocks of modes 1, 6 and 7, `references/encoder/modes-albedo.ktx2`, which

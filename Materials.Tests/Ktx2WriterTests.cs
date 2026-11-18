@@ -55,6 +55,35 @@ public class Ktx2WriterTests
         }
     }
 
+    [Theory]
+    [InlineData(PictureFormat.Bc5, "modes-bc5.ktx2")]
+    [InlineData(PictureFormat.Bc4, "modes-bc4.ktx2")]
+    public void The_Writer_Writes_The_Scripts_Bytes_In_Bc5_And_Bc4(PictureFormat format, string reference)
+    {
+        // BC5 of the picture's red and green and BC4 of its red, as a normal and a depth hold them.
+        var rgba = File.ReadAllBytes(Path.Combine(Reference, "source", "modes.rgba"));
+        Assert.Equal(File.ReadAllBytes(Path.Combine(Reference, reference)), Ktx2Writer.Encode(rgba, 16, 16, format, ColorSpace.Linear));
+    }
+
+    [NeedsPillowFact]
+    public void The_Scripts_Bc5_And_Bc4_Write_Their_References()
+    {
+        var folder = Directory.CreateTempSubdirectory("materials-bc45-");
+        try
+        {
+            foreach (var format in new[] { "bc5", "bc4" })
+            {
+                var written = Path.Combine(folder.FullName, format + ".ktx2");
+                Programs.Script("textures.py", "--encode", Path.Combine(Reference, "source", "modes.rgba"), "16", "16", written, "--format", format);
+                Assert.Equal(File.ReadAllBytes(Path.Combine(Reference, $"modes-{format}.ktx2")), File.ReadAllBytes(written));
+            }
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
     [NeedsPillowFact]
     public void The_Script_Writes_The_Reference_From_Its_Source()
     {

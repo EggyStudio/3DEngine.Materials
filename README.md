@@ -24,7 +24,7 @@ binds it by reading the values it gives into its own textures and materials.
 | `Prototypes` | The one table of prototype materials a level is blocked out with, seven parts of a level by name, their colors, the grid of a meter's cells with its lines and its `1m` mark, a prototype's picture tinted in linear light as a level editor shows it, and a prototype as a `MaterialDescription` |
 | `ColorSpace` | Whether a picture's red, green and blue are sRGB or linear, its alpha linear in either |
 | `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
-| `Ktx2Writer` | A picture whose sides are powers of two written as a KTX2 file of BC7 blocks in modes 6, 1 and 7 with all its levels, the bytes `scripts/textures.py --encode` writes for the same picture, so a texture is made at run time without the script |
+| `Ktx2Writer` | A picture whose sides are powers of two written as a KTX2 file of BC7 blocks in modes 6, 1 and 7, of BC5 of its red and green or of BC4 of its red, with all its levels, the bytes `scripts/textures.py --encode` writes for the same picture, so a texture is made at run time without the script |
 | `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
 
 The decoders give what Pillow's give for 412 blocks, every partition of BC7's and pictures whose
@@ -178,7 +178,7 @@ Pillow, and its docstring gives the recipe.
 python3 -I scripts/textures.py <collection>/textures.json [names] [--sources DIR] [--out DIR]
 python3 -I scripts/textures.py --sample DIR
 python3 -I scripts/textures.py --repeat FILE DX DY
-python3 -I scripts/textures.py --encode RGBA WIDTH HEIGHT OUT [--linear]
+python3 -I scripts/textures.py --encode RGBA WIDTH HEIGHT OUT [--linear] [--format bc7|bc5|bc4]
 ```
 
 A source is a folder under `--sources`, the repository's root where none is given, and `--out`

@@ -36,8 +36,26 @@ public static class Ktx2Writer
     /// otherwise.</param>
     /// <exception cref="ArgumentException">A side is no power of two, or the texels are not its
     /// size.</exception>
-    public static byte[] Encode(byte[] rgba, int width, int height, ColorSpace colorSpace)
+    public static byte[] Encode(byte[] rgba, int width, int height, ColorSpace colorSpace) =>
+        Encode(rgba, width, height, PictureFormat.Bc7, colorSpace);
+
+    /// <summary>
+    /// A picture as a KTX2 file of BC7, of BC5 of its red and green as a normal holds them, or of
+    /// BC4 of its red as a depth does, with all its levels.
+    /// </summary>
+    /// <param name="rgba">The texels, four bytes each, rows from the top.</param>
+    /// <param name="width">The width in texels, a power of two.</param>
+    /// <param name="height">The height in texels, a power of two.</param>
+    /// <param name="format">BC7, BC5 or BC4.</param>
+    /// <param name="colorSpace">The color space BC7's file names, sRGB or linear; BC5 and BC4 are
+    /// linear.</param>
+    /// <exception cref="ArgumentException">
+    /// A side is no power of two, the texels are not its size, or the format is none of the three.
+    /// </exception>
+    public static byte[] Encode(byte[] rgba, int width, int height, PictureFormat format, ColorSpace colorSpace)
     {
+        if (format is not (PictureFormat.Bc7 or PictureFormat.Bc5 or PictureFormat.Bc4))
+            throw new ArgumentException($"The writer writes BC7, BC5 and BC4, and {format} was asked for.", nameof(format));
         ArgumentNullException.ThrowIfNull(rgba);
         if (width < 1 || height < 1 || (width & (width - 1)) != 0 || (height & (height - 1)) != 0)
             throw new ArgumentException($"A picture of {width} by {height} is encoded where each side is a power of two, so every level halves whole.");
@@ -47,8 +65,14 @@ public static class Ktx2Writer
         var levels = new List<(byte[] Rgba, int Width, int Height)> { (rgba, width, height) };
         while (levels[^1].Width > 1 || levels[^1].Height > 1)
             levels.Add(Halved(levels[^1].Rgba, levels[^1].Width, levels[^1].Height));
-        var blocks = levels.Select(level => Blocks(level.Rgba, level.Width, level.Height)).ToList();
-        return File(colorSpace == ColorSpace.Srgb ? 146u : 145u, width, height, blocks);
+        var blocks = levels.Select(level => Blocks(level.Rgba, level.Width, level.Height, format)).ToList();
+        uint vkFormat = format switch
+        {
+            PictureFormat.Bc5 => 141u,
+            PictureFormat.Bc4 => 139u,
+            _ => colorSpace == ColorSpace.Srgb ? 146u : 145u,
+        };
+        return File(vkFormat, width, height, blocks);
     }
 
     // A level halved where its side is more than one, across and then down, each pass a half up.
@@ -71,7 +95,7 @@ public static class Ktx2Writer
     }
 
     // A level's blocks in rows from the top, a level smaller than a block repeating its edge.
-    private static byte[] Blocks(byte[] rgba, int width, int height)
+    private static byte[] Blocks(byte[] rgba, int width, int height, PictureFormat format)
     {
         var output = new List<byte>();
         var texels = new int[16][];
@@ -84,7 +108,12 @@ public static class Ktx2Writer
                 texels[i] = [rgba[at], rgba[at + 1], rgba[at + 2], rgba[at + 3]];
             }
 
-            output.AddRange(Block(texels));
+            if (format == PictureFormat.Bc7) output.AddRange(Block(texels));
+            else
+            {
+                output.AddRange(Bc4([.. texels.Select(texel => texel[0])]));
+                if (format == PictureFormat.Bc5) output.AddRange(Bc4([.. texels.Select(texel => texel[1])]));
+            }
         }
 
         return [.. output];
@@ -234,6 +263,27 @@ public static class Ktx2Writer
         var block = new byte[16];
         BinaryPrimitives.WriteUInt128LittleEndian(block, bits);
         return (block, Error(texels, e0, e1, indices));
+    }
+
+    // -- BC4, and each half of BC5
+
+    // One channel's block in BC4's eight-step mode, its highest value first, as the script writes
+    // it.
+    private static byte[] Bc4(int[] values)
+    {
+        int high = values.Max(), low = values.Min();
+        ulong bits = (uint)high | (ulong)(uint)low << 8;
+        if (high != low)
+            for (int i = 0; i < 16; i++)
+            {
+                int step = (int)((values[i] - low) * 7 / (double)(high - low) + 0.5);
+                int index = step == 7 ? 0 : step == 0 ? 1 : 8 - step;
+                bits |= (ulong)(uint)index << (16 + 3 * i);
+            }
+
+        var block = new byte[8];
+        BinaryPrimitives.WriteUInt64LittleEndian(block, bits);
+        return block;
     }
 
     // -- Mode 1, two subsets of an opaque block, six bits a channel and a bit each subset's ends
@@ -802,13 +852,24 @@ public static class Ktx2Writer
     {
         var descriptor = new List<byte>();
         void U32(List<byte> into, uint value) { Span<byte> b = stackalloc byte[4]; BinaryPrimitives.WriteUInt32LittleEndian(b, value); into.AddRange(b.ToArray()); }
+        // The color model, the transfer, the block's bytes and its samples' offset, bit length less
+        // one and channel, as the script's data_format gives them.
+        var (model, transfer, bytes, samples) = vkFormat switch
+        {
+            139u => (131, 1, 8, new (int Offset, int Length, int Channel)[] { (0, 63, 0) }),
+            141u => (132, 1, 16, [(0, 63, 0), (64, 63, 1)]),
+            _ => (134, vkFormat == 146 ? 2 : 1, 16, [(0, 127, 0)]),
+        };
         var block = new List<byte>();
         U32(block, 0);
-        U32(block, 2u | (24u + 16u) << 16);
-        block.AddRange([134, 1, (byte)(vkFormat == 146 ? 2 : 1), 0, 3, 3, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0]);
-        block.AddRange([0, 0, 127, 0, 0, 0, 0, 0]);
-        U32(block, 0);
-        U32(block, 0xFFFFFFFF);
+        U32(block, 2u | (uint)(24 + 16 * samples.Length) << 16);
+        block.AddRange([(byte)model, 1, (byte)transfer, 0, 3, 3, 0, 0, (byte)bytes, 0, 0, 0, 0, 0, 0, 0]);
+        foreach (var (offset, length, channel) in samples)
+        {
+            block.AddRange([(byte)offset, (byte)(offset >> 8), (byte)length, (byte)channel, 0, 0, 0, 0]);
+            U32(block, 0);
+            U32(block, 0xFFFFFFFF);
+        }
         U32(descriptor, (uint)(4 + block.Count));
         descriptor.AddRange(block);
 
