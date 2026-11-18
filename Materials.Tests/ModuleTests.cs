@@ -7,7 +7,8 @@ namespace Materials.Tests;
 /// <summary>
 /// The checks every module keeps, from the Tools submodule, that the library takes no engine,
 /// window or graphics API, names no engine in a public member or its documentation and has every
-/// public type named in the README, and that the README's binding block is the host's code.
+/// public type named in the README, that the README's binding block is the host's code, and that
+/// the cheat sheet is what the built library writes.
 /// </summary>
 public sealed class ModuleTests
 {
@@ -35,4 +36,11 @@ public sealed class ModuleTests
     [Fact]
     public void The_Readmes_Binding_Block_Stands_Word_For_Word_In_The_Host() =>
         Assert.Null(ModuleChecks.BindingBlock(Readme, File.ReadAllText(Path.Combine(Root, Host))));
+
+    [Fact]
+    public void The_Cheatsheet_Is_What_The_Built_Library_Writes()
+    {
+        var fault = ModuleChecks.CheatsheetFault(Assembly.Load(Library), Readme, Path.Combine(Root, "CHEATSHEET.md"));
+        Assert.True(fault is null, fault);
+    }
 }

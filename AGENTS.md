@@ -16,6 +16,7 @@ binds the module.
 | [.github/COMMITS.md](.github/COMMITS.md) | How and when work is committed |
 | [.github/REVIEW.md](.github/REVIEW.md) | Direction from the reviewing session, which comes before any other order of work |
 | [.github/NORM.md](.github/NORM.md) | The numbered rules the module keeps, each with what checks it, the same text in the eight module repositories |
+| [CHEATSHEET.md](CHEATSHEET.md) | Every public type and member a line, written from the built library by Tools' `Cheatsheet.Write` with `CHEATSHEET_WRITE=1 dotnet test Materials.Tests`, the text around the list by hand, and held to the library by a test |
 | [DEVLOG.md](DEVLOG.md) | What landed by day, with the pictures `.github/assets/readings` keeps, generated from them and the history by `python3 -I modules/Tools/scripts/devlog.py . Materials` in every commit that closes an item or adds a picture |
 
 ## Building and testing

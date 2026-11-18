@@ -1,6 +1,6 @@
 # Materials
 
-[DEVLOG.md](DEVLOG.md) holds what landed by day, with the pictures taken on the way.
+[Devlog](DEVLOG.md) [Cheat sheet](CHEATSHEET.md)
 
 Materials is a library an engine takes as a git submodule, for what a surface is, a material's
 description, the pictures it is drawn with and their encoding, and the response of a lit surface to
