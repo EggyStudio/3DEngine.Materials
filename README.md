@@ -12,6 +12,7 @@ its own textures and materials.
 |---|---|
 | `PictureRole` and `PictureLayout` | What each channel of a material's picture holds, in glTF 2.0's terms, and the color space the picture is read in, sRGB where it holds a color and linear otherwise, with the layouts glTF binds and the texture collections write, the surface's occlusion, roughness, metallic and diffuse transmission among them |
 | `MaterialPicture` | A picture a material is drawn with, its path among the engine's files and its layout |
+| `ColorSpace` | Whether a picture's red, green and blue are sRGB or linear, its alpha linear in either |
 | `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
 | `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
 
@@ -75,8 +76,8 @@ own calls, whatever it names them.
 var albedo = new MaterialPicture("textures/bark/albedo.ktx2", PictureLayout.Color);
 var picture = Ktx2.Read(host.ReadAllBytes(albedo.Path));
 
-// The levels go to the GPU as they are where it samples the format, and decoded where it does not,
-// through a view of the layout's color space.
+// The levels go to the GPU as they are where it samples the format and decoded where it
+// does not, through a view of the layout's color space.
 var format = host.Samples(picture.Format) ? picture.Format : PictureFormat.Rgba8;
 var levels = format == picture.Format
     ? picture.Levels
