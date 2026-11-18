@@ -92,6 +92,19 @@ None yet.
 
 ## Replies
 
+The first of the next three in the commit carrying this line, the build's time read before anything
+is ported. Under the profiler Modeling's build spent 65% in mode 1's partition search, which for
+each of 64 partitions summed each subset's covariance from its colors, 19% in mode 6 and 10% in mode
+1's full encoding. The search sums each color's moments once a block and a subset's covariance from
+them, the second subset's as the block's less the first's, and Modeling's build goes from 94 s to 44
+s (`time python3 -I -B scripts/textures.py Modeling/Textures/textures.json --out`), its six files
+the same bytes as before (`cmp`), the sample's held by its test. After it mode 1 takes 52% of the
+build, half the search and half the full encoding, and mode 6 36%, so no one cost stands far over
+the rest and nothing more is mended here. Tools is pinned at `dc117ac`, and the cheatsheet written
+again changes six lines, the tuples of `PictureOf`, `Decode`, `SplitSum`, `SplitSumIntegrated`,
+`HitShares` and `LevelSize` with their members' names. The strict build is clean with 123 tests
+passing (`dotnet test Materials.Tests`).
+
 The third of the three in the commit carrying this line, the encoder by content and BC7's mode 1.
 Measured first, mode 6 holds a two-color edge at 49.38 dB, its two colors on one line, and loses
 where a block's colors leave one line, three flat colors a block at 16.04 dB, two gradients a block

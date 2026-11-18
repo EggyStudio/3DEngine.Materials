@@ -987,37 +987,56 @@ def mode1_block(texels):
     if all(color == colors[0] for color in colors):
         return None
     best = None
-    for partition in sorted(range(64), key=lambda p: off_lines(colors, PARTITION_MASKS[p]))[:2]:
+    moments = [moments_of(color) for color in colors]
+    total = [sum(m[k] for m in moments) for k in range(10)]
+    for partition in sorted(range(64), key=lambda p: off_lines(moments, total, PARTITION_MASKS[p]))[:2]:
         encoded = mode1_partition(colors, partition)
         if best is None or encoded[1] < best[1]:
             best = encoded
     return best
 
 
-def off_lines(colors, mask):
+def moments_of(color):
+    """A color's count, its three channels and the six products of two channels, which summed over
+    a subset give the subset's covariance."""
+    r, g, b = color
+    return (1, r, g, b, r * r, r * g, r * b, g * g, g * b, b * b)
+
+
+def off_lines(moments, total, mask):
     """How far a partition's two subsets' colors lie off the lines through them, the spread of each
-    less the spread along its principal axis."""
-    total = 0.0
-    for subset in (0, 1):
-        members = [colors[i] for i in range(16) if (mask >> i & 1) == subset]
-        if len(members) < 2:
+    less the spread along its principal axis, from the colors' moments summed over each subset, the
+    second subset's sums taken from the whole block's less the first's."""
+    second = [0] * 10
+    at = mask
+    while at:
+        low = at & -at
+        m = moments[low.bit_length() - 1]
+        for k in range(10):
+            second[k] += m[k]
+        at ^= low
+    result = 0.0
+    for sums in ([total[k] - second[k] for k in range(10)], second):
+        count = sums[0]
+        if count < 2:
             continue
-        count = float(len(members))
-        mean = [sum(m[c] for m in members) / count for c in range(3)]
-        covariance = [[sum((m[i] - mean[i]) * (m[j] - mean[j]) for m in members) for j in range(3)] for i in range(3)]
-        trace = covariance[0][0] + covariance[1][1] + covariance[2][2]
+        mr, mg, mb = sums[1] / count, sums[2] / count, sums[3] / count
+        rr, rg, rb = sums[4] - count * mr * mr, sums[5] - count * mr * mg, sums[6] - count * mr * mb
+        gg, gb, bb = sums[7] - count * mg * mg, sums[8] - count * mg * mb, sums[9] - count * mb * mb
+        covariance = ((rr, rg, rb), (rg, gg, gb), (rb, gb, bb))
+        trace = rr + gg + bb
         widest = max(range(3), key=lambda c: covariance[c][c])
         axis = list(covariance[widest])
         for _ in range(4):
-            axis = [sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)]
+            axis = [covariance[i][0] * axis[0] + covariance[i][1] * axis[1] + covariance[i][2] * axis[2] for i in range(3)]
             largest = max(abs(value) for value in axis)
             if largest == 0.0:
                 break
             axis = [value / largest for value in axis]
-        length = sum(value * value for value in axis)
-        along = 0.0 if length == 0.0 else sum(axis[i] * sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)) / length
-        total += trace - along
-    return total
+        length = axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]
+        along = 0.0 if length == 0.0 else sum(axis[i] * (covariance[i][0] * axis[0] + covariance[i][1] * axis[1] + covariance[i][2] * axis[2]) for i in range(3)) / length
+        result += trace - along
+    return result
 
 
 def mode1_partition(colors, partition):

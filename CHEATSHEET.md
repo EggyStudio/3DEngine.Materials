@@ -63,7 +63,7 @@ bool DoubleSided { get; init; }                          // Whether the surface 
 IReadOnlyList<MaterialPicture> Pictures { get; init; }   // The pictures that scale the factors, no role held by two of them
 bool Equals(MaterialDescription? other);                 // Whether two descriptions hold the same factors and the same pictures in the same order
 int GetHashCode();                                       // A hash of the factors and the pictures, alike for descriptions Equals holds the same
-(MaterialPicture, int)? PictureOf(PictureRole role);     // The picture that holds a role and the channel the role stands in, or nothing where none does
+(MaterialPicture Picture, int Channel)? PictureOf(PictureRole role);  // The picture that holds a role and the channel the role stands in, or nothing where none does
 IReadOnlyList<string> Problems();                        // Each rule the description breaks, a sentence each, or none
 
 enum AlphaMode                                           // How a material's opacity is read, glTF's three modes
@@ -101,7 +101,7 @@ MaterialMeans Of(MaterialDescription material, IMaterialFiles files);  // The me
 
 interface IMaterialFiles                                 // The engine's files, by the paths a material's pictures name, the one thing the module asks of an engine
 byte[] ReadAllBytes(string path);                        // The whole file at a path
-(byte[], int, int)? Decode(string path, byte[] file);    // A picture of a format the module does not read, as PNG or JPEG, decoded by the engine, or nothing where the engine reads none of it either
+(byte[] Rgba, int Width, int Height)? Decode(string path, byte[] file);  // A picture of a format the module does not read, as PNG or JPEG, decoded by the engine, or nothing where the engine reads none of it either
 
 class SurfaceResponse                                    // How a lit surface sends its light back, the terms of a microfacet response and the two forms a probe's ray takes it in where it meets a surface, written down as they stand until a room read against its traced reference chooses between them
 float LeastRoughnessFullPrecision = 0.045f;              // The least perceptual roughness a response computed in single precision takes, 0.045, as Filament's material model holds it, a smaller one's distribution passing what the precision keeps
@@ -114,9 +114,9 @@ Vector3 Fresnel(Vector3 f0, float f90, float vh);        // Schlick's Fresnel fo
 float Lambert();                                         // Lambert's diffuse term, one over pi
 float Burley(float alpha, float nv, float nl, float lh);  // Burley's diffuse term, which darkens a smooth surface's edges and lightens a rough one's
 Vector3 F0(Vector3 baseColor, float metallic, float reflectance);  // The reflectance at normal incidence of a surface, the dielectric's reflectance moved toward the base color by how metal it is
-(float, float) SplitSum(float roughness, float nv);      // Karis's fit of the split sum, the scale on a reflectance and the bias added to it that give the share of the light from all around a surface reflects toward the eye
-(float, float) SplitSumIntegrated(float roughness, float nv, int samples = 1024);  // The split sum integrated by importance sampling GGX, the scale and the bias of SplitSum without a fit, for a table an engine samples
-(Vector3, Vector3) HitShares(SurfaceResponse.HitForm form, Vector3 paint, float metallic, float roughness, float reflectance, float nv);  // The weights a probe's ray gives a surface it meets in a form, the diffuse color that takes the light from all around and the glossy share that takes the light along the mirror way
+(float Scale, float Bias) SplitSum(float roughness, float nv);  // Karis's fit of the split sum, the scale on a reflectance and the bias added to it that give the share of the light from all around a surface reflects toward the eye
+(float Scale, float Bias) SplitSumIntegrated(float roughness, float nv, int samples = 1024);  // The split sum integrated by importance sampling GGX, the scale and the bias of SplitSum without a fit, for a table an engine samples
+(Vector3 Diffuse, Vector3 Glossy) HitShares(SurfaceResponse.HitForm form, Vector3 paint, float metallic, float roughness, float reflectance, float nv);  // The weights a probe's ray gives a surface it meets in a form, the diffuse color that takes the light from all around and the glossy share that takes the light along the mirror way
 
 class Prototypes                                         // The prototype materials a level is blocked out with, a grid of a meter's cells tinted by a color for each part of a level, so a reader tells what each surface is for before it has textures of its own
 float Roughness = 0.85f;                                 // The roughness of every prototype
@@ -144,7 +144,7 @@ ColorSpace ColorSpace { get; }                           // Whether red, green a
 int Width { get; }                                       // The width of level 0 in texels
 int Height { get; }                                      // The height of level 0 in texels
 IReadOnlyList<byte[]> Levels { get; }                    // Each level's texels in Format, level 0 first
-(int, int) LevelSize(int level);                         // A level's width and height in texels
+(int Width, int Height) LevelSize(int level);            // A level's width and height in texels
 byte[] Decode(int level = 0);                            // A level decoded to four bytes a texel, as Decode gives it
 Ktx2 Read(ReadOnlySpan<byte> file);                      // Reads a KTX2 file from its bytes
 
