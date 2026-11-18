@@ -3,6 +3,8 @@
     <!-- The library both engines reference from their own projects, which knows no engine
          (N 2.1). -->
     <PropertyGroup>
+        <AssemblyName>3DEngine.Materials</AssemblyName>
+        <PackageId>3DEngine.Materials</PackageId>
         <RootNamespace>Materials</RootNamespace>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
