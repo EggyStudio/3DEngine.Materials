@@ -83,6 +83,27 @@ public class SurfaceResponseTests
     }
 
     [Fact]
+    public void The_Integrated_Split_Sum_Gives_What_A_Table_Kept_Elsewhere_Is_Held_To()
+    {
+        // Read at 1024 points where none are given, the values a table of the split sum is held
+        // to, so a change to the points, the sampling or the visibility shows here first.
+        Assert.Equal(SurfaceResponse.SplitSumIntegrated(0.5f, 0.9f, 1024), SurfaceResponse.SplitSumIntegrated(0.5f, 0.9f));
+        (float Roughness, float Nv, float Scale, float Bias)[] held =
+        [
+            (0.25f, 0.5f, 0.95566016f, 0.032547668f),
+            (0.5f, 0.9f, 0.90770125f, 0.00034933334f),
+            (0.75f, 0.25f, 0.7158335f, 0.028005159f),
+            (1f, 1f, 0.3073074f, 3.3613607e-05f),
+        ];
+        foreach (var (roughness, nv, scale, bias) in held)
+        {
+            var (s, b) = SurfaceResponse.SplitSumIntegrated(roughness, nv);
+            Assert.Equal(scale, s, 1e-5f);
+            Assert.Equal(bias, b, 1e-5f);
+        }
+    }
+
+    [Fact]
     public void Both_Hit_Forms_Agree_At_The_Default_Reflectance_And_Part_Below_It()
     {
         // A gray of 0.5 that is not metal, fully rough and seen head on, so the share is 0.04 times

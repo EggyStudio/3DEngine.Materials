@@ -143,6 +143,10 @@ public static class SurfaceResponse
     /// The split sum integrated by importance sampling GGX, the scale and the bias of
     /// <see cref="SplitSum"/> without a fit, for a table an engine samples.
     /// </summary>
+    /// <remarks>
+    /// Its signature and its 1024 points where none are given are held, since a table of the split
+    /// sum kept elsewhere is held to what it gives, and a change to either changes that table.
+    /// </remarks>
     /// <param name="roughness">The perceptual roughness.</param>
     /// <param name="nv">The cosine between the normal and the way to the eye.</param>
     /// <param name="samples">How many half ways are drawn, Hammersley's points.</param>
