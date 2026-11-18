@@ -51,11 +51,13 @@ this repository does not have.
 ## Binding it in your engine
 
 The module declares one interface, `IMaterialFiles`, a file's bytes by its path, which
-`MaterialMeans` reads a material's pictures through, so the engine's files stay the engine's, a
-folder, an archive or an asset store. It draws nothing, opens no window, opens no file itself and
-keeps no thread, so a binding is the engine's code that reads a picture's bytes, gives them to the
-module and binds what it returns to the engine's own textures and materials. The library references
-no engine, window or graphics API, which a test of its own holds.
+`MaterialMeans` reads a material's pictures through, and a picture of a format the module does not
+read, as PNG or JPEG, decoded by the engine through `IMaterialFiles.Decode`, a method with a default
+that decodes nothing, so an engine whose pictures are KTX2 alone implements one method. The engine's
+files stay the engine's, a folder, an archive or an asset store. The module draws nothing, opens no
+window, opens no file itself and keeps no thread, so a binding is the engine's code that reads a
+picture's bytes, gives them to the module and binds what it returns to the engine's own textures and
+materials. The library references no engine, window or graphics API, which a test of its own holds.
 
 It stands on these conventions.
 
@@ -72,6 +74,11 @@ It stands on these conventions.
   component from zero for -1 to one for +1. An engine whose normal maps point Y down negates the
   green channel as it samples, and one holding X and Y alone rebuilds Z to make a unit length.
 - Roughness is glTF's perceptual roughness, whose square is the GGX distribution's alpha.
+- A picture `IMaterialFiles.Decode` gives is four bytes a texel, red, green, blue and alpha, rows
+  from the top, its alpha straight rather than premultiplied, and each channel the number the file
+  stores, sRGB where the picture's layout holds a color and linear otherwise, which the module
+  decodes by the picture's role. The module reads every texel of such a picture, where it reads a
+  KTX2 file's first level of 64 texels a side or fewer.
 - A color in numbers, as `MaterialDescription.BaseColor`, is linear, the BT.709 primaries with a
   D65 white and no transfer curve, and a mean of a picture's color is taken in linear light.
 - The emitted light, `MaterialDescription.Emissive`, is linear RGB in candelas a square meter where

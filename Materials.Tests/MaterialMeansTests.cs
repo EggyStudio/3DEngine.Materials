@@ -11,6 +11,16 @@ public class MaterialMeansTests
         public byte[] ReadAllBytes(string path) => files.TryGetValue(path, out var file) ? file : throw new FileNotFoundException(path);
     }
 
+    // An engine that decodes a picture of its own format, a PNG here standing for any the module
+    // reads none of, to the texels it was given.
+    private sealed class Decoding(Dictionary<string, byte[]> files, byte[] rgba, int width, int height) : IMaterialFiles
+    {
+        public byte[] ReadAllBytes(string path) => files.TryGetValue(path, out var file) ? file : throw new FileNotFoundException(path);
+
+        public (byte[] Rgba, int Width, int Height)? Decode(string path, byte[] file) =>
+            file.Length > 0 && file[0] == 0x89 ? (rgba, width, height) : null;
+    }
+
     [Fact]
     public void A_Material_Of_No_Picture_Has_Its_Factors_For_Means()
     {
@@ -69,6 +79,47 @@ public class MaterialMeansTests
         var file = Ktx2Files.Write(43, 128, 128, [Fill(128, 255), Fill(64, 0), Fill(32, 255)]);
         var means = MaterialMeans.Of(new MaterialDescription { Pictures = [new MaterialPicture("a.ktx2", PictureLayout.Color)] }, new Files(new() { ["a.ktx2"] = file }));
         Assert.Equal(0f, means.Color.X);
+    }
+
+    [Fact]
+    public void A_Picture_In_A_Format_The_Module_Does_Not_Read_Is_Decoded_By_The_Engine()
+    {
+        // The same half sRGB 188 and half black as a KTX2 gives, so the engine's decoding gives the
+        // same linear mean of 0.25 its own picture holds.
+        byte[] rgba = [188, 188, 188, 255, 0, 0, 0, 255];
+        byte[] png = [0x89, (byte)'P', (byte)'N', (byte)'G', 13, 10, 26, 10];
+        var material = new MaterialDescription { Pictures = [new MaterialPicture("a.png", PictureLayout.Color)] };
+        var means = MaterialMeans.Of(material, new Decoding(new() { ["a.png"] = png }, rgba, 2, 1));
+        Assert.Equal(0.2509f, means.Color.X, 1e-3f);
+    }
+
+    [Fact]
+    public void An_Engines_Decoding_Gives_Rows_From_The_Top_In_The_Pictures_Own_Numbers()
+    {
+        // A surface decoded by the engine, its top row's roughness 255 and its bottom row's 0, as
+        // stored and not decoded from sRGB, under an albedo whose top row alone is opaque, so a
+        // mask keeps the top row's roughness of one where rows given from the bottom would keep
+        // none.
+        byte[] surface = [255, 255, 0, 0, 255, 0, 0, 0];
+        var albedo = Ktx2Files.Write(43, 1, 2, [[255, 255, 255, 255, 255, 255, 255, 0]]);
+        byte[] png = [0x89, (byte)'P', (byte)'N', (byte)'G'];
+        var material = new MaterialDescription
+        {
+            AlphaMode = AlphaMode.Mask,
+            Pictures = [new MaterialPicture("a.ktx2", PictureLayout.Color), new MaterialPicture("s.png", PictureLayout.Surface)],
+        };
+        var means = MaterialMeans.Of(material, new Decoding(new() { ["a.ktx2"] = albedo, ["s.png"] = png }, surface, 1, 2));
+        Assert.Equal(1f, means.Roughness, 1e-6f);
+        Assert.Equal(1f, means.Occlusion, 1e-6f);
+        Assert.Equal(0.5f, means.Opacity, 1e-6f);
+    }
+
+    [Fact]
+    public void A_Picture_Neither_The_Module_Nor_The_Engine_Reads_Is_Refused_With_Its_Path()
+    {
+        var material = new MaterialDescription { Pictures = [new MaterialPicture("a.webp", PictureLayout.Color)] };
+        var thrown = Assert.Throws<InvalidDataException>(() => MaterialMeans.Of(material, new Files(new() { ["a.webp"] = [1, 2, 3] })));
+        Assert.Contains("a.webp", thrown.Message);
     }
 
     [Fact]

@@ -39,11 +39,13 @@ public readonly record struct MaterialMeans(Vector3 Color, float Opacity, float 
     /// </para>
     /// </remarks>
     /// <param name="material">The material.</param>
-    /// <param name="files">The engine's files, which the pictures are read from as KTX2.</param>
+    /// <param name="files">
+    /// The engine's files, which a KTX2 picture is read from and any other decoded by.
+    /// </param>
     /// <exception cref="ArgumentException">The material breaks a rule, with every one it
     /// breaks.</exception>
-    /// <exception cref="InvalidDataException">A picture is not a KTX2 file the module
-    /// reads.</exception>
+    /// <exception cref="InvalidDataException"> A picture is neither a KTX2 file the module reads
+    /// nor one <see cref="IMaterialFiles.Decode"/> decodes. </exception>
     public static MaterialMeans Of(MaterialDescription material, IMaterialFiles files)
     {
         ArgumentNullException.ThrowIfNull(material);
@@ -56,14 +58,7 @@ public readonly record struct MaterialMeans(Vector3 Color, float Opacity, float 
         {
             if (material.PictureOf(role) is not { } held) return null;
             if (!pictures.TryGetValue(held.Picture.Path, out var texels))
-            {
-                var file = Ktx2.Read(files.ReadAllBytes(held.Picture.Path));
-                int level = 0;
-                while (level + 1 < file.Levels.Count && Math.Max(file.LevelSize(level).Width, file.LevelSize(level).Height) > LongestSide)
-                    level++;
-                var (width, height) = file.LevelSize(level);
-                pictures[held.Picture.Path] = texels = new Level(file.Decode(level), width, height);
-            }
+                pictures[held.Picture.Path] = texels = Load(held.Picture.Path, files);
 
             return texels with { Channel = held.Channel };
         }
@@ -119,6 +114,32 @@ public readonly record struct MaterialMeans(Vector3 Color, float Opacity, float 
 
         var occlusion = 1f + material.OcclusionStrength * (Mean(PictureRole.Occlusion, 1f) - 1f);
         return new MaterialMeans(color, covered, occlusion, Mean(PictureRole.Roughness, material.Roughness), Mean(PictureRole.Metallic, material.Metallic), Mean(PictureRole.DiffuseTransmission, material.DiffuseTransmission));
+    }
+
+    // A picture's level to read, a KTX2 file's first that fits LongestSide, or the whole picture as
+    // the engine decodes a file the module does not read.
+    private static Level Load(string path, IMaterialFiles files)
+    {
+        var bytes = files.ReadAllBytes(path);
+        Ktx2 file;
+        try
+        {
+            file = Ktx2.Read(bytes);
+        }
+        catch (InvalidDataException refused)
+        {
+            if (files.Decode(path, bytes) is not { } decoded)
+                throw new InvalidDataException($"{path} is no KTX2 file the module reads ({refused.Message}), and the engine's files decode none of it.", refused);
+            if (decoded.Width < 1 || decoded.Height < 1 || decoded.Rgba.Length != 4L * decoded.Width * decoded.Height)
+                throw new InvalidDataException($"{path} decodes to {decoded.Rgba.Length} bytes for {decoded.Width} by {decoded.Height} texels, where four bytes a texel belong.");
+            return new Level(decoded.Rgba, decoded.Width, decoded.Height);
+        }
+
+        int level = 0;
+        while (level + 1 < file.Levels.Count && Math.Max(file.LevelSize(level).Width, file.LevelSize(level).Height) > LongestSide)
+            level++;
+        var (width, height) = file.LevelSize(level);
+        return new Level(file.Decode(level), width, height);
     }
 
     // Each texel of a picture with its weight, every texel at a weight of one where none has any.

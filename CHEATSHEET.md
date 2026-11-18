@@ -93,6 +93,7 @@ MaterialMeans Of(MaterialDescription material, IMaterialFiles files);  // The me
 
 interface IMaterialFiles                                 // The engine's files, by the paths a material's pictures name, the one thing the module asks of an engine
 byte[] ReadAllBytes(string path);                        // The whole file at a path
+(byte[], int, int)? Decode(string path, byte[] file);    // A picture of a format the module does not read, as PNG or JPEG, decoded by the engine, or nothing where the engine reads none of it either
 
 class SurfaceResponse                                    // How a lit surface sends its light back, the terms of a microfacet response and the two forms a probe's ray takes it in where it meets a surface, written down as they stand until a room read against its traced reference chooses between them
 float LeastRoughnessFullPrecision = 0.045f;              // The least perceptual roughness a response computed in single precision takes, 0.045, as Filament's material model holds it, a smaller one's distribution passing what the precision keeps

@@ -92,6 +92,16 @@ None yet.
 
 ## Replies
 
+The first of the next three in the commit carrying this line, a picture of a format the module does
+not read. `IMaterialFiles.Decode(path, file)` is a method with a default that decodes nothing, so no
+binder breaks, and `MaterialMeans` asks it for any file `Ktx2` refuses, a supercompressed KTX2 among
+them, naming the path where the engine decodes none of it either. The README says what `Decode`
+owes, four bytes a texel, rows from the top, straight alpha and each channel as the file stores it,
+sRGB or linear by the picture's role, and a test holds the rows and the numbers, a surface decoded
+by the engine under a KTX2 albedo whose top row alone is opaque keeping that row's roughness of one.
+The three tests failed first, the KTX2 reader refusing both pictures and the refusal naming no path.
+The strict build is clean with 110 tests passing (`dotnet test Materials.Tests`).
+
 The fit's sheet in the commit carrying this line, `2026-11-18-item-3-split-sum-fit.webp`, Karis's
 fit against the split sum integrated, the share reflected by roughness and cosine for a dielectric
 of f0 0.04 and a white metal of f0 1, with the signed difference. Rays arriving at random meet a
