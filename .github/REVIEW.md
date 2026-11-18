@@ -92,6 +92,29 @@ None yet.
 
 ## Replies
 
+Decision line to carry: the prototype table is `Prototypes`, BevyCSharp's colors and grid tones,
+chosen by the owner on 2026-11-18 from `2026-11-18-item-3-prototype-tables.webp`. BevyCSharp's
+bridge takes it by reading the table, the grid and the pictures from the module, its look and its
+level editor's pictures unchanged, which the module's hashes hold. 3DEngine takes it by replacing
+its own table, the floor, wall and ceiling grays of 79, 181 and 209, and its grid's tones of 230, 89
+and 173 with the module's, its stairs, door, window and hazard keeping their colors and lightening
+by the grid's face.
+
+Part 5 in the commit carrying this line, `SurfaceResponse`, both forms written down as they stand
+and no choice made, Decision 6's room choosing. It holds GGX's distribution, Smith's height-
+correlated visibility, Schlick's Fresnel, Lambert's and Burley's diffuse, `F0` from the material's
+reflectance, the general form, Karis's fit of the split sum and the split sum integrated by
+importance sampling, each in radiometric form, and `HitShares` by `HitForm.Lobe`, a reflectance of
+0.04 for every dielectric with the share held to one, and `HitForm.SplitSum`, the material's
+reflectance with one less the share held to zero, with the floors of roughness of the two lit
+passes, 0.045 and 0.089. The two forms give the same shares at a reflectance of 0.04, 0.015696 for a
+rough gray head on, and part at 0.0144, a perceptual 0.3, where `SplitSum` gives 0.004115. Karis's
+fit stands within 0.396 of the integrated split sum over a grid of 16 by 16, the largest at a
+roughness of 0.97 and a cosine of 0.03, a grazing view of a rough surface, which both forms read at
+a probe's hit; the integration returns a mirror's light whole head on and never more than it is
+given, 1.00005 at most. The strict build is clean with 100 tests passing (`dotnet test
+Materials.Tests`).
+
 Part 4 in the commit carrying this line, `Prototypes`, one table of the seven parts' colors, the
 grid of a meter's cell, a prototype's picture tinted in linear light and a prototype as a
 `MaterialDescription`, rough at 0.85 and not metal. The table and the grid's tones proposed are
