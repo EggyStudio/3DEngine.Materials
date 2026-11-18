@@ -1,12 +1,12 @@
 using System.Buffers.Binary;
-using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Materials.Tests;
 
 /// <summary>
 /// The README's smallest binding, run against a host that stands for an engine and records what
-/// the binding gives it, so the build and the suite prove the guide.
+/// the binding gives it, so the build and the suite prove the guide, the block read against the
+/// README word for word by <see cref="ModuleTests"/>.
 /// </summary>
 public class BindingTests
 {
@@ -74,42 +74,6 @@ public class BindingTests
         Assert.Equal([8 * 8 * 4, 4 * 4 * 4, 2 * 2 * 4, 4], texture.Levels.Select(level => level.Length));
         Assert.All(texture.Levels.SelectMany(level => level), value => Assert.Equal(255, value));
     }
-
-    [Fact]
-    public void The_Readmes_Block_Stands_Word_For_Word_In_This_Host()
-    {
-        var readme = File.ReadAllText(Path.Combine(Repository.Root, "README.md")).ReplaceLineEndings("\n");
-        var start = readme.IndexOf("## Binding it in your engine", StringComparison.Ordinal);
-        Assert.True(start >= 0, "the README has no section Binding it in your engine");
-        var open = readme.IndexOf("```csharp\n", start, StringComparison.Ordinal) + "```csharp\n".Length;
-        var block = readme[open..readme.IndexOf("```\n", open, StringComparison.Ordinal)];
-        var source = File.ReadAllText(Path.Combine(Repository.Root, "Materials.Tests", "BindingTests.cs")).ReplaceLineEndings("\n");
-        var lines = source.Split('\n');
-        var from = Array.FindIndex(lines, l => l.Contains("// The README's block from here", StringComparison.Ordinal)) + 1;
-        var to = Array.FindIndex(lines, l => l.Contains("// The end marker.", StringComparison.Ordinal));
-        var hosted = string.Join("\n", lines[from..to].Select(l => l.Length >= 8 ? l[8..] : l.TrimStart())) + "\n";
-        Assert.Equal(block, hosted);
-    }
-
-    [Fact]
-    public void Every_Public_Type_Is_In_The_Binding_Section_Or_A_Row_Of_A_Readme_Table()
-    {
-        // A stranger finds every type the library offers from the README alone, by its name in
-        // code, whole, as `Ktx2` or `Ktx2.Read`, and not as the start of a longer name.
-        var readme = File.ReadAllText(Path.Combine(Repository.Root, "README.md")).ReplaceLineEndings("\n");
-        var start = readme.IndexOf("## Binding it in your engine", StringComparison.Ordinal);
-        var end = readme.IndexOf("\n## ", start + 1, StringComparison.Ordinal);
-        var section = readme[start..(end < 0 ? readme.Length : end)];
-        var rows = string.Join("\n", readme.Split('\n').Where(l => l.StartsWith('|')));
-        var missing = typeof(Ktx2).Assembly.GetExportedTypes()
-            .Select(t => t.Name)
-            .Where(name => !Named(section, name) && !Named(rows, name))
-            .OrderBy(name => name, StringComparer.Ordinal)
-            .ToList();
-        Assert.True(missing.Count == 0, $"the README names {string.Join(", ", missing)} neither in Binding it in your engine nor in a table");
-    }
-
-    private static bool Named(string text, string name) => Regex.IsMatch(text, $@"`{name}([`.(<\[ ])");
 
     // An 8 by 8 albedo in BC7 and sRGB with its four levels, each block opaque white, mode 6 with
     // every endpoint's bits and both shared bits set.
