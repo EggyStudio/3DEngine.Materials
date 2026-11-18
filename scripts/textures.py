@@ -497,8 +497,8 @@ def repeated(image, repeat, size):
                     copy = band.transform(size, Image.Transform.AFFINE, data, Image.Resampling.BICUBIC).convert("F")
                     sums[at] = ImageMath.lambda_eval(lambda a: a["s"] + a["c"] * a["w"], s=sums[at], c=copy, w=weights)
 
-    # A place whose copies all lie at the scan's edges is weighted little but still its copies' mean,
-    # as the wallpaper's repeat is 21 pixels taller than its scan and a strip of it lies so.
+    # A place whose copies all lie at the scan's edges is weighted little but still its copies'
+    # mean, as the wallpaper's repeat is 21 pixels taller than its scan and a strip of it lies so.
     if total.getextrema()[0] <= 0:
         raise ValueError("the scan holds no copy of some place of its repeat")
     out = [ImageMath.lambda_eval(lambda a: a["s"] / a["t"] + 0.5, s=s, t=total).convert("L") for s in sums]
@@ -863,7 +863,12 @@ def bc7_block(texels):
     for i in range(4):
         for j in range(i):
             covariance[i][j] = covariance[j][i]
-    axis = [1.0, 1.0, 1.0, 1.0]
+    # The power method starts from the covariance's column of the channel that varies most, which
+    # lies along the principal axis wherever the block has one. A fixed start of (1, 1, 1, 1) is
+    # turned to nothing by a block whose red and blue move against each other, which then encoded
+    # as its mean alone.
+    widest = max(range(4), key=lambda c: covariance[c][c])
+    axis = list(covariance[widest])
     for _ in range(6):
         axis = [sum(covariance[i][j] * axis[j] for j in range(4)) for i in range(4)]
         largest = max(abs(value) for value in axis)
@@ -878,8 +883,9 @@ def bc7_block(texels):
         low = [mean[c] + axis[c] * min(places) for c in range(4)]
         high = [mean[c] + axis[c] * max(places) for c in range(4)]
 
-    # A block opaque throughout keeps the shared bit set, so its alpha decodes to 255 rather than 254
-    # where the color alone would have chosen the bit clear, and an opaque texture reads opaque.
+    # A block opaque throughout keeps the shared bit set, so its alpha decodes to 255 rather than
+    # 254 where the color alone would have chosen the bit clear, and an opaque texture reads
+    # opaque.
     shared = (1,) if all(texel[3] == 255 for texel in texels) else (0, 1)
     endpoints = quantize(low, shared), quantize(high, shared)
     indices = bc7_indices(texels, endpoints)

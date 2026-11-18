@@ -52,6 +52,29 @@ public class TexturesScriptTests
         Assert.True(short_.Count == 0, $"{short_.Count} opaque texels decode below 255, as {string.Join(", ", short_.Take(5))}");
     }
 
+    [Fact]
+    public void The_Samples_Albedo_Decodes_Near_The_Rings_It_Was_Drawn_From()
+    {
+        // The rings as scripts/textures.py draws them, red and blue moving against each other with
+        // green held, which a power iteration started at (1, 1, 1, 1) turned to flat blocks, a mean
+        // error of 13.71 of 255 over the opaque texels, where the start from the widest channel's
+        // column gives 1.64.
+        var texels = Ktx2.Read(File.ReadAllBytes(Path.Combine(Sample, "albedo.ktx2"))).Decode();
+        double total = 0;
+        int count = 0;
+        for (int y = 0; y < 64; y++)
+        for (int x = 0; x < 64; x++)
+        {
+            if ((x - 40) * (x - 40) + (y - 24) * (y - 24) < 100) continue;
+            int ring = (int)(128 + 100 * Math.Sin(x * 0.4) * Math.Cos(y * 0.2));
+            int[] drawn = [ring, 90, 255 - ring];
+            for (int c = 0; c < 3; c++) total += Math.Abs(texels[(y * 64 + x) * 4 + c] - drawn[c]);
+            count += 3;
+        }
+
+        Assert.InRange(total / count, 0, 2.0);
+    }
+
     [NeedsPillowFact]
     public void The_Script_Writes_The_Sample_The_Repository_Holds()
     {

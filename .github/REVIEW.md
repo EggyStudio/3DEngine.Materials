@@ -92,6 +92,23 @@ None yet.
 
 ## Replies
 
+The BC7 encoder's mend in the commit carrying this line. Its power iteration starts from the
+covariance's column of the channel that varies most, where it started at (1, 1, 1, 1), which a block
+whose red and blue move against each other turned to nothing, so the block encoded as its mean. The
+sample's albedo goes from 23.70 dB to 34.30 dB and its mean error from the rings it is drawn from
+from 13.71 of 255 to 1.64, the test holding it under 2 having failed at 13.71 first, and the reading
+`2026-11-18-item-3-bc7-axis.webp` shows it whole and a block of it before and after. Modeling's
+carpet holds at 45.27 dB and its wallpaper goes from 46.15 to 46.16, measured on the albedos built
+from Modeling's sources with `--out`. Both collections are built again through `scripts/textures.py`
+when their copies give way. Modeling's two albedos change, 622 bytes of the carpet's and 3,306 of
+the wallpaper's, and its normals and surfaces are the same bytes. Every albedo and every surface of
+Vegetation's 43 files changes, both being BC7, by this start and by the opaque blocks' shared bits,
+and its normals in BC5 and depths in BC4 are the same bytes, those encoders being untouched. The
+width test reads the project files, the workflow, `build`'s and `scripts`' files and the Python
+scripts' comments as the Levels module's does, and failed first on `scripts/textures.py:500` and
+`:881`, both rewrapped. The bleeding of a surface by its translucency stands in the README's known
+limits.
+
 Part 2 in the commit carrying this line, `scripts/textures.py`, one encoder of Modeling's and
 Vegetation's, Vegetation's recipe of parts with Modeling's tiles, its opaque blocks' shared bits and
 its levels kept as they are. Built from Modeling's sources with `--out`, it writes Modeling's six
