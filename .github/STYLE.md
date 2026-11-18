@@ -9,6 +9,9 @@ given file.
 
 Em dashes and en dashes are not used. Neither `—` nor `–`, in any file.
 
+The middle dot `·` is not used either. A row of links is separated by a space, a list by commas,
+and a product is said in words or with the word dot.
+
 The spaced hyphen ` - ` is not sentence punctuation. Replace it according to the relationship
 between the clauses.
 
@@ -61,6 +64,9 @@ Trailing runs of dashes are not used. They carry no information, and their lengt
 reproducible across edits.
 
 ## Comments
+
+A comment line holds to 100 columns, and a test of the module's fails on a longer one
+(NORM.md, N 4.11).
 
 A comment that restates the code is a maintenance liability, because it has to be kept true as
 the code changes. Remove it.
