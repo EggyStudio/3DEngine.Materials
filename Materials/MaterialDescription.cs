@@ -83,6 +83,40 @@ public sealed record MaterialDescription
     public IReadOnlyList<MaterialPicture> Pictures { get; init; } = [];
 
     /// <summary>
+    /// Whether two descriptions hold the same factors and the same pictures in the same order.
+    /// </summary>
+    /// <param name="other">The other description.</param>
+    public bool Equals(MaterialDescription? other) =>
+        other is not null && BaseColor == other.BaseColor && Metallic == other.Metallic && Roughness == other.Roughness
+        && Reflectance == other.Reflectance && Emissive == other.Emissive && EmissiveUnit == other.EmissiveUnit
+        && NormalScale == other.NormalScale && OcclusionStrength == other.OcclusionStrength
+        && DiffuseTransmission == other.DiffuseTransmission && AlphaMode == other.AlphaMode
+        && AlphaCutoff == other.AlphaCutoff && DoubleSided == other.DoubleSided && Pictures.SequenceEqual(other.Pictures);
+
+    /// <summary>
+    /// A hash of the factors and the pictures, alike for descriptions
+    /// <see cref="Equals(MaterialDescription?)"/> holds the same.
+    /// </summary>
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(BaseColor);
+        hash.Add(Metallic);
+        hash.Add(Roughness);
+        hash.Add(Reflectance);
+        hash.Add(Emissive);
+        hash.Add(EmissiveUnit);
+        hash.Add(NormalScale);
+        hash.Add(OcclusionStrength);
+        hash.Add(DiffuseTransmission);
+        hash.Add(AlphaMode);
+        hash.Add(AlphaCutoff);
+        hash.Add(DoubleSided);
+        foreach (var picture in Pictures) hash.Add(picture);
+        return hash.ToHashCode();
+    }
+
+    /// <summary>
     /// The picture that holds a role and the channel the role stands in, or nothing where none
     /// does.
     /// </summary>

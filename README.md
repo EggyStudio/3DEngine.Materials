@@ -15,6 +15,7 @@ binds it by reading the values it gives into its own textures and materials.
 | `MaterialPicture` | A picture a material is drawn with, its path among the engine's files and its layout |
 | `MaterialDescription`, `AlphaMode` and `EmissiveUnit` | What a surface is in glTF 2.0's terms, its base color, metallic, roughness, reflectance, emitted light with the unit it is measured in, normal scale, occlusion strength, diffuse transmission, alpha mode and pictures, with every rule a description breaks |
 | `Reflectance` | A dielectric's reflectance at normal incidence, 0.04 by default, with glTF's index of refraction and the perceptual reflectance whose square times 0.16 it is as functions of it |
+| `MaterialFile` | A material as a JSON file of its own beside its pictures, read with its pictures' paths joined to its folder and written with them relative to it, every broken field refused with its reason |
 | `MaterialMeans` | A material's mean color in linear light and its mean surface over what its opacity covers, read through `IMaterialFiles` from a level of 64 texels a side at most |
 | `IMaterialFiles` | The one thing the module asks of an engine, a file's bytes by its path |
 | `SurfaceResponse` | How a lit surface sends its light back, GGX's distribution, Smith's height-correlated visibility, Schlick's Fresnel, Lambert's and Burley's diffuse, the reflectance at normal incidence by the metallic, Karis's fit of the split sum and the split sum integrated, and the two forms a probe's ray takes a surface in, `SurfaceResponse.HitForm` |
@@ -132,6 +133,28 @@ A field of the scene's light that traces probes' rays reads a surface where a ra
 every dielectric at a reflectance of 0.04, for a field whose cells keep no reflectance of their own.
 `HitForm.SplitSum` reflects a lamp and the light from all around by the split sum's share at the
 material's reflectance, for a field whose cells keep it and a hit that needs no lobe.
+
+## A material file
+
+`MaterialFile` keeps a `MaterialDescription` as a JSON file of its own, named with
+`MaterialFile.Extension`, beside its pictures, so a folder of materials stands without a glTF to
+carry them. Each factor stands under its name, a field left out takes the description's default,
+and a picture's layout is a name of `PictureLayout`'s or its four channels' roles, its path relative
+to the file's folder. A field the format does not have, a name it does not know or a broken rule is
+refused with its reason.
+
+```json
+{
+  "format": "material/1",
+  "baseColor": [0.8, 0.7, 0.6, 1],
+  "roughness": 0.9,
+  "alphaMode": "mask",
+  "pictures": [
+    { "path": "albedo.ktx2", "layout": "color" },
+    { "path": "../shared/surface.ktx2", "layout": ["occlusion", "roughness", "metallic", null] }
+  ]
+}
+```
 
 ## A texture collection
 

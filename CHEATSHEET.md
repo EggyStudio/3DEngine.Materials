@@ -61,6 +61,8 @@ AlphaMode AlphaMode { get; init; }                       // How the opacity is r
 float AlphaCutoff { get; init; }                         // The opacity a texel reaches to be drawn under Mask
 bool DoubleSided { get; init; }                          // Whether the surface is seen from behind as well as from the front
 IReadOnlyList<MaterialPicture> Pictures { get; init; }   // The pictures that scale the factors, no role held by two of them
+bool Equals(MaterialDescription? other);                 // Whether two descriptions hold the same factors and the same pictures in the same order
+int GetHashCode();                                       // A hash of the factors and the pictures, alike for descriptions Equals holds the same
 (MaterialPicture, int)? PictureOf(PictureRole role);     // The picture that holds a role and the channel the role stands in, or nothing where none does
 IReadOnlyList<string> Problems();                        // Each rule the description breaks, a sentence each, or none
 
@@ -79,6 +81,12 @@ float FromIor(float ior);                                // The reflectance of a
 float ToIor(float reflectance);                          // The index of refraction of a dielectric of a reflectance
 float FromPerceptual(float perceptual);                  // The reflectance of a perceptual reflectance, 0.16 times its square, so 0.5 is 0.04 and 1 is 0.16, a gemstone's
 float ToPerceptual(float reflectance);                   // The perceptual reflectance of a reflectance, the square root of a sixth and a quarter of it
+
+class MaterialFile                                       // A material as a JSON file of its own beside its pictures, so a folder of materials stands without a glTF to carry them
+string Format = "material/1";                            // The value of the file's format
+string Extension = ".material.json";                     // The extension a material file is named with
+MaterialDescription Read(string json, string path);      // Reads a material from its file's text
+string Write(MaterialDescription material, string path);  // Writes a material as its file's text, each field the description holds
 
 record struct MaterialMeans                              // A material's means over its surface, which a far card, a picture of many surfaces at once, or a field of the scene's light is painted with where the pictures themselves are too fine to read
 int LongestSide = 64;                                    // The longest side of the level the means are read from, the first level of each picture that fits it, so a picture's cost is a few thousand texels whatever its size
