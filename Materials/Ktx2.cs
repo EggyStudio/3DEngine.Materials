@@ -89,10 +89,14 @@ public sealed class Ktx2
         if (width < 1 || height < 1 || width > 1 << 16 || height > 1 << 16)
             throw new InvalidDataException($"The file's picture is {width} by {height}, where a side of 1 to 65536 texels belongs.");
 
-        // A count of none asks a reader to make the levels below the one the file holds.
+        // A count of none asks a reader to make the levels below the one the file holds. The count
+        // is compared as it is written, before it is cast, so no count turns negative.
+        uint most = 1 + (uint)System.Numerics.BitOperations.Log2(Math.Max(width, height));
+        if (levelCount > most)
+            throw new InvalidDataException($"The file names {levelCount} levels, where a {width} by {height} picture holds {most}.");
         int count = (int)Math.Max(levelCount, 1);
-        if (count > 17 || 80 + 24L * count > file.Length)
-            throw new InvalidDataException($"The file names {levelCount} levels, more than its size or its picture's holds.");
+        if (80 + 24L * count > file.Length)
+            throw new InvalidDataException($"The file's index of {count} levels runs past the end of the file.");
 
         var levels = new byte[count][];
         for (int level = 0; level < count; level++)

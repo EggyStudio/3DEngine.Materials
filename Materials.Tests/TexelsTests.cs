@@ -21,16 +21,17 @@ public class TexelsTests
         // a partition's table shows as a texel that differs (scripts/blocks.py).
         var item = Reference().RootElement.GetProperty("cases").EnumerateArray().Single(c => c.GetProperty("name").GetString() == name);
         var format = Enum.Parse<PictureFormat>(item.GetProperty("format").GetString()!);
+        int width = item.GetProperty("width").GetInt32(), height = item.GetProperty("height").GetInt32();
         int count = 0;
-        foreach (var block in item.GetProperty("blocks").EnumerateArray())
+        foreach (var picture in item.GetProperty("blocks").EnumerateArray())
         {
-            var bytes = Convert.FromHexString(block.GetProperty("block").GetString()!);
-            var expected = block.GetProperty("texels").GetString()!;
-            Assert.Equal(expected, Convert.ToHexStringLower(Texels.Decode(format, bytes, 4, 4)));
+            var bytes = Convert.FromHexString(picture.GetProperty("block").GetString()!);
+            var expected = picture.GetProperty("texels").GetString()!;
+            Assert.Equal(expected, Convert.ToHexStringLower(Texels.Decode(format, bytes, width, height)));
             count++;
         }
 
-        Assert.True(count >= 16, $"{name} holds {count} blocks.");
+        Assert.True(count > 0, $"{name} holds no picture.");
     }
 
     [Fact]
@@ -103,6 +104,21 @@ public class TexelsTests
     {
         var thrown = Assert.Throws<ArgumentException>(() => Texels.Decode(PictureFormat.Bc7, new byte[15], 4, 4));
         Assert.Contains("holds 16 bytes, and 15 were given", thrown.Message);
+    }
+
+    [Fact]
+    public void A_Picture_Decoded_Past_What_An_Array_Holds_Is_Refused_With_The_Reason()
+    {
+        // 32768 by 16384 texels decode to 2^31 bytes, past the largest array .NET makes.
+        var thrown = Assert.Throws<ArgumentOutOfRangeException>(() => Texels.Decode(PictureFormat.Bc1, new byte[8], 32768, 16384));
+        Assert.Contains("decodes to 2147483648 bytes", thrown.Message);
+    }
+
+    [Fact]
+    public void A_Size_Near_The_Largest_Integer_Counts_Its_Bytes_Without_Overflowing()
+    {
+        Assert.Equal(16L * (int.MaxValue / 4L + 1), Texels.ByteCount(PictureFormat.Bc7, int.MaxValue, 1));
+        Assert.Equal(4L * int.MaxValue * 2, Texels.ByteCount(PictureFormat.Rgba8, int.MaxValue, 2));
     }
 
     private static JsonDocument Reference() => JsonDocument.Parse(File.ReadAllText(Path.Combine(Repository.References, "blocks.json")));

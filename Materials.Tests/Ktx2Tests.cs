@@ -83,6 +83,23 @@ public class Ktx2Tests
     }
 
     [Fact]
+    public void A_Level_Count_Past_What_The_Picture_Holds_Is_Refused()
+    {
+        // A 4 by 4 picture holds three levels, 4 by 4, 2 by 2 and 1 by 1, so a fourth is refused
+        // though its block is the size a 1 by 1 level holds.
+        var file = Ktx2Files.Write(139, 4, 4, [Block(1), Block(2), Block(3), Block(4)]);
+        Assert.Contains("names 4 levels, where a 4 by 4 picture holds 3", Assert.Throws<InvalidDataException>(() => Ktx2.Read(file)).Message);
+    }
+
+    [Fact]
+    public void A_Level_Count_Past_The_Largest_Signed_Integer_Is_Refused_As_Data()
+    {
+        var file = Ktx2Files.Write(139, 4, 4, [Block(1)]);
+        BinaryPrimitives.WriteUInt32LittleEndian(file.AsSpan(40), 0x8000_0000);
+        Assert.Contains("names 2147483648 levels", Assert.Throws<InvalidDataException>(() => Ktx2.Read(file)).Message);
+    }
+
+    [Fact]
     public void Bytes_That_Are_Not_Ktx2_Are_Refused()
     {
         Assert.Throws<InvalidDataException>(() => Ktx2.Read(new byte[100]));

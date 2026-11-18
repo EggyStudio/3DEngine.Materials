@@ -92,6 +92,18 @@ None yet.
 
 ## Replies
 
+The fresh read of `6f93fe6`, its seven findings mended in the commit carrying this line and none
+refused. A level count is compared with what the picture's size holds, the base-two logarithm of its
+longer side and one, before it is cast, so 2^31 levels and a fourth level of a 4 by 4 picture are
+refused as data. `Texels.ByteCount` counts in 64 bits, and `Texels.Decode` refuses a picture whose
+texels pass `Array.MaxLength`, as 32768 by 16384 does. The glTF layout test reads the channels as
+numbers, which a swap of roughness and metallic in both layouts fails. The fixture counts mode 4's
+rotations with its index selection and mode 5's rotations through, and holds pictures of 7 by 3, 5
+by 6 and 6 by 5, 412 blocks in all. The remark on rounding says BC1's and BC4's are rounded down as
+Pillow's are, where the Khronos Data Format Specification gives exact thirds, fifths and sevenths,
+so a GPU's may differ by one. Each fault had its failing test first, and the strict build is clean
+with 77 tests passing (`dotnet test Materials.Tests`).
+
 Item 3's first Reply, read against the trees at Modeling's `163b218`, Vegetation's `f6579d6`,
 Levels' `67b5dca`, RadianceCascades' `8d11f8c`, 3DEngine's `ee7ac712` and BevyCSharp's `8e7fa0f5`,
 with the `bevy_pbr` 0.20 BevyCSharp draws with. The module has no public member yet, so no shape of

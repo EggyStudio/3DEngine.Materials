@@ -25,9 +25,16 @@ public class PictureLayoutTests
     [Fact]
     public void The_Surface_Picture_Binds_As_Gltfs_Occlusion_And_Metallic_Roughness_Textures()
     {
-        foreach (var role in new[] { PictureRole.Roughness, PictureRole.Metallic })
-            Assert.Equal(PictureLayout.MetallicRoughness.ChannelOf(role), PictureLayout.Surface.ChannelOf(role));
-        Assert.Equal(PictureLayout.Occlusion.ChannelOf(PictureRole.Occlusion), PictureLayout.Surface.ChannelOf(PictureRole.Occlusion));
+        // glTF's own channels, the occlusion in red, the roughness in green and the metallic in
+        // blue, read as numbers so a swap made in every layout at once shows.
+        foreach (var layout in new[] { PictureLayout.Surface, PictureLayout.MetallicRoughness })
+        {
+            Assert.Equal(1, layout.ChannelOf(PictureRole.Roughness));
+            Assert.Equal(2, layout.ChannelOf(PictureRole.Metallic));
+        }
+
+        Assert.Equal(0, PictureLayout.Surface.ChannelOf(PictureRole.Occlusion));
+        Assert.Equal(0, PictureLayout.Occlusion.ChannelOf(PictureRole.Occlusion));
         Assert.Equal(3, PictureLayout.Surface.ChannelOf(PictureRole.DiffuseTransmission));
         Assert.Null(PictureLayout.Surface.ChannelOf(PictureRole.BaseColor));
         Assert.Equal(0, PictureLayout.Color.ChannelOf(PictureRole.BaseColor));

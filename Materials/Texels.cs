@@ -32,7 +32,7 @@ public static class Texels
         ArgumentOutOfRangeException.ThrowIfLessThan(width, 1);
         ArgumentOutOfRangeException.ThrowIfLessThan(height, 1);
         if (format == PictureFormat.Rgba8) return 4L * width * height;
-        return (long)BlockBytes(format) * ((width + 3) / 4) * ((height + 3) / 4);
+        return BlockBytes(format) * ((width + 3L) / 4) * ((height + 3L) / 4);
     }
 
     /// <summary>
@@ -43,8 +43,9 @@ public static class Texels
     /// A channel the format does not hold reads as a GPU reads it, zero for green and blue and 255
     /// for alpha, so <see cref="PictureFormat.Bc4"/> gives its value in red alone and
     /// <see cref="PictureFormat.Bc5"/> its two in red and green. Numbers between a block's two ends
-    /// are rounded down for BC1 and BC4 and to the nearest for BC7, as the format's specification
-    /// gives them.
+    /// are rounded down for BC1 and BC4, as Pillow's decoder rounds them, where the Khronos Data
+    /// Format Specification gives exact thirds, fifths and sevenths, so a GPU's may differ from
+    /// these by one. BC7's are the specification's own integer weights, rounded to the nearest.
     /// </remarks>
     /// <param name="format">The format the texels are in.</param>
     /// <param name="data">The texels, blocks in rows from the top, exactly <see cref="ByteCount"/>
@@ -53,9 +54,15 @@ public static class Texels
     /// <param name="height">The height in texels.</param>
     /// <exception cref="ArgumentException">The data is not the size the format and the size
     /// give.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The picture decodes to more bytes than an array holds, <see cref="Array.MaxLength"/>.
+    /// </exception>
     public static byte[] Decode(PictureFormat format, ReadOnlySpan<byte> data, int width, int height)
     {
         var expected = ByteCount(format, width, height);
+        long decoded = 4L * width * height;
+        if (decoded > Array.MaxLength)
+            throw new ArgumentOutOfRangeException(nameof(width), $"A {width} by {height} picture decodes to {decoded} bytes, past the {Array.MaxLength} an array holds.");
         if (data.Length != expected)
             throw new ArgumentException($"A {width} by {height} picture in {format} holds {expected} bytes, and {data.Length} were given.", nameof(data));
 

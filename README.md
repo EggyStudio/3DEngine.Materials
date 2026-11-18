@@ -16,8 +16,9 @@ its own textures and materials.
 | `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
 | `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
 
-The decoders give what Pillow's give for 400 blocks, every partition of BC7's among them
-(`dotnet test Materials.Tests`, against the reference `scripts/blocks.py` writes).
+The decoders give what Pillow's give for 412 blocks, every partition of BC7's and pictures whose
+sides are not multiples of four among them (`dotnet test Materials.Tests`, against the reference
+`scripts/blocks.py` writes).
 
 ## Taking it into an engine
 
