@@ -57,8 +57,10 @@ rather than leaves apart.
 
 The encoders are written here, BC7's mode 6 with each block's endpoints along its principal axis and
 fitted again by least squares, a block opaque throughout keeping its shared bits set so its alpha
-decodes to 255, and BC4 twice for BC5, so the build needs Python 3 and Pillow and nothing else. The
-encoding is the one function encode() below, so another format is a second branch of it.
+decodes to 255, and mode 1 for an opaque block mode 6 holds worse than MODE1_ABOVE, its two subsets
+of the partition whose colors lie nearest the lines through them, which a block of three colors or
+two gradients needs, and BC4 twice for BC5, so the build needs Python 3 and Pillow and nothing else.
+The encoding is the one function encode() below, so another format is a second branch of it.
 
 A source is a folder under the folder --sources names, the repository's root that holds the
 manifest where none is given, as the entry's source names it. An entry is written into its folder
@@ -94,6 +96,45 @@ TRANSFER_SRGB = 2
 # sixty-fourth, so a texel's place between the endpoints is turned into its index by a lookup.
 WEIGHTS = (0, 4, 9, 13, 17, 21, 26, 30, 34, 38, 43, 47, 51, 55, 60, 64)
 NEAREST = [min(range(16), key=lambda i: abs(WEIGHTS[i] - t)) for t in range(65)]
+
+
+# BC7's partitions of a block into two subsets, a row of its sixteen texels' subsets each read left
+# to right and top to bottom, and the anchor texel of each one's second subset, from the Khronos
+# Data Format Specification's tables.
+PARTITIONS = [
+    "0011001100110011", "0001000100010001", "0111011101110111", "0001001100110111",
+    "0000000100010011", "0011011101111111", "0001001101111111", "0000000100110111",
+    "0000000000010011", "0011011111111111", "0000000101111111", "0000000000010111",
+    "0001011111111111", "0000000011111111", "0000111111111111", "0000000000001111",
+    "0000100011101111", "0111000100000000", "0000000010001110", "0111001100010000",
+    "0011000100000000", "0000100011001110", "0000000010001100", "0111001100110001",
+    "0011000100010000", "0000100010001100", "0110011001100110", "0011011001101100",
+    "0001011111101000", "0000111111110000", "0111000110001110", "0011100110011100",
+    "0101010101010101", "0000111100001111", "0101101001011010", "0011001111001100",
+    "0011110000111100", "0101010110101010", "0110100101101001", "0101101010100101",
+    "0111001111001110", "0001001111001000", "0011001001001100", "0011101111011100",
+    "0110100110010110", "0011110011000011", "0110011010011001", "0000011001100000",
+    "0100111001000000", "0010011100100000", "0000001001110010", "0000010011100100",
+    "0110110010010011", "0011011011001001", "0110001110011100", "0011100111000110",
+    "0110110011001001", "0110001100111001", "0111111010000001", "0001100011100111",
+    "0000111100110011", "0011001111110000", "0010001011101110", "0100010001110111",
+]
+SECOND_ANCHORS = [
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 2, 8, 2, 2, 8, 8, 15, 2, 8, 2, 2, 8, 8, 2, 2,
+    15, 15, 6, 8, 2, 8, 15, 15, 2, 8, 2, 2, 2, 15, 15, 6,
+    6, 2, 6, 8, 15, 15, 2, 2, 15, 15, 15, 15, 15, 2, 2, 15,
+]
+PARTITION_MASKS = [sum(1 << i for i, subset in enumerate(row) if subset == "1") for row in PARTITIONS]
+
+# Mode 1's interpolation weights for three-bit indices, and the nearest index for each sixty-fourth.
+WEIGHTS3 = (0, 9, 18, 27, 37, 46, 55, 64)
+NEAREST3 = [min(range(8), key=lambda i: abs(WEIGHTS3[i] - t)) for t in range(65)]
+
+# The squared error over a block's sixteen texels and three channels past which an opaque block is
+# tried in mode 1's two subsets as well, a mean of 4 a channel, 42 dB, so a block mode 6 holds well
+# costs nothing more.
+MODE1_ABOVE = 16 * 3 * 4
 
 
 def main():
@@ -852,6 +893,20 @@ def bc7(image):
 
 
 def bc7_block(texels):
+    """
+    A block in BC7, in mode 6, or in mode 1's two subsets where the block is opaque, mode 6's error
+    passes MODE1_ABOVE and mode 1 holds it closer, as a block whose colors leave one line does.
+    """
+    block, error = mode6_block(texels)
+    if error > MODE1_ABOVE and all(texel[3] == 255 for texel in texels):
+        found = mode1_block(texels)
+        if found is not None and found[1] < error:
+            return found[0]
+    return block
+
+
+def mode6_block(texels):
+    """A block in BC7's mode 6 and its squared error over its texels' four channels."""
     # The endpoints along the principal axis of the block's colors, by a few rounds of the power
     # method on their covariance.
     count = 16.0
@@ -918,7 +973,188 @@ def bc7_block(texels):
     for index in indices[1:]:
         bits |= index << shift
         shift += 4
-    return bits.to_bytes(16, "little")
+    return bits.to_bytes(16, "little"), bc7_error(texels, ((q0, p0), (q1, p1)), indices)
+
+
+def mode1_block(texels):
+    """
+    An opaque block in BC7's mode 1, two subsets of a partition each with its endpoints of six bits
+    and a bit their channels share, three-bit indices, and its squared error over red, green and
+    blue, or nothing where its colors are one. Each of the 64 partitions is judged by how far its
+    subsets' colors lie off the lines through them, and the two nearest are encoded in full.
+    """
+    colors = [texel[:3] for texel in texels]
+    if all(color == colors[0] for color in colors):
+        return None
+    best = None
+    for partition in sorted(range(64), key=lambda p: off_lines(colors, PARTITION_MASKS[p]))[:2]:
+        encoded = mode1_partition(colors, partition)
+        if best is None or encoded[1] < best[1]:
+            best = encoded
+    return best
+
+
+def off_lines(colors, mask):
+    """How far a partition's two subsets' colors lie off the lines through them, the spread of each
+    less the spread along its principal axis."""
+    total = 0.0
+    for subset in (0, 1):
+        members = [colors[i] for i in range(16) if (mask >> i & 1) == subset]
+        if len(members) < 2:
+            continue
+        count = float(len(members))
+        mean = [sum(m[c] for m in members) / count for c in range(3)]
+        covariance = [[sum((m[i] - mean[i]) * (m[j] - mean[j]) for m in members) for j in range(3)] for i in range(3)]
+        trace = covariance[0][0] + covariance[1][1] + covariance[2][2]
+        widest = max(range(3), key=lambda c: covariance[c][c])
+        axis = list(covariance[widest])
+        for _ in range(4):
+            axis = [sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)]
+            largest = max(abs(value) for value in axis)
+            if largest == 0.0:
+                break
+            axis = [value / largest for value in axis]
+        length = sum(value * value for value in axis)
+        along = 0.0 if length == 0.0 else sum(axis[i] * sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)) / length
+        total += trace - along
+    return total
+
+
+def mode1_partition(colors, partition):
+    """The block in mode 1 at a partition, and its squared error over red, green and blue."""
+    subsets = [[i for i in range(16) if PARTITIONS[partition][i] == str(s)] for s in (0, 1)]
+    anchors = (0, SECOND_ANCHORS[partition])
+    endpoints, indices, error = [None, None], [0] * 16, 0
+    for s in (0, 1):
+        members = [colors[i] for i in subsets[s]]
+        ends, chosen, subset_error = mode1_subset(members)
+        # The anchor's index keeps its top bit clear, so the subset's ends are turned over where it
+        # is set.
+        if chosen[subsets[s].index(anchors[s])] >= 4:
+            ends = (ends[1], ends[0])
+            chosen = [7 - index for index in chosen]
+        endpoints[s] = ends
+        for i, index in zip(subsets[s], chosen):
+            indices[i] = index
+        error += subset_error
+
+    bits = 1 << 1
+    shift = 2
+    bits |= partition << shift
+    shift += 6
+    for c in range(3):
+        for s in (0, 1):
+            for e in (0, 1):
+                bits |= endpoints[s][e][0][c] << shift
+                shift += 6
+    for s in (0, 1):
+        bits |= endpoints[s][0][1] << shift
+        shift += 1
+    for i in range(16):
+        width = 2 if i in anchors else 3
+        bits |= indices[i] << shift
+        shift += width
+    return bits.to_bytes(16, "little"), error
+
+
+def mode1_subset(colors):
+    """A subset's ends, each six bits a channel with the bit the two share, its three-bit indices and
+    its squared error, along its colors' principal axis and fitted again by least squares."""
+    low, high = principal_ends(colors)
+    best = None
+    for bit in (0, 1):
+        ends = (mode1_quantize(low, bit), mode1_quantize(high, bit))
+        chosen = mode1_indices(colors, ends)
+        refit = least_squares_weighted(colors, chosen, WEIGHTS3)
+        candidates = [(ends, chosen)]
+        if refit is not None:
+            others = (mode1_quantize(refit[0], bit), mode1_quantize(refit[1], bit))
+            candidates.append((others, mode1_indices(colors, others)))
+        for ends, chosen in candidates:
+            error = mode1_error(colors, ends, chosen)
+            if best is None or error < best[2]:
+                best = (ends, chosen, error)
+    return best
+
+
+def principal_ends(colors):
+    """The ends of a set of colors along their principal axis, by the power method started from
+    the covariance's column of the channel that varies most."""
+    count = float(len(colors))
+    mean = [sum(color[c] for color in colors) / count for c in range(3)]
+    covariance = [[sum((color[i] - mean[i]) * (color[j] - mean[j]) for color in colors) for j in range(3)] for i in range(3)]
+    widest = max(range(3), key=lambda c: covariance[c][c])
+    axis = list(covariance[widest])
+    for _ in range(6):
+        axis = [sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)]
+        largest = max(abs(value) for value in axis)
+        if largest == 0.0:
+            break
+        axis = [value / largest for value in axis]
+    length = sum(value * value for value in axis)
+    if length == 0.0:
+        return mean, mean
+    places = [sum((color[c] - mean[c]) * axis[c] for c in range(3)) / length for color in colors]
+    return [mean[c] + axis[c] * min(places) for c in range(3)], [mean[c] + axis[c] * max(places) for c in range(3)]
+
+
+def mode1_quantize(endpoint, bit):
+    """An end's six bits a channel nearest it with the shared bit given."""
+    values = []
+    for c in endpoint:
+        c = max(0.0, min(255.0, c))
+        values.append(min(range(max(0, int(c / 4) - 1), min(63, int(c / 4) + 1) + 1), key=lambda v: abs(mode1_expand(v, bit) - c)))
+    return values, bit
+
+
+def mode1_expand(value, bit):
+    """Six bits and the shared bit widened to eight, the top bit repeated below them."""
+    seven = value << 1 | bit
+    return seven << 1 | seven >> 6
+
+
+def mode1_indices(colors, ends):
+    c0 = [mode1_expand(v, ends[0][1]) for v in ends[0][0]]
+    c1 = [mode1_expand(v, ends[1][1]) for v in ends[1][0]]
+    d = [b - a for a, b in zip(c0, c1)]
+    dd = sum(value * value for value in d)
+    if dd == 0:
+        return [0] * len(colors)
+    return [NEAREST3[max(0, min(64, int(sum((color[c] - c0[c]) * d[c] for c in range(3)) * 64 / dd + 0.5)))] for color in colors]
+
+
+def mode1_error(colors, ends, indices):
+    c0 = [mode1_expand(v, ends[0][1]) for v in ends[0][0]]
+    c1 = [mode1_expand(v, ends[1][1]) for v in ends[1][0]]
+    error = 0
+    for color, index in zip(colors, indices):
+        w = WEIGHTS3[index]
+        for c in range(3):
+            error += (((64 - w) * c0[c] + w * c1[c] + 32 >> 6) - color[c]) ** 2
+    return error
+
+
+def least_squares_weighted(colors, indices, weights):
+    """The ends that best give the colors at the weights the indices name, or nothing where they are
+    all one."""
+    a00 = a01 = a11 = 0.0
+    channels = len(colors[0])
+    b0 = [0.0] * channels
+    b1 = [0.0] * channels
+    for color, index in zip(colors, indices):
+        t = weights[index] / 64.0
+        s = 1.0 - t
+        a00 += s * s
+        a01 += s * t
+        a11 += t * t
+        for c in range(channels):
+            b0[c] += s * color[c]
+            b1[c] += t * color[c]
+    determinant = a00 * a11 - a01 * a01
+    if abs(determinant) < 1e-9:
+        return None
+    return ([(a11 * b0[c] - a01 * b1[c]) / determinant for c in range(channels)],
+            [(a00 * b1[c] - a01 * b0[c]) / determinant for c in range(channels)])
 
 
 def quantize(endpoint, bits=(0, 1)):
@@ -1030,11 +1266,21 @@ def psnr(errors, count):
 
 
 def psnr_bc7(image, blocks):
-    """The top level's error against its blocks, decoded as mode 6 decodes, in decibels."""
+    """The top level's error against its blocks, each decoded in the mode it was written in, in
+    decibels."""
     total = 0
     count = 0
     for at, texels in enumerate(texel_blocks(image.convert("RGBA"), 4)):
-        bits = int.from_bytes(blocks[16 * at:16 * at + 16], "little")
+        for texel, decoded in zip(texels, bc7_decoded(blocks[16 * at:16 * at + 16])):
+            total += sum((a - b) ** 2 for a, b in zip(texel, decoded))
+            count += 4
+    return psnr(total, count)
+
+
+def bc7_decoded(block):
+    """A block's sixteen texels as RGBA, decoded in mode 6 or mode 1, the two the encoder writes."""
+    bits = int.from_bytes(block, "little")
+    if bits & 1 << 6 and not bits & 63:
         shift = 7
         c0, c1 = [], []
         for _ in range(4):
@@ -1050,13 +1296,31 @@ def psnr_bc7(image, blocks):
         for _ in range(15):
             indices.append(bits >> shift & 15)
             shift += 4
-        for texel, index in zip(texels, indices):
-            w = WEIGHTS[index]
-            for c in range(4):
-                total += (((64 - w) * c0[c] + w * c1[c] + 32 >> 6) - texel[c]) ** 2
-            count += 4
-    return psnr(total, count)
+        return [tuple((64 - WEIGHTS[i]) * a + WEIGHTS[i] * b + 32 >> 6 for a, b in zip(c0, c1)) for i in indices]
 
+    # Mode 1, its mode's bits 01.
+    partition = bits >> 2 & 63
+    shift = 8
+    raw = [[[0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0]]]
+    for c in range(3):
+        for s in (0, 1):
+            for e in (0, 1):
+                raw[s][e][c] = bits >> shift & 63
+                shift += 6
+    shared = [bits >> shift & 1, bits >> (shift + 1) & 1]
+    shift += 2
+    anchors = (0, SECOND_ANCHORS[partition])
+    texels = []
+    for i in range(16):
+        width = 2 if i in anchors else 3
+        index = bits >> shift & (1 << width) - 1
+        shift += width
+        s = int(PARTITIONS[partition][i])
+        c0 = [mode1_expand(v, shared[s]) for v in raw[s][0]]
+        c1 = [mode1_expand(v, shared[s]) for v in raw[s][1]]
+        w = WEIGHTS3[index]
+        texels.append(tuple((64 - w) * a + w * b + 32 >> 6 for a, b in zip(c0, c1)) + (255,))
+    return texels
 
 def psnr_bc5(image, blocks):
     total = 0

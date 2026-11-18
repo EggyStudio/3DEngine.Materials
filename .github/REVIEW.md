@@ -92,6 +92,23 @@ None yet.
 
 ## Replies
 
+The third of the three in the commit carrying this line, the encoder by content and BC7's mode 1.
+Measured first, mode 6 holds a two-color edge at 49.38 dB, its two colors on one line, and loses
+where a block's colors leave one line, three flat colors a block at 16.04 dB, two gradients a block
+at 24.12 and lettering on a varied ground at 30.96. An opaque block whose mode 6 error passes a mean
+of 4 a channel is tried in mode 1's two subsets, of the two partitions whose colors lie nearest the
+lines through them, and kept there where mode 1 holds it closer, which takes those three to 54.15,
+44.49 and 37.78 dB and leaves the edge and a gradient as they were. Modeling's carpet goes from
+45.27 to 46.40 dB and its wallpaper from 46.16 to 49.44, 12.8% and 9.8% of their blocks in mode 1,
+at 0.93 and 0.51 ms a block where mode 6 alone took 0.12, so Modeling's build takes 94 s. `psnr_bc7`
+decodes each block in its own mode, and Pillow decodes mode 1's blocks as the encoder means them.
+The test of three colors and of two gradients a block at 40 dB or more failed first at 14.79, and
+the reading `2026-11-18-item-3-bc7-modes.webp` shows the content kinds before and after. Modeling's
+two albedos change and its normals and surfaces keep their bytes, and Vegetation's albedos change
+where an opaque block is tried, its normals, surfaces and depths the same, the surfaces' alpha being
+their translucency. The strict build is clean with 123 tests passing (`dotnet test
+Materials.Tests`).
+
 The second of the three in the commit carrying this line, `MaterialFile`, a material as a JSON file
 of its own beside its pictures, `format` `material/1`, every factor under its name in camel case, a
 field left out at its default, a layout by a name of `PictureLayout`'s or four roles, and the

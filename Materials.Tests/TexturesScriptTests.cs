@@ -105,6 +105,52 @@ public class TexturesScriptTests
     }
 
     [NeedsPillowFact]
+    public void A_Block_Whose_Colors_Leave_One_Line_Is_Encoded_Near_Its_Source()
+    {
+        // Three flat colors in each block and two gradients in each, which one line between two
+        // endpoints holds at 16 and 24 dB, encoded at 40 dB or more where a block's colors fall
+        // into subsets of their own.
+        Assert.InRange(Encoded((x, y) => x % 4 < 2 && y % 4 < 2 ? [220, 40, 40] : y % 4 < 2 ? [40, 200, 60] : [40, 60, 220]), 40, 200);
+        Assert.InRange(Encoded((x, y) => x % 4 < 2 ? [(byte)(60 + 40 * (y % 4)), 40, 40] : [40, (byte)(60 + 40 * (x % 4)), 200]), 40, 200);
+    }
+
+    // A tile of 16 by 16 texels drawn by a function, built through a manifest and read back from
+    // its albedo's top level, its peak signal to noise in decibels over red, green and blue.
+    private static double Encoded(Func<int, int, byte[]> texel)
+    {
+        var folder = Directory.CreateTempSubdirectory("materials-encode-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "source"));
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "collection"));
+            var ppm = new List<byte>(System.Text.Encoding.ASCII.GetBytes("P6\n16 16\n255\n"));
+            for (int y = 0; y < 16; y++)
+            for (int x = 0; x < 16; x++)
+                ppm.AddRange(texel(x, y));
+            File.WriteAllBytes(Path.Combine(folder.FullName, "source", "tile.ppm"), [.. ppm]);
+            var manifest = Path.Combine(folder.FullName, "collection", "textures.json");
+            File.WriteAllText(manifest, """{"entries": [{"name": "tile", "source": "source", "size": [16, 16], "albedo": {"file": "tile.ppm"}}]}""");
+            Programs.Script("textures.py", manifest, "--sources", folder.FullName);
+
+            var decoded = Ktx2.Read(File.ReadAllBytes(Path.Combine(folder.FullName, "collection", "tile", "albedo.ktx2"))).Decode();
+            double squares = 0;
+            for (int y = 0; y < 16; y++)
+            for (int x = 0; x < 16; x++)
+            {
+                var source = texel(x, y);
+                for (int c = 0; c < 3; c++) squares += Math.Pow(decoded[(y * 16 + x) * 4 + c] - source[c], 2);
+            }
+
+            var mean = squares / (16 * 16 * 3);
+            return mean == 0 ? 200 : 10 * Math.Log10(255.0 * 255.0 / mean);
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
+    [NeedsPillowFact]
     public void The_Script_Writes_The_Sample_The_Repository_Holds()
     {
         var folder = Directory.CreateTempSubdirectory("materials-sample-");

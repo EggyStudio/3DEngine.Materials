@@ -30,3 +30,12 @@ above and 0.415 below. The dielectric's largest difference is 0.084, at a roughn
 mean is 0.0067 with 15.8% of the hits past 0.01. The metal's largest is 0.509, at a roughness of
 0.99 seen at a cosine of 0.008, its mean over the hits 0.10 with 95.6% past 0.01, the fit holding
 0.45 at a roughness of one where the integral worked by hand gives 0.3069 head on.
+
+![](.github/assets/readings/2026-11-18-item-3-bc7-modes.webp)
+The BC7 encoder by content, each picture 64 by 64 texels at four pixels a texel, its source on the
+left, mode 6 alone in the middle and modes 6 and 1 on the right, mode 1 tried for an opaque block
+whose mode 6 error passes a mean of 4 a channel, 42 dB; a two-color edge holds at 49.38 dB both
+ways, three flat colors a block go from 16.04 to 54.15 dB, two gradients a block from 24.12 to
+44.49, lettering on a varied ground from 30.96 to 37.78 and a corner of Modeling's scanned wallpaper
+from 46.39 to 50.06, at about 3 ms a block tried against 0.12 for mode 6 alone, Modeling's carpet
+taking 0.93 ms a block for 46.40 dB where it took 0.12 for 45.27.
