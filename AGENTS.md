@@ -36,6 +36,7 @@ runs the tests on Linux, Windows and macOS on every push (NORM.md, N 6.1 and N 6
 | `Materials` | The library, `Materials.csproj` |
 | `Materials.Tests` | The xunit tests of the library |
 | `build` | The version, `version.txt`'s major and minor set by hand and `version.sh`, which prints it with the patch counted from the history |
+| `scripts` | What is run by hand with Python 3 and Pillow, `blocks.py`, which writes the block decoders' reference the tests read from Pillow's own decoders |
 
 ## Conventions
 

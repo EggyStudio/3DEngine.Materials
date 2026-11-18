@@ -1,0 +1,1683 @@
+{
+ "pillow": "12.3.0",
+ "cases": [
+  {
+   "name": "BC1, the first color the greater",
+   "format": "Bc1",
+   "blocks": [
+    {
+     "block": "e6a7d43457130bc0",
+     "texels": "57bb7eff319aa5ff319aa5ff319aa5ff57bb7effa5ff31ff319aa5ffa5ff31ff57bb7eff7edd57ffa5ff31ffa5ff31ffa5ff31ffa5ff31ffa5ff31ff57bb7eff"
+    },
+    {
+     "block": "615004397eb46cb3",
+     "texels": "491210ff411918ff411918ff392021ff520c08ff392021ff411918ff491210ff520c08ff411918ff491210ff392021ff411918ff520c08ff411918ff491210ff"
+    },
+    {
+     "block": "addf2a37003afd8b",
+     "texels": "def76bffdef76bffdef76bffdef76bffa4f162ffa4f162ff6aec5affdef76bff31e752ff6aec5aff6aec5aff6aec5aff6aec5affa4f162ffdef76bffa4f162ff"
+    },
+    {
+     "block": "0d5e0135465bbe18",
+     "texels": "4cb84aff31a208ff5ac36bff31a208ff3ead29ff4cb84aff31a208ff31a208ff4cb84aff3ead29ff3ead29ff4cb84aff5ac36bff4cb84aff31a208ff5ac36bff"
+    },
+    {
+     "block": "91f1eb8435632436",
+     "texels": "849e5aff849e5affaa796afff7308cffaa796afff7308cffd0547bff849e5afff7308cff849e5affd0547bfff7308cffd0547bff849e5affaa796afff7308cff"
+    },
+    {
+     "block": "1b7e953b6d370ddb",
+     "texels": "3971adff4f8cbdff65a7cdff3971adff4f8cbdff3971adff4f8cbdff7bc3deff3971adff4f8cbdff7bc3deff7bc3deff4f8cbdff65a7cdff3971adff4f8cbdff"
+    },
+    {
+     "block": "2efae677d1f58f41",
+     "texels": "73ff31ffff4573ff73ff31ffa1c147ff73ff31ff73ff31ffa1c147ffa1c147ffa1c147ffa1c147ffff4573ffd0835dff73ff31ffff4573ffff4573ff73ff31ff"
+    },
+    {
+     "block": "27d6ed9f66dc60c6",
+     "texels": "c2d949ff9cff6bffc2d949ff9cff6bffd6c739ffafec5aff9cff6bffafec5affd6c739ffd6c739ffc2d949ff9cff6bffc2d949ff9cff6bffd6c739ffafec5aff"
+    },
+    {
+     "block": "b85b0e10b8e54b57",
+     "texels": "5a75c6ff414eaaff28278eff414eaaff100073ff100073ff414eaaff28278eff28278eff414eaaff5a75c6ff100073ff28278eff100073ff100073ff100073ff"
+    },
+    {
+     "block": "98e1ad9860a4aa27",
+     "texels": "e730c6ffe730c6ffce26a7ff9c146bffe730c6ff9c146bffce26a7ffce26a7ffce26a7ffce26a7ffce26a7ffce26a7ffb51d89ff9c146bffce26a7ffe730c6ff"
+    },
+    {
+     "block": "65bf45adb356cca0",
+     "texels": "b2c129ffbdef29ffb2c129ffb7d829ffb7d829ffadaa29ffadaa29ffadaa29ffbdef29ffb2c129ffbdef29ffb2c129ffbdef29ffbdef29ffb7d829ffb7d829ff"
+    },
+    {
+     "block": "c4fb1cbc32ce9046",
+     "texels": "e97c63ffff7921ffd37fa5ffff7921ffe97c63ffd37fa5ffff7921ffd37fa5ffff7921ffff7921ffbd82e7ffe97c63ffe97c63ffbd82e7ffff7921ffbd82e7ff"
+    },
+    {
+     "block": "d6f36f78e0f3a025",
+     "texels": "f779b5fff779b5ffcd54a1ffa4308effa4308efff779b5ffa4308effa4308efff779b5fff779b5ffcd54a1ffcd54a1ff7b0c7bff7b0c7bffcd54a1fff779b5ff"
+    },
+    {
+     "block": "10ea8f26bd9b3d60",
+     "texels": "21d37bff65a27eff65a27effaa7181ff65a27effaa7181ff21d37bffaa7181ff21d37bff65a27eff65a27effef4184ffef4184ffef4184ffaa7181ff21d37bff"
+    },
+    {
+     "block": "7769880747dbf564",
+     "texels": "23b06bff00f342ff6b2cbdff00f342ff23b06bff476e94ff00f342ff23b06bff00f342ff00f342ff23b06bff23b06bff6b2cbdff00f342ff476e94ff00f342ff"
+    },
+    {
+     "block": "30dd17820e580aff",
+     "texels": "c08497ffa262aaffdea684ffdea684ffdea684ffc08497ff8441bdff8441bdffc08497ffc08497ffdea684ffdea684ffa262aaffa262aaffa262aaffa262aaff"
+    }
+   ]
+  },
+  {
+   "name": "BC1, the first color not the greater",
+   "format": "Bc1",
+   "blocks": [
+    {
+     "block": "1a7843a38b6462bd",
+     "texels": "00000000903477ff7b00d6ff903477ff7b00d6ffa56918ff903477ffa56918ff903477ff7b00d6ff903477ffa56918ffa56918ff0000000000000000903477ff"
+    },
+    {
+     "block": "be32b2f918cdd473",
+     "texels": "3155f7ff9844c5ffff3494ff3155f7ffff3494ff000000003155f7ff000000003155f7ffff3494ffff3494ff00000000000000003155f7ff00000000ff3494ff"
+    },
+    {
+     "block": "2b04cf8c0af17a0e",
+     "texels": "46906aff46906aff00865aff00865aff8c9a7bff00865aff000000000000000046906aff46906aff000000008c9a7bff46906aff0000000000865aff00865aff"
+    },
+    {
+     "block": "e329252d73852554",
+     "texels": "00000000293c18ff0000000029a629ff29a629ff29a629ff293c18ff297120ff29a629ff29a629ff297120ff293c18ff293c18ff29a629ff29a629ff29a629ff"
+    },
+    {
+     "block": "f367fdbf4db2d1b0",
+     "texels": "bdffefff0000000063ff9cffbdffefff90ffc5ff63ff9cff0000000090ffc5ffbdffefff63ff9cffbdffefff0000000063ff9cff63ff9cff0000000090ffc5ff"
+    },
+    {
+     "block": "442e59b0d26bb994",
+     "texels": "6f6977ff29cb21ffb508ceff00000000000000006f6977ff6f6977ffb508ceffb508ceff6f6977ff000000006f6977ff29cb21ffb508ceffb508ceff6f6977ff"
+    },
+    {
+     "block": "06dc56f394a890f6",
+     "texels": "de8231fff769b5fff769b5ffea7573ffde8231ffea7573ffea7573ffea7573ffde8231ffde8231fff769b5ffea7573ffea7573fff769b5ff0000000000000000"
+    },
+    {
+     "block": "30b477e859263b23",
+     "texels": "ef0cbdffd249a0ffef0cbdffef0cbdffd249a0ffef0cbdffd249a0ffb58684ff00000000d249a0ff00000000b58684ff00000000b58684ffd249a0ffb58684ff"
+    },
+    {
+     "block": "256945b79dd5aee1",
+     "texels": "b5eb29ff00000000b5eb29ff908729ffb5eb29ffb5eb29ffb5eb29ff00000000908729ff00000000908729ff908729ffb5eb29ff6b2429ff908729ff00000000"
+    },
+    {
+     "block": "87a36bd09da37900",
+     "texels": "d60c5aff00000000d60c5affbd3e49ff00000000a57139ffbd3e49ffbd3e49ffd60c5affbd3e49ff00000000d60c5affa57139ffa57139ffa57139ffa57139ff"
+    },
+    {
+     "block": "d4f3f5f625e7e25c",
+     "texels": "f7dfadfff7dfadfff7aca9fff779a5ff00000000f7dfadfff7aca9ff00000000f7aca9fff779a5fff7aca9ff00000000f779a5ff00000000f7dfadfff7dfadff"
+    },
+    {
+     "block": "ddb28fd32be46844",
+     "texels": "00000000c565b5ffc565b5ffb559efffb559efffd6717bffc565b5ff00000000b559efffc565b5ffc565b5ffd6717bffb559efffd6717bffb559efffd6717bff"
+    },
+    {
+     "block": "9d3141bc60c84fc0",
+     "texels": "3130efff3130efff775d7bffbd8a08ff3130efff775d7bff3130efff0000000000000000000000003130efffbd8a08ff3130efff3130efff3130efff00000000"
+    },
+    {
+     "block": "efb18af954aba9db",
+     "texels": "b53c7bffff3052ffff3052ffff3052ff00000000da3666ffda3666ffda3666ffff3052ffda3666ffda3666ffda3666ff00000000da3666ffff3052ff00000000"
+    },
+    {
+     "block": "f6051ac778a93a91",
+     "texels": "00beb5ff63d0c5ff00000000c6e3d6ffc6e3d6ff63d0c5ff63d0c5ff63d0c5ff63d0c5ff63d0c5ff0000000000beb5ffc6e3d6ff00beb5ffc6e3d6ff63d0c5ff"
+    },
+    {
+     "block": "ee28e7713697b63b",
+     "texels": "4e2c56ff733c39ff00000000291c73ff00000000733c39ff733c39ff4e2c56ff4e2c56ff733c39ff000000004e2c56ff000000004e2c56ff00000000291c73ff"
+    }
+   ]
+  },
+  {
+   "name": "BC4, the first end the greater",
+   "format": "Bc4",
+   "blocks": [
+    {
+     "block": "87391fbe65ee9883",
+     "texels": "440000ff700000ff870000ff440000ff700000ff700000ff390000ff700000ff4f0000ff5a0000ff700000ff650000ff390000ff440000ff870000ff650000ff"
+    },
+    {
+     "block": "6c6b893eaea5e27d",
+     "texels": "6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff6b0000ff"
+    },
+    {
+     "block": "ebe97b498038284b",
+     "texels": "ea0000ffe90000ffe90000ffea0000ffea0000ffeb0000ffeb0000ffea0000ffeb0000ffe90000ffeb0000ffea0000ffea0000ffe90000ffea0000ffea0000ff"
+    },
+    {
+     "block": "622cdf8e99509fff",
+     "texels": "330000ff520000ff520000ff330000ff620000ff520000ff3b0000ff4a0000ff620000ff5a0000ff430000ff330000ff2c0000ff330000ff330000ff330000ff"
+    },
+    {
+     "block": "c5bd94511d53c952",
+     "texels": "c10000ffc30000ffbf0000ffc50000ffc00000ffc30000ffbe0000ffc50000ffc20000ffc30000ffc00000ffc10000ffc10000ffc00000ffc10000ffc30000ff"
+    },
+    {
+     "block": "fb2bbe601aa9652c",
+     "texels": "660000ff480000ffdd0000fffb0000ff660000ffa10000ff660000fffb0000ff2b0000ff840000ff660000ffdd0000ff660000fffb0000ffbf0000ff2b0000ff"
+    },
+    {
+     "block": "a11ed0be89556112",
+     "texels": "a10000ff8e0000ff7b0000ff300000ff7b0000ff7b0000ff8e0000ff680000ff560000ff8e0000ff560000ffa10000ff430000ff680000ff680000ffa10000ff"
+    },
+    {
+     "block": "3d2b129d757eb361",
+     "texels": "3a0000ff3a0000ff350000ff300000ff2b0000ff370000ff320000ff370000ff300000ff2d0000ff320000ff2b0000ff370000ff370000ff3d0000ff370000ff"
+    },
+    {
+     "block": "3c120004b08aa1ee",
+     "texels": "3c0000ff3c0000ff3c0000ff360000ff3c0000ff3c0000ff2a0000ff240000ff360000ff120000ff1e0000ff3c0000ff360000ff240000ff300000ff180000ff"
+    },
+    {
+     "block": "2a0d15e589d75c01",
+     "texels": "190000ff250000ff1d0000ff250000ff150000ff210000ff250000ff1d0000ff110000ff250000ff210000ff150000ff190000ff250000ff2a0000ff2a0000ff"
+    },
+    {
+     "block": "2f086c9f10e10225",
+     "texels": "1e0000ff180000ff180000ff0d0000ff080000ff080000ff1e0000ff2f0000ff080000ff1e0000ff230000ff080000ff2f0000ff290000ff080000ff080000ff"
+    },
+    {
+     "block": "f4c7b86ebf4be9fb",
+     "texels": "f40000ffcd0000ffed0000ffcd0000ffd30000ffd30000ffcd0000ffda0000ffe70000ffc70000ffda0000ffe00000ffd30000ffcd0000ffd30000ffcd0000ff"
+    },
+    {
+     "block": "9014b261febb25eb",
+     "texels": "7e0000ff370000ff370000ff900000ff370000ff5a0000ff250000ff250000ff6c0000ff250000ff370000ff7e0000ff7e0000ff370000ff7e0000ff250000ff"
+    },
+    {
+     "block": "8d37215b81b5bfec",
+     "texels": "370000ff680000ff680000ff5b0000ff5b0000ff800000ff8d0000ff680000ff5b0000ff4f0000ff4f0000ff430000ff740000ff370000ff740000ff430000ff"
+    },
+    {
+     "block": "945873ace5a3122d",
+     "texels": "820000ff690000ff580000ff690000ff8b0000ff820000ff580000ff600000ff820000ff7a0000ff8b0000ff580000ff580000ff8b0000ff820000ff580000ff"
+    },
+    {
+     "block": "9312a6c256b41421",
+     "texels": "360000ff5b0000ff800000ff120000ff5b0000ff490000ff490000ff800000ff5b0000ff360000ff800000ff800000ff120000ff800000ff930000ff120000ff"
+    }
+   ]
+  },
+  {
+   "name": "BC4, the first end not the greater",
+   "format": "Bc4",
+   "blocks": [
+    {
+     "block": "0b774f46e106dbd5",
+     "texels": "ff0000ff770000ff770000ff360000ff4b0000ff200000ff0b0000ffff0000ff000000ff0b0000ff4b0000ff610000ff610000ff360000ff610000ff000000ff"
+    },
+    {
+     "block": "3dcbf347c11e1076",
+     "texels": "750000ff000000ffff0000ff750000ff920000ff590000ff3d0000ff000000ff000000ff750000ff3d0000ff3d0000ffcb0000ff920000ffae0000ff750000ff"
+    },
+    {
+     "block": "2b84640a162f7779",
+     "texels": "600000ff600000ff840000ff720000ff2b0000ff600000ff720000ff2b0000ffff0000ff720000ff600000ff4e0000ffff0000ff3c0000ff000000ff4e0000ff"
+    },
+    {
+     "block": "dce66988256bf113",
+     "texels": "e60000ffe40000ffe60000ffe20000ffdc0000ffe00000ffe60000ffe60000ffe00000ffe40000ffe40000ffdc0000ffff0000ffff0000ffe20000ffdc0000ff"
+    },
+    {
+     "block": "1f7001374df529de",
+     "texels": "700000ff1f0000ff4f0000ff3f0000ff3f0000ff2f0000ff3f0000ff2f0000ff5f0000ff000000ffff0000ff4f0000ff2f0000ff4f0000ffff0000ff000000ff"
+    },
+    {
+     "block": "0a3c82d8b1ffae82",
+     "texels": "140000ff0a0000ff140000ff280000ff320000ff1e0000ff280000ff320000ffff0000ffff0000ff1e0000ffff0000ff140000ff320000ff0a0000ff280000ff"
+    },
+    {
+     "block": "2e4a8a9152abe7e4",
+     "texels": "330000ff4a0000ff000000ff2e0000ff4a0000ff440000ff3e0000ff330000ff390000ff440000ff000000ff390000ff000000ff4a0000ff4a0000ffff0000ff"
+    },
+    {
+     "block": "b0bae47bb3106948",
+     "texels": "b60000ffb60000ffff0000ffb80000ffff0000ff000000ffb60000ffb80000ffb00000ffb20000ffb60000ffb60000ff000000ffb00000ffb20000ffb20000ff"
+    },
+    {
+     "block": "3e8cd09a00d3d84e",
+     "texels": "3e0000ff4d0000ff5d0000ff7c0000ff8c0000ff8c0000ff3e0000ff3e0000ff5d0000ff4d0000ff5d0000ff6c0000ff7c0000ff7c0000ff5d0000ff4d0000ff"
+    },
+    {
+     "block": "80f4b7e5debf2db1",
+     "texels": "ff0000ff000000ff000000ff970000ff000000ffdc0000ffff0000ff000000ffff0000ffff0000ff000000ff000000ff970000ff970000ffc50000ffdc0000ff"
+    },
+    {
+     "block": "3cd06047e6a7051f",
+     "texels": "3c0000ff940000ffb20000ff770000ff940000ff940000ffd00000ffff0000ffff0000ff940000ff000000ff590000ff3c0000ff000000ffff0000ff3c0000ff"
+    },
+    {
+     "block": "337a203f7bf02a03",
+     "texels": "330000ff5d0000ff5d0000ffff0000ff4f0000ff000000ff000000ff4f0000ff330000ff000000ff4f0000ff6b0000ff410000ff000000ff330000ff330000ff"
+    },
+    {
+     "block": "defdbff2d7f6b122",
+     "texels": "ff0000ffff0000ffe40000fffd0000ffff0000ffff0000fff60000ff000000ff000000ff000000ffff0000ffde0000ffea0000fff60000ffde0000fffd0000ff"
+    },
+    {
+     "block": "a5b11c9fefea832b",
+     "texels": "ac0000ffa90000ffac0000ffff0000ffb10000ffff0000ffa90000ffff0000ffa70000ffae0000ffff0000ffb10000ffa50000ffff0000ffa70000ffb10000ff"
+    },
+    {
+     "block": "178f26377ac9bcf5",
+     "texels": "000000ff5f0000ff5f0000ff470000ff470000ff5f0000ff000000ff470000ff8f0000ff8f0000ff470000ff000000ff470000ff470000ff770000ffff0000ff"
+    },
+    {
+     "block": "5c94464e7072f0c7",
+     "texels": "000000ff5c0000ff940000ffff0000ff7d0000ff5c0000ff7d0000ff720000ff670000ff000000ff940000ff5c0000ffff0000ffff0000ff940000ff000000ff"
+    }
+   ]
+  },
+  {
+   "name": "BC5",
+   "format": "Bc5",
+   "blocks": [
+    {
+     "block": "2e92eee047485116209494e95942d032",
+     "texels": "006500ff7e3700ff560000ff2e6500ff000000ffff4e00ff920000ff423700ff2e3700ff922000ff7e9400ff2e2000ff7e7c00ff6a7c00ff7e6500ff2e9400ff"
+    },
+    {
+     "block": "7cf7a23d12db33ebd505e2acc9271760",
+     "texels": "94b700ffc57b00ff009900ff004000ffadb700ffc59900ffc5b700ff7c4000ffad2200ffad7b00ffff7b00fff79900ffad0500ff00d500ff94d500ffff9900ff"
+    },
+    {
+     "block": "c07edefd44d47187024f535a76f4ccb4",
+     "texels": "902000ffad1100ff874f00ff903f00ff873f00ff7e3000ff7e3f00ffb62000ffa33000ffb60000ff872000ffc00000ff873000ff904f00ff7e3f00ffa33f00ff"
+    },
+    {
+     "block": "4b1311a8c1026b0ee387c09b9281f089",
+     "texels": "13e300ff43e300ff4b9400ff33ae00ff438700ff3bae00ff4bbb00ff23bb00ff438700ff4be300ff33d500ff2be300ff239400ff33c800ff3bd500ff4bbb00ff"
+    },
+    {
+     "block": "df05de9d76004b1caea50fea9788d502",
+     "texels": "43a600ffa0a500ff24ae00ff43a800ff05a700ff62a600ff62a800ffa0aa00ffdfae00ffdfa500ff81a700ff62ac00ff81a800ffdfa800ff24ae00ffdfae00ff"
+    },
+    {
+     "block": "5ff55d5f2caf15db14b6c3fb6941e8b5",
+     "texels": "d75400ff9b1400ffd7ff00ffff9500ffd7ff00ff5f5400ff9b3400fff55400ffffb600ffd71400ff00b600ff7d7500fff50000ff005400ff009500ff009500ff"
+    },
+    {
+     "block": "2ad41bc0533e916d57daced2526c6ce9",
+     "texels": "6e0000ff6eda00ff2a8b00ff2ada00ff90bf00ffffbf00ff90a500ff4c7100ff00a500ffffbf00ff90da00ff2a0000ffd40000ff6e7100ff6e7100ff6eff00ff"
+    },
+    {
+     "block": "29d7ee2d854783c66fdc8168eacf079e",
+     "texels": "00dc00ffb46f00ffff8400ff00b000ff4b0000ff4bb000ffd78400ff91ff00ffffff00ff29dc00ffb4ff00ffd79a00ff296f00ffb4b000ffd7ff00ff00b000ff"
+    },
+    {
+     "block": "b0475b1fd1b146bc3925f186b07805a8",
+     "texels": "922500ff922a00ff743300ff563300ff473900ffa12500ff833000ff652d00ff473900ff652700ffa12d00ff923600ff833900ffb03900ff563600ff742d00ff"
+    },
+    {
+     "block": "9e21fc6e4d65d3936cbcd22e7a76a453",
+     "texels": "687c00ff327c00ff7a8c00ff32ff00ff447c00ff8c9c00ff7a0000ff8c8c00ff560000ff680000ff56bc00ff217c00ff567c00ff32ff00ff689c00ff687c00ff"
+    },
+    {
+     "block": "0e05408683f699442eebc89bb709c27f",
+     "texels": "0e2e00ff0eeb00ff05ff00ff0bc500ff0eeb00ff06ff00ff0ec500ff0ac500ff07eb00ff07eb00ff062e00ff0aeb00ff059f00ff05ff00ff05ff00ff0c7900ff"
+    },
+    {
+     "block": "5aecc695869d9ddf98cfe5b3d7db1418",
+     "texels": "00c400ff5ab900ffffff00ff77cf00ffecae00ffceff00ffecc400ffb10000ffceae00ff94ae00ff00ae00ff00a300ffeccf00ffff9800ffff0000ff009800ff"
+    },
+    {
+     "block": "e47ef34a6a9b381c15bde538d8fd454a",
+     "texels": "c69b00ff9b7900ffc65800ffa97900ffb85800ffb81500ffd50000ffc60000ffc69b00ffc6ff00ffd5ff00ffb83600ffc67900ffe47900ff8c3600ffe43600ff"
+    },
+    {
+     "block": "fd75b9943f442f049c76fff83f1695a2",
+     "texels": "757b00ff887b00ffe99100ffe98b00ff757b00ff887b00ff887b00ff757600ffc28000fffd9600ffaf8b00ff889600ffe97600fffd8600ff759c00fffd8600ff"
+    },
+    {
+     "block": "5ac90e8cec0129af35849046927b7952",
+     "texels": "003500ffc94400ff5a4400ff005400ff5a6400ffc96400ff866400ffff6400ffc95400ff5aff00ff9c7400ff9c6400ff70ff00ff006400ff866400ffb24400ff"
+    },
+    {
+     "block": "16265441322d7fc8063e9bb6864bf8be",
+     "texels": "1f1c00ff191c00ff221100ff161c00ff1f1c00ff1f3200ff1f3e00ff262700ff221c00ff223e00ff1f3e00ffff2700ffffff00ff163200ff19ff00ff003200ff"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 0",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "8115668463893a6f69f951f811618561",
+     "texels": "c59b93ffc59b93ff08bdbdff1d8c8cffad187bffc9b497ff169d9dff247b7bffcece9cff23c1c4ff2d6cbaff0fadadff2898bfff2f57b7ff2898bfff2f57b7ff"
+    },
+    {
+     "block": "e3cad1d35c3a1eae0f8ad2c07d9254b1",
+     "texels": "6a8820ff57d463ff736300ffef29deff57d463ff5bc253ff84d673ffe041cfffe23712ffd5571dffd15ac0ffd15ac0ffaeb83dffd5571dffba9933ffa2a591ff"
+    },
+    {
+     "block": "653d14ad54401304ac9adaa9da14859a",
+     "texels": "ca750effe0991cffbc5e05ffd98e18ff80a67dffd98e18ffd98e18ff2c2315ff86a96bff86a96bff401d22ff2c2315ff749fa2ff80a67dff53182eff401d22ff"
+    },
+    {
+     "block": "271bd0f223e266ed29b4c1d97e90eb7e",
+     "texels": "9cffbdff8d3a90ff6a6a25ff78574fffce3270ffce3270ff9431a5ff6a6a25ff9cffbdffa4ddb0ff8c184aff2d18ccffd61063ff791863ff8c184aff1b18e6ff"
+    },
+    {
+     "block": "293aed3ae14b46d67357b54fbcf448d5",
+     "texels": "4a6d4dffa42f91ffde08bdff2d8037ff2d8037ffc11ca7ff675963ff2d8037ff8ee1dcff6b5a9cff8224b6ff9128b7ff88cbd2ff7786b1ff9128b7ffa02bb8ff"
+    },
+    {
+     "block": "cb9afed4c71cfa31c669516d9336737a",
+     "texels": "8bbcdfff8bbcdfffcac82dff5d7716ff9ca2ceff9ca2ceff778a1cff778a1cff9ca2ceff9ca2ceff9eb859ff907c88ff9ca2ceff8bbcdfffa5d642ff7a1ed0ff"
+    },
+    {
+     "block": "2d234ed09c5e8e4c3d047b0f4da46968",
+     "texels": "5c9b50ff5c9b50ff847321ff363319ff946342ff35c25aff363319ff363319ff2e77baff2e77baff3d92c4ff2e77baff3d92c4ff1042a5ff5dcadaff1f5dafff"
+    },
+    {
+     "block": "8f69c17d73fc4662788ff0b2c6e52d99",
+     "texels": "a1ac1cff429410ff886a61ff1bcfb2ffa1ac1cff8ea71aff509e8bff6d8274ffe76aacffe73a7cff6d8274ff6d8274ffe76aacffe76aacff6d8274ff886a61ff"
+    },
+    {
+     "block": "f1cf347787bc14aec0eb41e3b344d4a4",
+     "texels": "ffbd08ffda9828ffc78539ffb3714aff7b397bffecaa18ffc78539ffecaa18ff74614eff91a92bff6b4a5aff9ac11fffb09967ffa78291ffa78291ff9d69bdff"
+    },
+    {
+     "block": "b31061fcc24894f303c9fa059fcfcfa0",
+     "texels": "6a4db4ff8c189cff7c32a8ff5273c6ff3b5375ff004210ff7865ddff004210ff515a9aff3b5375ff004210ff515a9affcf944cff39298cff9e7161ff6a4c77ff"
+    },
+    {
+     "block": "35362a56d8aa013b2cfdb0ac1609a3d2",
+     "texels": "4657a3ff8fa0c7ff7788bbff8fa0c7ff28642dff306038ff206723ff3a5d43ff6f5ac4ff10d694ff9e1edbff10d694ff873cd0ff3e9aabff3e9aabff567cb7ff"
+    },
+    {
+     "block": "77c3ce6cba6495177095de849bd8f399",
+     "texels": "6f77bfff27bfb7ff703950ff6bbdbdff27bfb7ff3ea8baff6c5219ff6bb9b9ff5690bcff3ea8baff732184ff6bb4b4ff10d6b5ff9e48c4ff6e423cff6bb9b9ff"
+    },
+    {
+     "block": "79c7ad6ad2eaab8a8b81a465ba155fd1",
+     "texels": "b53152ff8a5975ff8a5975ff579c58ffa23f52ff8a5975ffb4609aff597023ff904d52ffdb67bdff775663ff5a5a08ff904d52ffdb67bdffc864abff55b576ff"
+    },
+    {
+     "block": "1b949c695e2c724e2e539a0846aead23",
+     "texels": "498850ffa14750ffce189cffba299bff003131ff883d44ffce189cffba299bffadff7bff703438ff934c99ff934c99ff7cc566ff883d44ff7d6097ffce189cff"
+    },
+    {
+     "block": "dd1ae72623bee6832277480c7bc1df92",
+     "texels": "7b89dfff8b77beff549625ff78303bff6b9cffff61712dff31f710ff443aacff841042ff549625ff3131b5ff3131b5ff3dd717ff60499dff60499dff60499dff"
+    },
+    {
+     "block": "5f47624fa94b144be08f422dff109eea",
+     "texels": "a5a584ff848976ff17790cff25ca23ffb33aebff314252ff314252ff1ea318ffbd29ffffa84cd8ffa5a584ff314252ffb33aebff88829affa84cd8ff314252ff"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 1",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "025b05a752a3f401f3ab54a595d982f0",
+     "texels": "69450aff5b3a24ffb962e5ffbd45f1ff5b3a24ff5b3a24ffb962e5ffa9d8b5ff5e3c1dff5b3a24ffadbbc1ffc128fdff5e3c1dff6c4804ffa9d8b5ffb57edaff"
+    },
+    {
+     "block": "06a5b419629fc84b908196a0cebd5bc2",
+     "texels": "8a9826ff8a9826ff8a9826ff6e2666ff5ed70fff53e60aff8a9826ff1acb83ff53e60aff75b71bff48f504ff26b47fff7fa721ff7fa721ff95892cff4b6c72ff"
+    },
+    {
+     "block": "0aaaad5dedfb0b7f912a8b1b6781381b",
+     "texels": "b9b9bdff6affa7ff5e0a2aff602c3cffabb7ffff5e0a2aff63715fff614f4dffabb7ffff6affa7ff68dd95ff602c3cffb2b8deff659872ff659872ff6affa7ff"
+    },
+    {
+     "block": "0ec4727e6360dfcaf4fe2152bdfb4bac",
+     "texels": "128f2aff1a6834ff22403fff8adbe2ff1a6834ff262d44ff7cddfdff81dcf4ff262d44ff2e064eff7cddfdff94dacfff1a6834ff8adbe2ff85dcebff94dacfff"
+    },
+    {
+     "block": "125f649632324e25aa99f68b7605f058",
+     "texels": "74b197ff4420a1ff4420a1ff6c9998ff5c679cff4c389fff4c389fff98608dff6c9998ff7cc995ff7cc995ff996986ff4420a1ff7cc995ff99747fff9a8671ff"
+    },
+    {
+     "block": "1676dc8d6d368ac35c3fcd0c3135fddb",
+     "texels": "d3955fffcf887eff788cbfff7f8b94ffdbb70eff788cbfff898a52ff828b7dffd5a044ff7f8b94ff7b8caaff8d893cff8d893cff7f8b94ff7f8b94ff7f8b94ff"
+    },
+    {
+     "block": "1a51a0928e3cae44896c2595ee79572a",
+     "texels": "3d4e25ff346337ff346337ff98a457ff218e5fff0fb784ff98a457ff91ad6cff218e5fff91ad6cff94a961ff98a457ffa29635ffa29635ff98a457ffa98d20ff"
+    },
+    {
+     "block": "1e1261a97915bec9183908bb9f14643a",
+     "texels": "38bc42ff48e524ff18687eff18687eff207d6fff10548dff30a850ff6f9541ff38bc42ff40d133ff588544ff638d42ff30a850ff6f9541ffa9bd38ff588544ff"
+    },
+    {
+     "block": "22f411eec08c5651e9848ee886cc3ca7",
+     "texels": "855666ffd10044ffb81d4fff9e3a5bff1ccd95ff35b08affd10044ff9e3a5bff35b08aff687773ffb81d4fffef5687ffb81d4fff1ccd95ffc37667ffa48d50ff"
+    },
+    {
+     "block": "26e3738211b57c6aaac0b40641438a6e",
+     "texels": "8246a8ff6b49a7ff896696ff99373eff8d44a9ff99373eff9d2c28ff896696ff99373eff8d5a80ff8d5a80ff954353ff8d5a80ff8571abff896696ff99373eff"
+    },
+    {
+     "block": "2a95f52c5ee2c90b94a0935d13eaf6fe",
+     "texels": "567a2eff576e31ff585736ff5a2642ff576234ff585736ff576234ff3e7a26ff593e3cff30c091ff33b480ff33b480ff2ecba3ff30c091ff2ecba3ff379c5bff"
+    },
+    {
+     "block": "2e528324076ae7304eb6711ac186d5c8",
+     "texels": "4a1ec3ff36a3e3ff3e6bd6ff3990dfff4a1ec3ff4731c8ff4a1ec3ff4256d1ff4256d1ff4a1ec3ff4256d1ff23e2abff3990dfff20d991ff21db96ff22dea0ff"
+    },
+    {
+     "block": "3230be97cef4b978ad409402ab5b080c",
+     "texels": "c63bdfffc63bdfffd846d8ffed7c28ffc138e1ffc89632ffaea839ffa1b03dffaea839ffaea839ffed7c28ffd48d2fffed7c28ffba9f36ffe1852bffed7c28ff"
+    },
+    {
+     "block": "36919cbc994a92b68826e1cf9c29c558",
+     "texels": "4666dbffb8a196ffcbab8bff7e83b9ffb8a196ff938eadff7e83b9ffb8a196ff7c9159ff4f917eff4f917eff3a918fffa79136ff2491a1ff65916cff3a918fff"
+    },
+    {
+     "block": "3a148a573b4f6783865978a48477d32e",
+     "texels": "67ee26ffa1f168ff50ed0cff5bee19ff7c835aff8f925bffe1d160ff687359ffa6a35dff546458ff687359ff8f925bff687359ff687359ff7c835affe1d160ff"
+    },
+    {
+     "block": "3ec7304628a879fc1169ce5c29bccefb",
+     "texels": "159497ff138f76ff1a9dd3ff0c811cff1898b5ff1a9dd3ff118a58ff1ca1f1ff0e863aff159497ff118a58ff159497ff507865ff707155ff467a6aff707155ff"
+    },
+    {
+     "block": "4278b49a8e398dbd7319f0ddfb22bb5b",
+     "texels": "e138f5ff449938ff9f61a5ff449938ff9c8422ff9f61a5ff449938ff9f61a5ffaa5552ffa75e49ff9c8422ff5a8b53ff9f7b2bffa5673fffa5673fffaa5552ff"
+    },
+    {
+     "block": "46c68e73eb17b159cbf99302152bb619",
+     "texels": "1aaf66ffd35585ffd35585ffd35585ff1aaf66ff56a17dffb38ca0ffe34672ff749a88ffb38ca0ff1aaf66ff749a88ff749a88ff749a88ffd185acff1aaf66ff"
+    },
+    {
+     "block": "4a1f54cc674093d96afdc85cbb8392e5",
+     "texels": "6b7279ff59458eff74876eff4004adff6b7279ff635c83ff4004adff481aa3ff2ec86fff7c9d64ff6b7279ff74876eff2ec86fff62b69eff2ec86fff4004adff"
+    },
+    {
+     "block": "4e6e4a28c2dfb4f3bb6b2ff4941307ef",
+     "texels": "b371c8ff195acaff1236efff195acaffa7ffbfffb82ccdff23938fff2081a2ffb371c8ffb54fcbffaf98c6ff1c6cb7ffbb0acfffaaddc1ffb371c8ffa7ffbfff"
+    },
+    {
+     "block": "52a112a9d2609121fec20362658e5ac6",
+     "texels": "874a87ff874a87ff465abfff5462c0ff3716d6ff6d39a1ff7a4294ff7172c1ff3716d6ff7a4294ff6d39a1ff441fc9ff441fc9ff5127bcff7a4294ff3716d6ff"
+    },
+    {
+     "block": "56b3b02ba1dd76189c523a8c43c6fed8",
+     "texels": "969d7bff7aa889ffcd8560ff7aa889ff7d9176ff7aa889ffcd8560ffb1916eff9c9c83ffefb7a7ff7aa889ff08d9c1ff2a7652ffd3ae9bff467f5eff24cdb3ff"
+    },
+    {
+     "block": "5a2b1e7b0447fa1e24433826ac32c41c",
+     "texels": "bc2b68ffc33960ffcb4858ffb41e70ffb41e70ffcb4858ffd25550ffbc2b68ffbaa0b6ffda6348ffad1078ffbc2b68ff98cd7affbaa0b6ffe17040ffad1078ff"
+    },
+    {
+     "block": "5efdadf0fe431d69216f1a199421a373",
+     "texels": "eec47cff464bbeff6343b1ffd7257bfff5f9a5ffe78c51ff6343b1ffd7257bfff5f9a5ffeec47cffd7257bff2a52cbffe4713dffeba968ffe05728ff464bbeff"
+    },
+    {
+     "block": "62e7cf0d523331b13811b1b7935d4a76",
+     "texels": "9f4ac7ffc842aeff464033ff464033ffc842aeffff368bffd73ea4ff363c29ffe43c9cffc842aeffad47bfff283821ffd73ea4ffd73ea4ffe43c9cffc842aeff"
+    },
+    {
+     "block": "663eb9419a9b0978dd912cfc99b43e6c",
+     "texels": "cd8adcffdc7fdefff968e1ff91b9d5ff400891ffea73dfffcd8adcffdc7fdeff604a7cffa0aed7ffdc7fdeff91b9d5ff593d80ff6c6474ffcd8adcffcd8adcff"
+    },
+    {
+     "block": "6a63611b58dc2ea5bf57bd77b196836a",
+     "texels": "5c8dc1ff887bacff887bacff5c8dc1ff16c7fbffa38ec2ff696695ff38abdfff27b9edffa38ec2ff333f6aff7e70a5ff8f6297ff4e537fffa38ec2ff5c8dc1ff"
+    },
+    {
+     "block": "6ee4c65d7e81e465e63c7503f1d4fe6b",
+     "texels": "8edb90ff6e1666ff6a5739ff6d3c39ff93fb97ff6a5739ff64923aff6e1666ff7e777bff6a5739ff68733aff6e1666ff5ce53cff5ce53cff89bb89ff839a82ff"
+    },
+    {
+     "block": "72fb7f6965fae0b4741352755acad0d6",
+     "texels": "ed95d1fff9a16ffff29aaaff67b54cfff49c97ff616ca5ff638489ff6055c2ff6055c2ff6055c2ff638489ffed95d1ff67b54cfff9a16ffff9a16ffffba35bff"
+    },
+    {
+     "block": "763ad206041bf71ff18d59679c00762c",
+     "texels": "b23f60ff5b8630ff3e9c21ffcf296fff6ad983ff4fe186ff6ad983ff83d381ffb5c57cffb5c57cffb5c57cff6ad983ff22b312ffeb127eff965650ffcf296fff"
+    },
+    {
+     "block": "7afdc75a3e59b8ae305d3eb5a3f04527",
+     "texels": "c2cd6eff8d5c55ff9a4453ff9a4453ffc2cd6eff7c9108fff5f9b9ff738d5affb3164eff8da021ff7c9108ffd3dc87ff807557ff67a45cffa62d50ffe4eaa0ff"
+    },
+    {
+     "block": "7e6b7e0f96fe00d9f168e8fcc113f1cf",
+     "texels": "bd8150ffddd526ffc03442ff290862ff0c0068ffc59546ffad5864ff290862ff85234fffbd8150ffcdac3affdd3c3cff0c0068ff0c0068ffc59546ffddd526ff"
+    },
+    {
+     "block": "824f7aaf356329a29218c44094c35304",
+     "texels": "4bbe7bffc13c1dff4bbe7bffdd5824ff5aa76effc13c1dff5aa76effb42f1aff4bbe7bffc13c1dffa53028ffc13c1dff5aa76effc13c1dff3cd589ffdd5824ff"
+    },
+    {
+     "block": "86c778393ee74fa3136ce8c3c897440e",
+     "texels": "3cd275ff7d8344ff8d7038ff1cf98dff3d645dff5cf904ff57e113ff384c6cff4cbf69ff2ce681ff2ce681ff2ce681ff52c821ff3d645dff57e113ff5cf904ff"
+    },
+    {
+     "block": "8a046d23309e255a50d68dd23b405385",
+     "texels": "63d140ffd96495ff9dda22ff6e3fbaff3a2dccff63d140ff8b49b0ff2dc85cff12c36affd96495ff9dda22ffbf5b9eff5436c3ff48cc4effbf5b9eff82d630ff"
+    },
+    {
+     "block": "8e80d2b4935fb9210c06ada83e899f17",
+     "texels": "1397a0ff0d7f98ff46626fff58705eff1fcab2ff24e3bbffb5b904ff7f8e39ff345481ff46626fff24e3bbff2afbc3ff46626fffb5b904ff1fcab2ff024e87ff"
+    },
+    {
+     "block": "92bb78b6f6e762765cba602b19926a29",
+     "texels": "edd9d9ff9789c8ffa4a09fffae79afffa4a09fffa4a09fff9789c8ffedd9d9ffd1bfd3ffd1bfd3ffa4a09fffae79afffb26db4ffa4a09fffd1bfd3ffdfccd6ff"
+    },
+    {
+     "block": "9617b5d6a613d891ce2e028b289f7107",
+     "texels": "5c9944ffaf06b3ff5246d2ffba428eff5561a3ffaf06b3ff5353bbffc68166ffc0607bff57708affd1bd41ff5c9944ffd7db2eff5246d2ffb524a0ff5c9944ff"
+    },
+    {
+     "block": "9af30603bb047c4f81f1908cb7e8f446",
+     "texels": "cded3cffa61174ffa61174ffa4a72bff5148b4ff6c4814ff7a5f1aff8b2389ff958e25ff1b6bddffa61174ff87761fff007cf1ff7a5f1affcded3cffa61174ff"
+    },
+    {
+     "block": "9eae8248fcee9d43f44e861af52f4acd",
+     "texels": "a5f014ff227abfff51ee34ff449a5eff227abfff51ee34ff449a5eff28ed44ff4a9f4eff90f01cff398f7eff90f01cff90f01cff3f956effa5f014ff338a8fff"
+    },
+    {
+     "block": "a2a36b40fb6ecd8c735a1048d9f7fd45",
+     "texels": "8ded30ff1e6893ff18589dff2f9c75ffa6ed35ff99ed32ff3abd62ff3abd62ff40cd58ff3abd62ffb9ed38ffb3ed37ff40cd58ff298980ff1e6893ff99ed32ff"
+    },
+    {
+     "block": "a60dbe35b5d12da6959b1f6d54e54222",
+     "texels": "7f8780ff4ebc92ff67a289ff5658c7ff7f8780ff9a6a75ff5e62d2ff4642b0ff5e62d2ff4e4cbbff7f8780ff4ebc92ff4e4cbbff9a6a75ff36d79bff4ebc92ff"
+    },
+    {
+     "block": "aac23f2d908efcd424b2868f8e4b4460",
+     "texels": "2a584fff084050ff417f9cff2effb3ff084050ffb8b94dff417f9cff96a24eff6f874eff4a4191ff2a584fff4d704fff3ca2a2ff4e228bff084050ff6f874eff"
+    },
+    {
+     "block": "ae405f56f861b2b676007ddaa82025a1",
+     "texels": "6990abfff71e6aff95991cff66aa08ff66aa08ff24c7cbff83a014ff66aa08ff95991cff6fa70cff90719aff83a014ff83a014ff83a014ff02e3dbffb2558aff"
+    },
+    {
+     "block": "b239dee971bffe8916a7af7cdb06975a",
+     "texels": "e5db43ff97c6beff86bac3ffe4f060ffebffa7ffe4f060ffe4f060ffdbf4acffdbf4acffe7c726ffe5e34dffa7d1baffe6ce30ffcae9b0ffdbf4acffe6d539ff"
+    },
+    {
+     "block": "b6b908c1a326263514baafb92d03bfbe",
+     "texels": "c07f98ffcd85adff78609dffb134b4ff9f42acff9f42acffa5746cffb27a81ff547d8eff428b87ff986f57ff8b6a42ffa5746cff986f57ffc326bbff666f96ff"
+    },
+    {
+     "block": "ba2ab360e98d2163d66f76533ee5b8a7",
+     "texels": "98ad87ff62226eff5b2b81ff63c575ff87b581ff5b2b81ff62226eff63c575ff3d50d0ff41d56aff98ad87ff5b2b81ff533495ff30dd64ff63c575ff3d50d0ff"
+    },
+    {
+     "block": "be51d59d98ecdf2ee827c618bceec98b",
+     "texels": "466fb1ff4d9d99ff466fb1ff52ba89ff4460b9ff8eeb80ff87efa1ff50ab91ff52ba89ff93e762ff9fdf26ff4d9d99ff4d9d99ff54c981ff497ea9ff4d9d99ff"
+    },
+    {
+     "block": "c2d7726dd8982866b8b34080a6935b25",
+     "texels": "5c6099ff6526caff5c6099ff5c6099ff6526caff6a27b9ff5c24edff3a808bff487391ff6125dcff338788ff3a808bff3a808bff4f6d93ff556696ff556696ff"
+    },
+    {
+     "block": "c61a033abd9c2920606a68d5fe1d4de4",
+     "texels": "58e95dff38cf12ff6c538bff58e95dff40d524ff4d3976ff382868ff382868ff40d524ff50e24bff57417dff38cf12ff48dc36ff68f581ff60ef6fff30c900ff"
+    },
+    {
+     "block": "ca3e795666053411154d5e8cbc31d806",
+     "texels": "cd7c49ffae674dfff99944ffcd7c49ffbd714bffbd714bff801849ffae674dffea8f46ff602f4dff9f0246ff75204bffae674dffae674dff950947fff99944ff"
+    },
+    {
+     "block": "ce676f5cbe4730fbc33f51b4f8fb8a7e",
+     "texels": "9ffbefffde9e70ff9ffbefffde9e70ffde9e70ff1810f1fff77a3efff77a3eff2215d8ff5c303cff351ea5ffde9e70ff9ffbefff49276ffff77a3effc4c5a4ff"
+    },
+    {
+     "block": "d2278f4405e4a94c772d83f6a4f5816a",
+     "texels": "9f1632ff227a5eff3c9d3cffdb3663ff46ab2eff379642ffd02f59ffe73c6cff2c8851fff34276ffc2294fff227a5effd02f59ffb72245ff3c9d3cff278157ff"
+    },
+    {
+     "block": "d6799d742748a16d98b5cf8c2435d4b3",
+     "texels": "e093a3ffde8f9bff315d71ff487488ffde8f9bff548195ff548195ffde8f9bff3d697dff487488ffe79fb7ffdc8b95ff6b98acffe093a3ffd9878eff3d697dff"
+    },
+    {
+     "block": "da2bcc513917b6b38f8679382bc6e499",
+     "texels": "b5c6dbff50b585ff7085a1ffbba3e8ffb7b6e2ffc082f5ff679399ff6c8c9dff55ae89ffafe7cfffb7b6e2ff679399ff55ae89ff639995ffc082f5ffbba3e8ff"
+    },
+    {
+     "block": "de57b831a67aac8c4ade14737e0e7415",
+     "texels": "629b41ff629b41ff5b45a6ff64309cff30adddff74a276ff85a9a9ff5359b1ff3899d2ff64309cff5c9930ff689e52ff85a9a9ff5b45a6ff4184c8ff5c9930ff"
+    },
+    {
+     "block": "e203a5e5172071b9937d5c08a8240b7a",
+     "texels": "29359cffc26575ff684864ff1f42b4ff684864ff684864ff3d1a69ff1f42b4ff8b536bff8b536bff460d50ff1f42b4ff684864ff1f42b4ff500038ff7a4e67ff"
+    },
+    {
+     "block": "e6df3aaf3dbd034fc1ae3de5e29bd48d",
+     "texels": "93e82dffc089afffc4aab0ff85f238ffafd316ff8ced33ffbb64afffad00adffa1dd21ff85f238ffc9ccb0ffb643aeffb221aeffa1dd21ff85f238ffc4aab0ff"
+    },
+    {
+     "block": "ea66ec815b872bceb8ef6ccab7f859cb",
+     "texels": "ac6f5cff8042edff7d76edff7badedff8042edff8128edff8042edffa56e50ff7d76edffc5748dffac6f5cffbf7381ffa56e50ffac6f5cff9f6d44ff7c93edff"
+    },
+    {
+     "block": "ee9dbc8a43ce4426e8b36a94045b8bca",
+     "texels": "8c4992ffbdc684ff740c99ff9540c7ff9a3ed1ffa5898bff740c99ffa5898bff9540c7ff9540c7ff9043bdff8c4992ffa5898bffa538e7ffaa35f1ffa03addff"
+    },
+    {
+     "block": "f28c74281004f43cdd625b923f30827e",
+     "texels": "3942eaff4342dcff4042e1ff4042e1ff259086ff2af762ff2af762ff1e02b7ff3242f3ff3c42e6ff259086ff1e02b7ff4042e1ff4742d8ff2af762ff2024abff"
+    },
+    {
+     "block": "f62f6d18db45f1d92ccf16eb2cefdbe2",
+     "texels": "c06a73ffc06a73ff1a7fccff1ac6ceffce5ebeffc06a73ff1a96cdff1a69ccff1af3cfff1ac6ceff1af3cfff1ac6ceffcb61afffcb61afffbd6c64ffd15ccdff"
+    },
+    {
+     "block": "faf2b80413b3c874aab66efef891d351",
+     "texels": "b040beff9534abff2e2eabff8d30a5ff8d30a5ffc148cbff0cb5b5ff8d30a5ff2844adff235aaeff0cb5b5ffc148cbff119fb4ff1d70b0ff1789b2ffb844c5ff"
+    },
+    {
+     "block": "fe8a525a70f1e2cb84355cadc187e156",
+     "texels": "28783aff69d740ff289035ff28783aff284543ff8cc25aff28c12cff28144cff28783aff95bd60ff7bcc4dff95bd60ff28144cff61dc3aff84c754ff8cc25aff"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 2",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "041eb2c9444625458391e549c601d6be",
+     "texels": "7b6363ff7b6363ff4aa5f7ff929a8eff7b6363ff7b6363ffb5945affb5945aff42a521ff6e2695ff6e2695ff929a8eff8c18ceff8c18ceff4f345aff4f345aff"
+    },
+    {
+     "block": "0cbc357a90bebc5e9947581bebcfd731",
+     "texels": "e1bec9ffcb8baaffb55a8cff67ec91ffb55a8cffe1bec9ffa0e1a0ffd6d6adff1b8068ff1b8068ff67ec91ffd6d6adff1b8068ff185a6bff21ce63ff31f784ff"
+    },
+    {
+     "block": "1458c1432704419cdcbe8d7e836f1ff6",
+     "texels": "6342b5ff6342b5ff3c6e8eff29847bff4ae76bff3c6e8eff5058a2ff188c42ffa8b5ceff4ae76bffc600deffc600deff4ae76bff78ce9cff188c42ff8d2eabff"
+    },
+    {
+     "block": "1cae98f6f58e4c4a01a2af2472e23ff9",
+     "texels": "bdef84ffef0842ffa13479ff7b4a94ff84b66effbdef84ffef0842ffef0842ff104242ff104242ffa439c6ffad428bffbdef84ffb54a52ffb54a52ffa439c6ff"
+    },
+    {
+     "block": "24ca6d27c73857c71b23bd038eabea56",
+     "texels": "5a919bff298cc6ff8c976dffbd9c42ff8c976dff8c976dff8c976dff8c976dff6b5ad6ff5b8bd9ff8cdec6ffb8ce46ff39efdeff49bedbffa2d688ffcec608ff"
+    },
+    {
+     "block": "2cb4bbfe26791507365441f5c49b4acf",
+     "texels": "d69408ffd69408fff7e7a5ffd08341ffb6a13eff73bdadffbd5210ffd08341ffb6a13effb6a13eff707aafff707aafff73bdadffb6a13eff707aafff973bc3ff"
+    },
+    {
+     "block": "34b0bf43b2233eb9147ec554124b731e",
+     "texels": "c63984ffd62cacff94bd52ff84b54fffd62cacffd62cacff73ad4dff73ad4dff87b658ff4e6a5dff182163ffbdff52ff182163ff182163ffbdff52ffbdff52ff"
+    },
+    {
+     "block": "3cf05686ee1da084e83385a6037c999c",
+     "texels": "c6deffffc6deffff528452ff528452ffde0863ffde0863ff47894dff47894dffa5849cffde4273ff528452ff47894dffcb5880ffde4273ff528452ff47894dff"
+    },
+    {
+     "block": "44be14c67a25fa50692ea29c2826ce11",
+     "texels": "dc3c86ffb72670ffff529cffb72670ffdc3c86ffb72670ffff529cffb72670ff1ba831ff1ba831ff265f42ff311852ffb55273ffe14d30ffb55273ffb55273ff"
+    },
+    {
+     "block": "4cda2bb8d40211b0fb5bade94cf85875",
+     "texels": "7047e7ff6b29ffff7047e7ff6b29ffff9216d6ffc600d6ffc600d6ff2942d6ff2942d6ffc600d6ff9216d6ff9216d6ff82d19fff82d19fffadde9cff29b5a5ff"
+    },
+    {
+     "block": "54d263d684d00505fa8166ebaf2dc693",
+     "texels": "5a5453ff6ba328ff6ba328ff5a5453ffb5a5b5ff9a749dff63106bff63106bff08d6ffff3100adff1590e4ff08d6ffff2446c8ff1590e4ff3100adff2446c8ff"
+    },
+    {
+     "block": "5c224bc29b720303450aa97b14d3058f",
+     "texels": "8c2994ff7f5a69ff4a0894ff31298cff8c2994ff7f5a69ff3726aaff31298cff708c3bff8c2994ff4a0894ff721cacff63bd10ff7f5a69ff4a0894ffb60dcfff"
+    },
+    {
+     "block": "64f0ae9aed2636aa4e389126b46b31c5",
+     "texels": "c66b10ffd6424affc97537ffde7384ffd62e53ffc97537ffbaab23ffb6868cffc66b10ffc97537ffbaab23ffb6868cffd62e53ffadde10ffc97537ff8b9a94ff"
+    },
+    {
+     "block": "6cb0c72d73ad2b28e28f685791511b72",
+     "texels": "c6d6ffffa87499ffdf1839ffd6214affc6d6ffffa87499ffdf1839ffdf1839ffd6d6b3ff6b00b5ffce295affce295affd6d6b3ff8939a8ffe71029ffce295aff"
+    },
+    {
+     "block": "7486706da64a66c979927bf8ee75bf02",
+     "texels": "157f74ff134f49ff6b2939ff707692ff134f49ff6e4f64ff6b2939ff65cee1ff6b2939ff6b2939ff81cee4ff81cee4ff707692ff9ccee7ff9ccee7ff9ccee7ff"
+    },
+    {
+     "block": "7cd653e86797f8fe7e7e33404f1a29d4",
+     "texels": "6566bcff5a739cff4de429ff52e731ffeffc4eff7b4affff5a739cff47e120ffffff00ffdefaa1ff7057dfff5a739cffffff00ffeffc4effeffc4eff7b4affff"
+    },
+    {
+     "block": "84cec37e22a480945e2466196c67f07e",
+     "texels": "4f4723ff654d37ff4f4723ffd6317eff7b524aff394210fff794b5ffc60063ff394210ffe7639afff794b5ff7eb46efff794b5fff794b5ff42f784ff9c9463ff"
+    },
+    {
+     "block": "8ce6e23361eeb195d0024d0097196da9",
+     "texels": "9ce7b5ffcec09bffb5bb5cffcec09bff9ce7b5ff5af700ffe7c6d6ffb5bb5cff4a9400ff5af700ff70f23bffcec09bff738f4cff9d899bff70f23bff70f23bff"
+    },
+    {
+     "block": "9476fdc1daeefaa076e21945c761d738",
+     "texels": "deef9cffdeef9cffad73c6ffcec6aaffffef9cff595f91ffb5aa59ffb5b5efffaea897ff595f91ffb5b0a6ffb5aa59ffffef9cff08188cffb5aa59ffb5a510ff"
+    },
+    {
+     "block": "9c52e16a9918b4d457261e0ba0c1ec8e",
+     "texels": "4a8c94ff343362ff3ec50dff4dce1cff4a8c94ff4a8c94ff3ec50dff4dce1cff343362ff3f617cff31bd00ff4dce1cff52948cffb6c0c9ffe7d6e7ffb6c0c9ff"
+    },
+    {
+     "block": "a48c92b872f7b7f48dc0aa71fab0ad21",
+     "texels": "3ca141ffc694d6ffc694d6ff94deadff317321ffb6acc9ffa4c6baffc694d6ff47d164ffc0c99dffc0c99dffe76b4aff317321ffadf7c6ffc0c99dffadf7c6ff"
+    },
+    {
+     "block": "ac98795cb7e1870ba99a8bbb2591fc18",
+     "texels": "6318adff41ae5aff6318adff9e36c0ff6318adff41ae5aff6318adff9e36c0ffd608efff6b4ab5ff6b4ab5ffe773c6ffd608efff8e34c8ffb31edcff7b18bdff"
+    },
+    {
+     "block": "b46a05bfe0bc52b1cf33e7dca5c11a14",
+     "texels": "adcef7ffad8094ffad8094ffada8c6ffadcef7ffadcef7ff543f73ff543f73ffada8c6ffff2973ff29b573ff29b573ffad8094ffab3473ff29b573ff29b573ff"
+    },
+    {
+     "block": "bc2ca79b1a86197506213e9d0ff49377",
+     "texels": "c58342ffb56342ffb56342ffb56342ffb879ceffdea59cffe7c642ffe7c642ffa57373ff5747ccffa563e7ffd7a642ff3131f7ff7f5d9effdea59cffc58342ff"
+    },
+    {
+     "block": "c404764bf82f7186a4275e266e479518",
+     "texels": "4cdcb9ff62cb67ff5c64aaff5c64aaffc6944aff73c6e7ff10849cff5c64aaff4cdcb9ff4cdcb9ff6bc9a9ff62cb67ff10ffefff8ab780ff4cdcb9ff10ffefff"
+    },
+    {
+     "block": "cc604c6ca3cddb6c28d3ac85bcf37aa8",
+     "texels": "87e1c1ff8ce7a5ff5b8cd3ff424294ff84deceff8ce7a5ff639cd6ff754f69ff4a6bceff639cd6ff424294ffde6b10ffde6b10ffab5e3bffab5e3bffab5e3bff"
+    },
+    {
+     "block": "d40efe85efe581f83170f3ba2acf9c1e",
+     "texels": "678e51ff6f0b63ffff0031ffc6f7e7ff29107bffe7ffefffe4d9bbffb90549ffff0031ffde8c52ffe4d9bbff6f0b63ff98c39eff29107bffb90549ff395a08ff"
+    },
+    {
+     "block": "dc4229c263d0df7955cf29d501f21c14",
+     "texels": "0800d6ff0800d6ff0800d6ff1ea1afff0800d6ff103994ff216599ff134ec3ff184f97ffc6ad39fff77b52ff297b9cff297b9cffe78b4affe78b4aff297b9cff"
+    },
+    {
+     "block": "e48227af3aa2d46ae9ba3697948e88da",
+     "texels": "0821bdff5631a5ff865581ff865581ff7b5a9cff21526bffa9428bffad6b5aff21526bff3f557bff0821bdff9a606dff5631a5fff75273ff865581ff9a606dff"
+    },
+    {
+     "block": "ecdebaf59ca372d8de59f3ef8043aad5",
+     "texels": "7b3973ffbdce31ffb249bbff5a52b5ff7b3973ffbdce31ffb249bbff7b3973ff39e687ff704189ff704189ff39f718ff39ef4eff39ef4eff39ef4eff39e687ff"
+    },
+    {
+     "block": "f46e8cd22f1f3f93a658a94a29d63507",
+     "texels": "add457ff9caf87ff8cff94ff919668ffadd457ff8fcc7eff5a3129ffc37429ffadd457ff946352fff79429ff8e5129ff8c8cb5ffbdf729ff8cff94ff8cff94ff"
+    },
+    {
+     "block": "fc022a193ed6cfad10fda63f758a9817",
+     "texels": "086342ff42efffff1b9180ff2fc1c1ff7e91c3ff086342ff2fc1c1ff086342ff84adffff7b84a5ff29396bffcebdd6ff7b84a5ff7e91c3ff84adffff29396bff"
+    },
+    {
+     "block": "04b74de885fb8a5e4b87430421b82deb",
+     "texels": "debdd6ffc2914cffdebdd6ffdebdd6ffc2914cffb57b08ffc2914cff555a16ff476231ff476231ff555a16ff2e5a1bff476231ff555a16ff085a21ff555a16ff"
+    },
+    {
+     "block": "0c27189e3fe9db42a495d819b5e75226",
+     "texels": "9c946bff7b21a5ff9e2c8fffc43779ff00f729ff9c946bff7b21a5ffc43779ff69b455ff33d73fffae60cfffe74263ff00f729ff9c946bff6165acff186b8cff"
+    },
+    {
+     "block": "141143f633714dee72cb288205ab45ae",
+     "texels": "4210deff4210deff42318cff686563ff4d49c6ff4d49c6ff686563ff6394b5ff5884acff4210deff96b27cffffef08ff63bd94ffccd141ffccd141ffccd141ff"
+    },
+    {
+     "block": "1c9958a6c72c035c978af324ad169def",
+     "texels": "48bb74ff3e5b65ffac9d9fff2ba741ff48bb74ff4d314fffef5a94ff2ba741ff2ba741ff31847bffef5a94ff2ba741ff109410ff31847bffac9d9fff109410ff"
+    },
+    {
+     "block": "2485d511fb76339fc7ef2f9c527abb2f",
+     "texels": "106bf7ff4686efff4686efff7fa2e6ffa4df5eff8ce710ffbed6b1ffa4df5effd67c68fff73952ffd67c68ffe7595dffb5bddeffb5bddeff7fa2e6ff106bf7ff"
+    },
+    {
+     "block": "2c7106c8f308c5bfc557fce89cd9abe4",
+     "texels": "c989dfff165eadffec5a9fffc989dfff2cb194fff28ca2ffce84adff42ff7bfff7bda5ffc989dfff165eadffec5a9fffc68cf7ff165eadffec5a9fffce84adff"
+    },
+    {
+     "block": "344f9c53d86ecef7121763674c9bdaf0",
+     "texels": "54b192ff9c3931ff46d797ff8c3129ff7fb491ff54b192ff9cbe8aff7fb491ff9c3931ff46d797ff54b192ff9cffb5ff39efc6ff9c3931ffb5948cff8c3129ff"
+    },
+    {
+     "block": "3ce38aafd589106ad270d3e5fee77243",
+     "texels": "7c7e6dff5a42e7ff7b42efff7b42efff8178acff9787c6ff5a42e7ff6a60abff8c4231ff7b42efff8178acff9787c6ff7c7e6dff8c9c31ff8142b1ff8c4231ff"
+    },
+    {
+     "block": "44d7fb89aa081c547128d90b5e7eb6b7",
+     "texels": "655e2bff655e2bffc479b2ff857ed1ff4a84efff4a84efff8a655dffa55229ff528cc6ff6d7992ff655e2bff7b0052ff7b0052ff702e3fffc479b2ffc479b2ff"
+    },
+    {
+     "block": "4c9d890b9b677580327c21593200e02a",
+     "texels": "737b08ff5a0894ff737b08ff8cd610ff737b08ff8cd610ff737b08ff8cd610ffc68463ffc68463ff31944aff95895bff95895bff95895bff95895bffc68463ff"
+    },
+    {
+     "block": "5485ffc4d54c009a6291e475357d9feb",
+     "texels": "10ce5afff72121ff10ce5aff5c9547fff72121fff72121ff5c9547fff72121ff866ec9ff2142f7ff739cd6ff2142f7ff866ec9ffb61683ffad10adffb61683ff"
+    },
+    {
+     "block": "5c05cb60ec8b14304434a27a32ba6654",
+     "texels": "10bd10ff63426bff1831efff9d2680ff441b42ff8a3731ff592cb9ff592cb9ff63426bff10bd10ffde214aff1831efff441b42ff441b42ff9d2680ff1831efff"
+    },
+    {
+     "block": "64eff08940038a5cbbcf9d3f67ffe31c",
+     "texels": "bd31efff4e10b7ff4185f7ff4185f7ff18009cff18009cff4a94ceff4a94ceff8721d4ffbd31efff84dee7ff4185f7ff4e10b7ff18009cfff729defff729deff"
+    },
+    {
+     "block": "6c23a08fc8e5b263f6e887d915d5a285",
+     "texels": "8c5a39ff477e81ff216363ff5e626dff97b094ff477e81ff477e81ff97b094ff5e626dff216363ff477e81ff0073d6ff8991adff216363ff216363ff97b094ff"
+    },
+    {
+     "block": "74a503e154a54394f1bb959168e19c3c",
+     "texels": "897dd1ff0561a8ff897dd1ff033380ff399442ff878f20ff5f9132ff5f9132ff878f20ffad8c10ff399442ff5f9132ff7eaba1ff088cceff897dd1ff00085aff"
+    },
+    {
+     "block": "7cb971f8b8cb8af793b905e20d3058d3",
+     "texels": "ab9f68ffe7bd63ffe7bd63ffe7bd63ff39f78cffc6f700ff39f78cff73295aff39f78cffc6f700ff60baadffabb31eff4cd99cffabb31eff60baadff8e6d3cff"
+    },
+    {
+     "block": "84819fff45814236f74774a9a4c6f6c4",
+     "texels": "0010ffffdf8d95ffa632b2ff9c0842fff7428cff9c0842ffa632b2ffbc496afff7428cffdf8d95fff7428cffbc496aff868f9aff7b31a5ff868f9aff815f9fff"
+    },
+    {
+     "block": "8c5fc507ddb532c5d8d568b34463a8e2",
+     "texels": "7b5a73ff42c6ceff6ac6bbff6ac6bbff8b5a86ffc6ce8cff39a5b5ffc6ce8cff7b5a73ff6ac6bbff6ac6bbff6ac6bbff8b5a86ffc6ce8cff39a5b5ff98c199ff"
+    },
+    {
+     "block": "94bf6c6b4e4071c342a65943faada0f9",
+     "texels": "dc367cff94a54aff94a54aff9c8a1eff5a6badff6bc69cff65a8a2ff9c8a1effff0094ffff0094ffdc367cff9c104aff6bc69cff5a6badff5a6badff9c8a1eff"
+    },
+    {
+     "block": "9c2595ec81d30a50b3a032faa3702ed6",
+     "texels": "943929ff9f5b3aff9f5b3aff943929ff7b52efff841c23ff630018ff7b52efff009c7bff841c23ff841c23ff7b52efff009c7bff730d1eff730d1eff536ac9ff"
+    },
+    {
+     "block": "a4e5cbb9c61a87b1a12430f91a058b15",
+     "texels": "8ca234ffa27cb9ffadb5e7ffa27cb9ff8ca234ffce1800ffce1800ffce2969ff8ca234ffce2033ffce1800ffce319cff83973fff974188ffadb5e7ffadb5e7ff"
+    },
+    {
+     "block": "ac27edff8b20d2d9c164373ecd0efadf",
+     "texels": "9f0b65ff9c0831ffa510ceff5e4ec3ffff3918ffef4a73ffef4a73ff5e4ec3ffef4a73ffff3918ffff3918ff1008a5ffa510ceffa510ceffa20d9affb198e1ff"
+    },
+    {
+     "block": "b489254ea16f7cce6f9408748ec830c8",
+     "texels": "52bb1eff21f78cff58db2eff21ff18ff847523ff21f78cff58db2eff52bb1eff21ff18ff58db2eff3cea5eff21ff18ff52ced6ff4db3d3ff4796d1ff4db3d3ff"
+    },
+    {
+     "block": "bc71da2126f1df436750e2b704e09723",
+     "texels": "c61018ffc61018ffc61018ffc61018ffc61018ff73b177ff4affa5ff4affa5ff763fc6ff987b67ffde7b21ff4a3994ff763fc6ffde7b21ff987b67ff8c42deff"
+    },
+    {
+     "block": "c4d76b121e197b1472304afad7484f5e",
+     "texels": "5a9418ff78cf7aff948c21ff5a9418ff708f4aff6befa5ff87ac4cff708f4aff3994ffff6b3bf4ff5269faff8410efff3994ffff3994ffff5269faff8410efff"
+    },
+    {
+     "block": "cca7350d4fa091acafe8ce5ff84b4eb6",
+     "texels": "a44662ffb5d6d6ff9c7b08ff9c7b08ffad909dff9c0029ff445decff5879eaffb5d6d6ff9c0029ff445decff3142efffb5d6d6ffad909dffb89d55ffb89d55ff"
+    },
+    {
+     "block": "d44992f8841eb9c963fa2a188708c377",
+     "texels": "21ef9cff21ef9cff1854bcff39ce63ffb66d44ff94e7adff39ce63ff0818e7ff94e7adff94e7adff1854bcff0818e7ff4a8cf7ff3dacd9ff0818e7ff39ce63ff"
+    },
+    {
+     "block": "dc3fcd0b4fa9b01cded5d1449be5e15b",
+     "texels": "e17e86ffe17e86ffc3689affe17e86ffe17e86ffc3689affa552adffe17e86ffff9473ffc3689affa552adffa552adffaaae4dffa8b633ff80a450ffc61810ff"
+    },
+    {
+     "block": "e4f169a3ec53a77340ed03252c0b026a",
+     "texels": "985f80ff6787b0ffc63952ff644d8fff985f80ff985f80ffc63952ff6b9c39ff985f80ffc63952ffc63952ff297394ff985f80ff985f80ff39addeff6b9c39ff"
+    },
+    {
+     "block": "ecc53c172126c0e45cf62bd7b63eab1b",
+     "texels": "106394ff42e7deff42e7b3ff42e7b3ffbd9c94ff42e7deff42e75aff42e7deff6e2bd1ff42e7b3ff42e7b3ff42e7deff3900bdff42e7deff42e75aff42e75aff"
+    },
+    {
+     "block": "f469a6b7e98d28f56f7cbe87ab7bec2c",
+     "texels": "b2ab64ffb5a5e1ffc175b3ffada5e4ff8ece36ffd67b73ffd67b73ff6bf718ffb3a455ff8ece36ffd67b73ff8ece36ffb3a455ff8ece36ff8ece36ff6bf718ff"
+    },
+    {
+     "block": "fc53955dadd32a3d832f98526ad41061",
+     "texels": "6a49b9ffd1a85dffb2aa71ff94ad84ff57234aff8d5b88ffd1a85dffb2aa71ff52394aff52394aff6a49b9ff94ad84ff552e4aff52394aff57234aff6a49b9ff"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 3",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "0810180c59442edbbc271fe70bc73a76",
+     "texels": "0923dfff0e63a3ff19653fff4c467eff19e527ff0923dfff4c467eff32565eff0e63a3ff19e527ff32565eff19653fff19e527ff14a563ff65379dff19653fff"
+    },
+    {
+     "block": "18c8e3eb90466607b1a22921bbd073da",
+     "texels": "e43458ffe264a2ffe34470ffa6b563ffe43458ffe3548affe3548aff434185ffe34470ffe3548affe264a2ffd7ed53ffe34470ffe264a2ffe3548affa6b563ff"
+    },
+    {
+     "block": "28c88650b7e77794ae9d2857061b52e0",
+     "texels": "7052c4ffa08e50ffa08e50ffc99d59ff7052c4ffdda55dffa08e50ffa08e50ff7052c4ffc99d59ffc99d59ffa08e50ff653dd7ffa08e50ffdda55dffb49654ff"
+    },
+    {
+     "block": "38587d4df91fad54dd5d7a2e562d88d5",
+     "texels": "9cefbeff8cdf8cff8cdf8cffcc6accff8cdf8cff9cefbeffb37fe1ff9a94f4ffacfeeeff9cefbeff9a94f4ffe555b9ff8cdf8cffcc6accffcc6accffb37fe1ff"
+    },
+    {
+     "block": "48788acb475efb6838507c733f747d7a",
+     "texels": "56de2eff8ab450ff56de2eff3df31dff71c93fff71c93fff8ab450ff461cdbff71c93fff8ab450ff8ab450ff971ff9ff56de2eff8ab450ff1f1bcdff971ff9ff"
+    },
+    {
+     "block": "58c8300ebf4f0232ffa5aebcaa1a954d",
+     "texels": "647cfeff535fe1ff666e8eff666e8eff535fe1fffdcdf3ff1c405cffb39fc1ff4242c2ffb39fc1ff1c405cfffdcdf3ffb39fc1ff666e8effb39fc1ff1c405cff"
+    },
+    {
+     "block": "68b877f24506bb6bb32fb40c6242b9a7",
+     "texels": "dc32d8ffdc32d8ff76b02effe47668ffbb5ba0ffdc32d8ff5aba44ff5aba44ffdc32d8ff17db33ffa19757ff17db33ff17db33ffe47668ffa19757ffa19757ff"
+    },
+    {
+     "block": "7828379609da832961af14d358b790c1",
+     "texels": "95d1b1ff373dafff566eb0ff566eb0ff373dafff566eb0ff76a0b0ff2a3934ff95d1b1ff566eb0ff2c3028ff264a4cff95d1b1ff2c3028ff284140ff2a3934ff"
+    },
+    {
+     "block": "8828c21adbfdc49218ce3b4f183bb3ed",
+     "texels": "15ef0dffc24eceff15ef0dff89838fff4eba4cffc24eceff4eba4cff89838fff4eba4cff89838fff4eba4cff6c243cff89838fff4eba4cff6c243cff464763ff"
+    },
+    {
+     "block": "98742f3cc8a364fad383079c45f88bc1",
+     "texels": "8c2dc7ffba1ee8ff3dc450ff794d0fffba1ee8ff20fe70ff20fe70ff20fe70ff5c872fff5c872fff794d0fff20fe70ff794d0fff794d0fff3dc450ff5c872fff"
+    },
+    {
+     "block": "a8bc7fc90371dc7b2ce3d4d741ef0120",
+     "texels": "df8997ffdf8997ff9fb3caff9fb3caff7fc7e3ffc09db0ff7fc7e3ff0e1e5effdf8997ff937ba9ff937ba9ff937ba9ff937ba9ff937ba9ff675c90ff937ba9ff"
+    },
+    {
+     "block": "b8109f9fee43a7209d9d1765c6a0ad9c",
+     "texels": "903bbeff891fcfff9758adff903bbeff891fcfff891fcfff903bbeff9e749cff9758adff903bbeff903bbeff672550ff9758adffbb4995ff3e142eff672550ff"
+    },
+    {
+     "block": "c870a874eaac135a43daa736026e44d9",
+     "texels": "386620ff386620ff386620ffe8424effa83adaffd3737cffa9d7dbffe8424effbea6adffe8424effbea6adffbea6adffe8424effa9d7dbffbea6adffd3737cff"
+    },
+    {
+     "block": "d8a05cd91b75a2358ed62de4e3aaf78c",
+     "texels": "51a947ff51a947ff5d27d7ff557e76ff557e76ff557e76ff557e76ff5d27d7ff6f8d91ff859a7fff6f8d91ff9da86dff859a7fff9da86dffb3b55bff9da86dff"
+    },
+    {
+     "block": "e83812b78ad2b228f3fc756d62e3d793",
+     "texels": "1d9579ff1d9579ff122cfcff164ed1ff5851d9ff6e16eaff2bcbb5ff2bcbb5ff2bcbb5ff4190c6ff4190c6ff2bcbb5ff5851d9ff4190c6ff6e16eaff5851d9ff"
+    },
+    {
+     "block": "f8b8176854ca3bef92886bbe68a2a84f",
+     "texels": "dc5248ff9b755dff17bd89ffdc5248ff9b755dffdc5248ff9b755dff9b755dffdc5248ff9b755dff9b755dff17bd89ff50baf8ffa6d8e1ff7ac8edffd0e6d6ff"
+    },
+    {
+     "block": "088dacdc4a6516c681d876a013d700f8",
+     "texels": "462a40ff8b53a7ff462a40ff8b53a7ff2b7181ff8b53a7ff8b53a7ff683e72ffb9c3edffb9c3edffb9c3edff462a40ffb9c3edff2b7181ff2b7181ff8aa8caff"
+    },
+    {
+     "block": "18f5b7a1dea0924c3d31e0434510bf31",
+     "texels": "e4127bff4393c1ff4393c1ff557e86fffb079ffffb079fffe4127bff4393c1ffb62a30ffb62a30ffb62a30ffcd1f54ffe4127bfffb079fffb62a30fffb079fff"
+    },
+    {
+     "block": "287df45722d866906bebae358548fc56",
+     "texels": "7aa4c6ff3ec0b4ff3ec0b4ff7aa4c6ff3ec0b4ff7aa4c6ffb888d8ff3ec0b4ffaf0d5dfff46ceafff46ceafff46ceaff959daeffa25485ffa25485ff7aa4c6ff"
+    },
+    {
+     "block": "3885625a8b4e92c30d441bb0371ccf2a",
+     "texels": "4d5a1bff5a7294ff887264ffb57337ff427406ff632545ff887264ffb57337ff632545ff632545ff427406ff2d71c1ff583f30ff583f30ff583f30ff427406ff"
+    },
+    {
+     "block": "48d5b54d54bc2afa2e458ac0204c78fd",
+     "texels": "ebe397ffebe397ff826c0eff9a4414ffebe397ffb5ab45ffebe397ff826c0effebe397ffc7bd60ffb5ab45ffd9d17cffd9d17cffb5ab45ffb5ab45ffb5ab45ff"
+    },
+    {
+     "block": "5871c8346d1afb25793f66760759c858",
+     "texels": "68c893ff39d3bdff39d3bdff99bb68ff69bfcdffc8b03eff99bb68ff39d3bdff69bfcdff9c70d5ff39d3bdffc8b03eff69bfcdff9c70d5ff8298d1ff68c893ff"
+    },
+    {
+     "block": "6861de8ec4139b6b34a5048275f2d294",
+     "texels": "69a49effa6aba1ffdfb1a5ff309e9aff69a49effa6aba1ffdfb1a5ff69a49eff195609ff309e9aff69a49effdfb1a5ff1d7309ff195609ff69a49effa6aba1ff"
+    },
+    {
+     "block": "783d2f54a0073f99d0171f9aadae3bc6",
+     "texels": "7a77a3ff9c274cff9c274cff9c274cff2ff117ff7a77a3ff9c274cff802668ff7a77a3ff2ff117ff9c274cffa9273fff2ff117ff9e3ce8ff53b65cff9c274cff"
+    },
+    {
+     "block": "88d1b30c419226512eaa09e5111c776f",
+     "texels": "e99317ffc5777aff192513ff192513ffe99317ffb369abffd78548ff192513ffb369abffd78548ffb369abff12493dffb369abffb369abffc5777affd78548ff"
+    },
+    {
+     "block": "984dd660bac396b54240fa625423398c",
+     "texels": "60372bff9d5236ff9d5236ff9d5236ffcdb0d1ff271d21ff60372bff9d5236ffc0b2f4ff9d5236ffd66c40ff271d21ffc0b2f4ffe8ac8aff271d21ff9d5236ff"
+    },
+    {
+     "block": "a8596934de6b776daa7ab45d3a365243",
+     "texels": "ad5f55ff799b77ff6ea86dffad5f55ff7f6e6eff6ea86dff799b77ffad5f55ff7f6e6eff68ae68ff6ea86dff966761ff68767aff68ae68ff68ae68ff966761ff"
+    },
+    {
+     "block": "b8e94308a7a11d90f74c1b6034e92042",
+     "texels": "ba506cff7d975bff3e4c4eff100236ffba506cff6e9a68ff6e9a68ff42da4cfff50d7bff100236ff6e9a68fff50d7bff6e9a68ff100236fff50d7bffba506cff"
+    },
+    {
+     "block": "c82980a238d600f5020d497fef55e886",
+     "texels": "387b5bff387b5bff800c0cffe3bdfdff5d4232ffafb4daffafb4daff45a193ff45a193ffafb4daffafb4daff800c0cffafb4daff387b5bff15b181ff5d4232ff"
+    },
+    {
+     "block": "d8bd5e6180077c0e9cce30b61e1f082d",
+     "texels": "5e6878ff5fc1cfff5e3c4eff5f95a5ff0103d9ff0103d9ffc2ce60ffc2ce60ffc2ce60ff4046b1ffc2ce60ffc2ce60ff5e6878ff5fc1cfff5f95a5ff5e3c4eff"
+    },
+    {
+     "block": "e8313667b8ceef262dcd3f98c495d93b",
+     "texels": "22a1a8ffcedc7effcedc7effe04860ff22a1a8ff22a1a8ff22a1a8ffda796affd4ab74ff2dd0bbff22a1a8ff37fdcdffe04860ffda796affe04860ff187496ff"
+    },
+    {
+     "block": "f8dd04498b1adba44891b10b6ae88236",
+     "texels": "6ed4a4ff4bc89dff717551ff717551ff929a62ff27bc97ff27bc97ff2d292fff4e4e40ff6ed4a4ff6ed4a4ff4e4e40ff4e4e40ff717551ff04b090ff6ed4a4ff"
+    },
+    {
+     "block": "082eb234148f40eef941ddea698850ea",
+     "texels": "1779fdff61afb5ffb30941ff69c9bbff1779fdff61afb5ff1779fdff61afb5ff1779fdff5894b0ff802e7fff69c9bbff4a54bfff61afb5ffb30941ff61afb5ff"
+    },
+    {
+     "block": "1816382627607be0d89e31f44526269f",
+     "texels": "1a3d7dff0b016dff2a7b8fff0b016dff9c38d0ff4d0f63ff671c87ff4d0f63ff39b79fff0b016dff1a3d7dff2a7b8fff9c38d0ff9c38d0ff4d0f63ff671c87ff"
+    },
+    {
+     "block": "28e616a47cb1993fb6c90719c1eaefad",
+     "texels": "728adaff49f30fff3495ceff80d22bff80d22bff548fd4ff80d22bff169ac8ff169ac8fff28e64ff3495cefff28e64ff80d22bff169ac8ffbbaf48ff3495ceff"
+    },
+    {
+     "block": "383a1a135f1d83ed6863e6a01a808d38",
+     "texels": "1ceab4ff1b3163ff26b0ccff26b0ccff1ceab4ff1ceab4ff26b0ccff7d3b83ff26b0ccff7d3b83ff1ceab4ff1b6e7eff26b0ccff60619bff1b3163ff1ceab4ff"
+    },
+    {
+     "block": "48da3858c6423f1f554b4fcf12b5ca02",
+     "texels": "6d17abff4aac6bffb0e69effb0e69eff7eb27eff7eb27eff39f54bff4aac6bff4aac6bff4aac6bffb0e69eff19473dff4b7b5dffb0e69eff6d17abff6d17abff"
+    },
+    {
+     "block": "58fa783c982939f7173fc39ad1c4f009",
+     "texels": "7c4c8aff68f574ff7a7c58ff71ee7dff7a7c58ff79e787ff7a7c58ff71ee7dff79e787ff7c4c8aff60fc6aff79933fff71ee7dff7a7c58ff79e787ff7c4c8aff"
+    },
+    {
+     "block": "682a573ff5a24d3baed5108a48b84e33",
+     "texels": "9416d6ff9a7423ffb88225ff9416d6ff7e6820ff57dbd5ff8057d6ff9a7423ff57dbd5ff9a7423ffb88225ff6b9ad5ff9a7423ff6b9ad5ff8057d6ff7e6820ff"
+    },
+    {
+     "block": "78c67abe4365f958cf0eeb1f2a2ac47c",
+     "texels": "622a66ff585bb9ff6a4d49ff7c1ed6ff585bb9ff6a4d49ff585bb9ff622a66ff339a9cff622a66ff339a9cff6a4d49ff72732bff0fd77fff7a960eff7c1ed6ff"
+    },
+    {
+     "block": "881adc8ec1bd5f73f8fef92df52e050c",
+     "texels": "50f2a7ff0e36caff1551dfff061cb6ff98f6d3ffdcfafeff0e36caff1d6bf3ff1551dfff1551dfff0cee7cff0cee7cff1d6bf3ff061cb6ff1d6bf3ff0cee7cff"
+    },
+    {
+     "block": "982e19aadc6c1f0a6010bfc5e03fe5d4",
+     "texels": "976731ff976731ff19f711ff720216ff19f711ff19f711ff5e2d5cff681738ff54427eff5e2d5cff42c81cff19f711ff54427eff6e9627ff6e9627ff19f711ff"
+    },
+    {
+     "block": "a8befc8cd0db78fa63f6577e3bd8284d",
+     "texels": "5fdf31fffc8cf6ff2789c7ff194fafff5fdf31ffc8a7b5ff2789c7fffc8cf6ff5fdf31ff35c5e1ffc8a7b5ff5fdf31ff2789c7ff43fff9ff5fdf31ff93c472ff"
+    },
+    {
+     "block": "b82eb733fc99e4635bd593cc232ca9e1",
+     "texels": "97cfadff97cfadff949b2bff677d27ff677d27ffb749d5ffc4bb2fff677d27ff949b2bffc4bb2fffad75c8ffc4bb2fff949b2bff677d27ffad75c8ffb749d5ff"
+    },
+    {
+     "block": "c852e51432600e76d53cf94f6999af1e",
+     "texels": "a9016bff5da0b8ff5da0b8ffbc4c5cff5da0b8ffd19b4bffbc4c5cff947d79ffc85c3effe4e63cffd19b4bff947d79ffd19b4bffc85c3eff5da0b8ffa9016bff"
+    },
+    {
+     "block": "d8ee3669be8c924c1dbe4186a428ecd9",
+     "texels": "615148ff76640effde7d5fffde7d5fffd29282ffde7d5fff615148ff76640effec673bffde7d5fff3729bfff3729bfff76640eff3729bfffec673bffde7d5fff"
+    },
+    {
+     "block": "e84e4c557b1e6d500fb46b4371ac8194",
+     "texels": "27f307ffd7934fffecd40cff27f307ff40db7bffc04e94ffc04e94ff4cd0b4ffab0dd7ff27f307ff27f307ffc04e94ffd7934fff40db7bff27f307ffc04e94ff"
+    },
+    {
+     "block": "f89e583737e62cf5a15524394d4ce457",
+     "texels": "5164a7ff5164a7ff559a7dff4e30d0ff559a7dff93987cff6fa549ff5164a7ff4e30d0ff93987cffb889b1ff58ce54ff58ce54ff5164a7ff5164a7ff5164a7ff"
+    },
+    {
+     "block": "084f78decb608be287c37ca17b1f0e13",
+     "texels": "2606c2ff2ff985ff79b7c3ff5e7dc3ff2ff985ff2ff985ffbd51f9ff2606c2ff5e7dc3ff2ff985ff2606c2ff2606c2ff79b7c3ff2606c2ff4140c2ff2606c2ff"
+    },
+    {
+     "block": "18ef5091e9bc24ec37cc128ccada1ec6",
+     "texels": "76e61aff6ab355ff228424ff514bcdff5d7e92ff7bd42dff4eab28ffa7fb31ff5d7e92ff514bcdff4eab28ff76e61aff5d7e92ff6ab355ff76e61aff514bcdff"
+    },
+    {
+     "block": "28ab00b0a5d0b08809e7962ee5131696",
+     "texels": "385da4ff548484ff000ce6ff000ce6ff385da4ff1c33c6ff61172dff548484ff1c33c6ff72305bff72305bff61172dff1c33c6ff385da4ff72305bff1c33c6ff"
+    },
+    {
+     "block": "38139e2243b864250027029241e5ca4d",
+     "texels": "08c280ff08c280ff6d7244ff6d7244ff6d7244ff45ad05ff9f4b27ff3a9b63ff32771bff1f3e32ff45ad05ff9f4b27ff3a9b63ff0c0848ff08c280ff3a9b63ff"
+    },
+    {
+     "block": "4887f8da0f5d3ecab0ea4c66115b8695",
+     "texels": "43e959ff653998ffb54799ffbde6baff8e4099ff3e3298ffbde6baff43e959ff3e3298ff43e959ff43e959ff3e3298ffbde6baffbde6baffb54799ff8e4099ff"
+    },
+    {
+     "block": "582f284439944a4bd70ac2a4d3f8225b",
+     "texels": "16a06aff23a62affc7b08effa78c8aff16a06affe5d393ffe5d393ff1ca34bffa78c8aff896985ff1ca34bff23a62affa78c8aff29a90bff23a62aff896985ff"
+    },
+    {
+     "block": "68cb2c736a85748a41f054a92b5dc520",
+     "texels": "642a20ffd356a8ffd356a8ff642a20ff523465ff2d49f1ffd356a8ffd356a8ffd356a8ff523465ff642a20ffa963a5ffe74fa9ffe74fa9ff3f3facff642a20ff"
+    },
+    {
+     "block": "783336efe733cd27af10e01a4f1364ea",
+     "texels": "22af3fff22af3fffdff9c1ffcae9a5ff9fc96bff189e56ff22af3fffdff9c1ffdff9c1ffcae9a5ff2cc127ff22af3fff2cc127ffb4d987ffb4d987ff36d210ff"
+    },
+    {
+     "block": "88c3770ad93bb33f390fa440809d708d",
+     "texels": "e1df9dff14f648ff14f648ff76320eff4a8519ff644e02ffe1df9dffbea66eff14f648ff4a8519ff76320eff996b3dff4a8519ffbea66effe1df9dff2ebf31ff"
+    },
+    {
+     "block": "98e77b1f18edc2422fbeab84337b12b2",
+     "texels": "f26816ff56aa29ff4a8041ffa24288ffcb554dff7b2fbfff61d113ff3f5957ffcb554dffa24288ff3f5957ff3f5957ff4a8041ffa24288ffcb554dff4a8041ff"
+    },
+    {
+     "block": "a8878920364eecd1f54daf2f412764ab",
+     "texels": "c270faff413d5fffa6629fffa6629fffd874beff413d5fff734f7effc270faffa6629fffc270faff88c44cff9ba885ffaf8cc1ffaf8cc1ffaf8cc1ff734f7eff"
+    },
+    {
+     "block": "b89fb837a43cb36ae1b8b79a48586948",
+     "texels": "4ee470ff71aa88ff966da1ff6e566eff6e566effb933b9ff966da1ff966da1ff6e566eff79576dff905a6aff4ee470ff4ee470ff79576dff85596bff6e566eff"
+    },
+    {
+     "block": "c80359ddcc587a08bed9290379a3aeda",
+     "texels": "80c6deff58a4d8ff58a4d8ff65afdaff8e353cffbb0f53ff8e353cff8e353cff58a4d8ff73bbdcff8e353cff8e353cff73bbdcff58a4d8ff5f5c23ff8e353cff"
+    },
+    {
+     "block": "d8fbcf04fd69ba4c960d6b65189947b7",
+     "texels": "fd4fcbffcea60cff0896d6ff0896d6ffee6c8cffdd894bff5595c0ffa793aafff49294ff5595c0ff0896d6ff5595c0ffcea60cffee6c8cffcea60cffdd894bff"
+    },
+    {
+     "block": "e8538930c063b41285daf568b85f72ef",
+     "texels": "a91f43ff8846daff4150d2ff9339a8ff8846daff8846daff4150d2ff9e2c75ff204abaff6056eaff0044a2ff9e2c75ff0044a2ff0044a2ff204abaff8846daff"
+    },
+    {
+     "block": "f8ff5a526187b150305e67cb38bfddb2",
+     "texels": "7f3b19ff84142cff733030ff672448ff5b195fff84142cff733030ff5b195fff672448ff84142cff8f1561ff9a1599ff733030ff8f1561ff9a1599ff9a1599ff"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 4",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "508149d6cbc0b588040240b2f49eb8e3",
+     "texels": "260cae84450c6a73261aae84261aae840837ef94261aae840855ef942671ae8445636a730837ef940828ef940846ef942637ae840871ef94080cef940871ef94"
+    },
+    {
+     "block": "90a814782133e6f0a5108bdf61b4f266",
+     "texels": "3e36b54f3e36b5302d778c8e2984844f306a9430374fa56f4229bd8e374fa58e345e9c6f2d778c303b43ad4f3e36b54f29848430306a946f3e36b530374fa56f"
+    },
+    {
+     "block": "b03c449857d35e5e42f7830d79ebc567",
+     "texels": "5f8bbec8b68ccee78b856a2734856a27b68ccee7b68aada88b856a2734899d895f899d8934867b478b845a088b8aada8b6878b668b845a08b68bbec8b6899d89"
+    },
+    {
+     "block": "70b57405b5c6180483c04781336e9436",
+     "texels": "adef5184295269d6adef4084adef6984548669bbadef3084adef4884548661bb82bb389fadef4084adef618482bb599fadef6184adef4084548640bb295261d6"
+    },
+    {
+     "block": "b040742337ab50d8fa7412a7d752d7fd",
+     "texels": "b2d49e0255baa9055581bf09b29fb307b2baa9052831de105566c90c854cd40e85baa90528baa9052866c90c859fb3075566c90c559fb3072831de10b231de10"
+    },
+    {
+     "block": "10a5e5ee90ef6b67249a7143d8fbc755",
+     "texels": "29ce73fb3fd963fb6bef42fb55e452fb6bef42fb29ce73fb6bef42fb29ce73fb55e452fb29ce73fb3fd963fb29ce73fb3fd963fb6bef42fb29ce73fb6bef42fb"
+    },
+    {
+     "block": "50419fb43ef1671c150c37f261251311",
+     "texels": "4c75903f08dd5a39d610ff4a08325a3992ffc944d675ff4a08105a399275c94492bcc944929ac944089a5a3908325a399232c9444c53903f089a5a399210c944"
+    },
+    {
+     "block": "701beb96ee9ff4b81296f063a928e753",
+     "texels": "d6b3ff70ce8e4397c66b24bdd6b3e070ded6434ac66bc1bdd6b3c170d6b36270d6b3ff70ce8e6297ded6804aded6a34ac66b43bdce8e2497ded6804ad6b3c170"
+    },
+    {
+     "block": "10e8275a34648bc9341f26ec05815b10",
+     "texels": "424a29828068629a424a2941ffa5d6c5424a29c580686282c1879d5780686241c1879d57c1879d41806862c5c1879db0ffa5d6b0ffa5d641424a299a424a2941"
+    },
+    {
+     "block": "70337f2b9ae1c3cebb40a57d2c690b8a",
+     "texels": "9cff58109cff9b10becddb4dace7db2eceb5fb6bace7182ebecd784dceb5386bace7382eceb5bb6bace7bb2eace7bb2e9cff18109cff9b10becd584dbecd9b4d"
+    },
+    {
+     "block": "90fda5e70a870ebb99556d6f0622dce4",
+     "texels": "ce585e819c6d3e819c6d3e717b7b29928b743381ac6648a2df516981ef4a73a2ce585e71ac6648a2ef4a73718b7433a29c6d3e92df516992df5169927b7b2992"
+    },
+    {
+     "block": "904de8af9a6ffe61c59d63dd55228e83",
+     "texels": "5edc56db36ee609a2af3649a1df9679a2af364fb45e75dfb2af3649a51e259ba51e259ba36ee60fb6bd652ba10ff6b9a6bd652ba10ff6b9a6bd652fb36ee609a"
+    },
+    {
+     "block": "707ce258956c2b956d30630b886b5080",
+     "texels": "e7c6cdadceb3d48fceb3d78fb59fd770b59fcb70b59fcb70e7c6d0ad9c8cd452b59fd270ceb3d78f9c8ccd52e7c6cbade7c6d7adb59fcb70ceb3cb8fb59fd470"
+    },
+    {
+     "block": "d06a7bbe8904604a7920e03565523151",
+     "texels": "5249def7a34971eede0021e77949a9f38d318ef07931a9f36618c3f58d188ef07949a9f37900a9f3b70056ec5249def78d498ef07949a9f3a33171ee7949a9f3"
+    },
+    {
+     "block": "7092aef1c51b933ae59c73788414c689",
+     "texels": "945abfff9f2ec65e945abfff9a44c3b19a44c7b1a518be109a44bfb19f2ec35e9f2ec35e945ac1ffa518be109a44c2b19f2ec35ea518c210945ac1ffa518c310"
+    },
+    {
+     "block": "b0bbca1fe0e7deae74be633efa868dee",
+     "texels": "91a319d7bad250c2a6a319d791ff84adbac13cc991d250c291f073b491ff84ada6f073b4a69408debaf073b47df073b4ba9408debae161bb91c13cc9baff84ad"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 5",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "60689d3a90a3b33ddfc0dff0bd76cc36",
+     "texels": "6c9099b2cf02e974cf47c293af9099b2afd572d18cd572d1cf47c2938c02e9746c02e974cf02e9746c47c293cf9099b2afd572d18c47c293cf02e9746c02e974"
+    },
+    {
+     "block": "a09320627e93395bca68bbdea9f6d91a",
+     "texels": "26ce6e1045a86b5764a867a045a86b5726a86e1045bc6b57839664e7649667a045bc6b5783a864e745bc6b5745966b5783a864e783a864e764bc67a083ce64e7"
+    },
+    {
+     "block": "2080fa180487c07ff0bf28398134fe9f",
+     "texels": "00c7e1f09e6c5ff0eb4020f0eb402064eb4020f0eb4020ab4d9ba21f4d9ba2f000c7e1644d9ba21f4d9ba21f9e6c5f1f00c7e11feb40201f4d9ba2ab9e6c5f64"
+    },
+    {
+     "block": "60d48d7059156760bfaf25c5057dc6fe",
+     "texels": "198bb4835897c536198bb4831997c5365897c536d88bb483d88bb4835897c5369991bc5c5885aba9198bb483d891bc5c9991bc5cd885aba9d891bc5cd897c536"
+    },
+    {
+     "block": "a0dc68eed8f789a2bc8b70cbf9b7669f",
+     "texels": "b2a2d17ca3507c8fb228d17ca3287c8fb228d17cb27ad17cb928fb72b250d17cb950fb72aa7aa685a3507c8faa7aa685b228d17cb228d17caa7aa685a3507c8f"
+    },
+    {
+     "block": "20fa99381a4d1183cd3f4d48808088b5",
+     "texels": "c6ba88c4c6ba88c495ae6dc466a3528166a352c466a352c4c6ba88c495ae6d8195ae6dc4c6ba888195ae6dc4f5c5a381f5c5a3a3c6ba88a395ae6d60f5c5a381"
+    },
+    {
+     "block": "e0e4e5bbf432f30ba303197fc1293bd8",
+     "texels": "c9dffc5ec9dffc5eb9aefc82974ac2cdb9aee982c9dfd55ec9dfd55ea77bfca9c9dfc25e974ad5cdc9dfc25ea77bfca9974afccd974ad5cd974ae9cda77bc2a9"
+    },
+    {
+     "block": "e0c3894e6cabdedebe6b7fb7109e62da",
+     "texels": "678fb78126c5b7ab678fb78126c5b7ab678fb781678fb78126c5b7ab46aab79626c5b7ab26c5b7ab26c5b7ab46aab79626c5b7ab46aab796678fb781678fb781"
+    },
+    {
+     "block": "e0a72db716325cc9e050b3c92614407f",
+     "texels": "4eb94b424eb94b42b76a3e0c709f57304eb9574295844b1e95844b1e9584571e709f57309584571e709f5730b76a4b0c4eb93242709f32309584321e709f4b30"
+    },
+    {
+     "block": "e0a05ec40957ce3b8c26f16c1f3b3004",
+     "texels": "534aa8c8534a0ec84022a8e1534af3c87a9d0e95402259e1534a0ec86775f3ae4022f3e16775f3ae7a9d0e95534af3c86775f3ae534aa8c87a9df3956775f3ae"
+    },
+    {
+     "block": "60ccb2f98e4f2f47ddb75e56ac84f10d",
+     "texels": "cbd8e7a951efd3cb79e4ddbb79efd3cbcbefd3cba3e4ddbbcbd8e7a979d8e7a9a3efd3cbcbefd3cb51e4ddbb51cdf199a3efd3cb51e4ddbbcbe4ddbbcbcdf199"
+    },
+    {
+     "block": "a0a4e06f2ff4c781ae33a31de71b3125",
+     "texels": "5b80aca65b80aca65b91aca683a0fdf75ba0aca67091d6cf5b80aca67071d6cf5b80aca64871857e5ba0aca68371fdf77080d6cf8380fdf74891857e7071d6cf"
+    },
+    {
+     "block": "60388f073ecd48ece273af0dcacfa880",
+     "texels": "493ca770843ca77012e1323cbbe1323cbb72815fbbab584d12e1323cbbab584d12e1323c8472815f8472815f84e1323c12ab584d1272815f123ca770843ca770"
+    },
+    {
+     "block": "a06b1e5f8b02aaadd42aec6c756a8694",
+     "texels": "b86a60e3975571cb972b71cbb85560e3b84060e3b84060e3b84060e3d75550f9974071cbb85560e3786a81b5b84060e3976a71cbb85560e3785581b5974071cb"
+    },
+    {
+     "block": "60e94405ca6e6f3d765766e70bf2b99f",
+     "texels": "6c51da947e7ada515ba1db125b7ada517ea1db125b7ada518f7ada518f2ad9d36ca1db127e2ad9d38fa1db127e7ada518fa1db128f2ad9d36ca1db127ea1db12"
+    },
+    {
+     "block": "a0cb08c0b88d3acb5851769a40aa2bf6",
+     "texels": "97ceb70022cea38d48ceaa5f489baa5f9765b7004865aa5f4865aa5f9765b7002232a38d4865aa5f2265a38d97ceb7007165b02e229ba38d9732b7007132b02e"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 6",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "40a09c4d61159f978474164eb19b7213",
+     "texels": "8fc0608fb67b73639baa6681af86706aa9916d7187ce5c98de3387359baa668187ce5c98ca577d4cca577d4cbc70765c8fc0608faf86706a95b5638887ce5c98"
+    },
+    {
+     "block": "40d3300eb52402f0ec504fb27abc42fe",
+     "texels": "64c8225d82a414d24de32d0360cd244c86a012e05cd1263e55da292277b219a573b61b9768c4206b7aae17b377b219a555da29225cd1263e82a414d286a012e0"
+    },
+    {
+     "block": "40e4b813461649fb3d55a8353b35b839",
+     "texels": "a7728f909c57906ca3688f82a3688f82ae838ea5b5968dbea3688f829c57906cb99f8dc99c57906ca3688f829c57906cae838ea5b99f8dc9b18c8db09c57906c"
+    },
+    {
+     "block": "40f053eb117c0fa2b8336ff0475beb0d",
+     "texels": "b895361da75c8d36ba9c2b1aba9c2b1a9e3cbe44b3845025c1b5050f9e3cbe44b17c5c28b895361da75c8d36b68d4220a75c8d36a044b241a34da43dc1b5050f"
+    },
+    {
+     "block": "c03c87854b88506bc22e9a7deb3bcfc7",
+     "texels": "e65a15585e6b3abb446f41ced85b1963756834aa846630a0526d3dc39b63298f696a37b2446f41ce696a37b2cc5d1c6b387044d65e6b3abb9b63298f5e6b3abb"
+    },
+    {
+     "block": "c0e138fd8f0594ac7c71e833005ba3ed",
+     "texels": "a1e43c7ca5e736788bd65d91a5e73678a8ea2f75c2fb085c94dc4f8994dc4f8987d3639587d36395b5f31c689ce1438194dc4f89b1f0226cbdf81061c2fb085c"
+    },
+    {
+     "block": "400e09a1f07297350255c86bec1f1749",
+     "texels": "3910bc933810bc963d11bb883d11bb884112ba7f4513b9734413b9763f12ba844513b9734714b86d4814b86a3910bc934012ba813910bc934212ba7c3c11bb8a"
+    },
+    {
+     "block": "407cbfba370cd6adfe41169675affa01",
+     "texels": "f5ce0a9cfaf6065af2b00dcff3bf0bb6f5c90aa4f2b00dcff5c90aa4f6d8098df4c40baef5ce0a9cfaf6065af7dd0883f7dd0883faf6065af2b00dcff1ab0dd7"
+    },
+    {
+     "block": "40342290b6678b251cd7527f5335d6d5",
+     "texels": "8257d470c40fe8867664d16c2bb5ba53b51fe4819146d97510d2b24a7664d16ca92ce07d9146d9759146d975a92ce07d8257d4702bb5ba539146d9752bb5ba53"
+    },
+    {
+     "block": "4038bd6b7dbce65a00cfcc5f04c98a5a",
+     "texels": "e0ba1ee6e0ba1ee6e8ac5eb4e6af51bee6af51bee6af51bee8ac5eb4e3b533d6e2b62fd9e0ba1ee6e5b244c8e6af51bee5b149c4e4b340cbe5b149c4e3b533d6"
+    },
+    {
+     "block": "c080609b59f3439bf3c65ec81c0fbbf8",
+     "texels": "03afd9420533f9370481e53e054ef239053bf738048ce23f0471e93d054ef239054ef23903afd9420533f93703b7d7430456f03a0456f03a0471e93d0533f937"
+    },
+    {
+     "block": "40afc2772dabc6e546f6119be4831b7a",
+     "texels": "9b87b3c8908aabc878919bc814ae54cab280c4c7b280c4c741a174c9599a84c9908aabc81fab5bca9b87b3c863978cc941a174c9b280c4c74b9e7bc96e9493c8"
+    },
+    {
+     "block": "c0b34c0b9b0360c3502c0b1ddfb6bbe9",
+     "texels": "cfb5e761ac999b6d7a712f7ec0a9c76680773d7ccfb5e761736c2081c8b0d96364600086736c2081a492897080773d7c80773d7c80773d7c8f835e776b650e84"
+    },
+    {
+     "block": "40f7c5702e929597d68f016542693088",
+     "texels": "b934978047b3bf3c2ecec82e8074ab5ed2198f8fdd0d8b95a44c9f73965ba46bc4289487af409b7a7580af58965ba46bdd0d8b95b93497808074ab5e8074ab5e"
+    },
+    {
+     "block": "40fcbe83e1a97afe67d3308dfa82c93f",
+     "texels": "f2397295f3376ab0f2397295f6325aebf13b797bf2397295f6325aebf43666c0f53461d2f73155fdf23a748df43666c0f53564c8f6335ce3f73155fdf2397295"
+    },
+    {
+     "block": "40ea19d8e90bf0cb202bdfaf8af2152e",
+     "texels": "a981fbf1ae77d8e4c44d46aeae77d8e4ce3a0496c94427a3ce3a0496c25155b4c25155b4bd5b78c1ae77d8e4ce3a0496b56aaad3ab7decebcc3e139cae77d8e4"
+    }
+   ]
+  },
+  {
+   "name": "BC7, mode 7",
+   "format": "Bc7",
+   "blocks": [
+    {
+     "block": "80c0794231b071131f22231ac2e48e11",
+     "texels": "38616941386169413eceac4e27d4d52f64202d363861694155c7866d27d4d52f790010304d414c3b10dbfb1055c7866d3861694164202d3610dbfb1010dbfb10"
+    },
+    {
+     "block": "808185cd3d290626e556f5c97d50ed1b",
+     "texels": "a685929186962455869624556d142cffb67dc7ae968e5972968e597270178b69968e5972a6859291869624557118ba20a685929186962455b67dc7ae6d142cff"
+    },
+    {
+     "block": "8082f61835392d671713c7b85a33c825",
+     "texels": "d369e32045b6c7e76eadc3bb6eadc3bbdf78ba3c6eadc3bb9aa3be8dc39aba61d369e3209aa3be8d6eadc3bb45b6c7e7eb878e59c39aba619aa3be8dc39aba61"
+    },
+    {
+     "block": "8003d8bb7e9537d5de77e80cecedfa73",
+     "texels": "48c3b2c948c3b2c9db51d382aadbf3309389c3a448c3b2c9aadbf330cbd0f35c48c3b2c9db51d382aadbf330aadbf33048c3b2c9bad6f345aadbf330dbcbf371"
+    },
+    {
+     "block": "808488b6a84ad1e9c17efcc6ddbfa671",
+     "texels": "3c7277ed8eaeefc76691b4d98eaeefc78eaeefc78eaeefc73c7277ed8785425c8eaeefc714553cff3c7277ed2841b21814553cff6691b4d92841b218b6a60c7d"
+    },
+    {
+     "block": "80451d565e7f08ea3974cec32516147f",
+     "texels": "7ed17decaebe45efaa338e9eb63ccfe71cf7efe79e294951b63ccfe7b63ccfe74ce4b7ea9e294951b63ccfe79e294951922008089220080892200808b63ccfe7"
+    },
+    {
+     "block": "8006362060b1a92ee5058d05ee630fd0",
+     "texels": "93889b4b93889b4b301028d30ca67d1493889b4bc3c3d3080ca67d1408b7614d301028d304ca448a00db28c300db28c300db28c308b7614d08b7614d04ca448a"
+    },
+    {
+     "block": "8087e4ea742e0ed864780d98394e7323",
+     "texels": "92eb00f3e7e7dfd7aeea49ea92eb00f3e7e7dfd7aeea49eacbe896e0422c1c42aeea49eacbe896e038381861422c1c42aeea49ea551424044b20202355142404"
+    },
+    {
+     "block": "80c8986a80a9c85a471d6928a973a22b",
+     "texels": "1800593843335956433359569a9a5992433359566f6759749a9a599218005938433359561800593843335956182051a243335956433359564144435855553c34"
+    },
+    {
+     "block": "80c914c2334efe31a06d1a748e5ad731",
+     "texels": "6f8e38cb6f8e38cb102000085c69244c6f8e38cbf7ff6dd7abb64993abb64993f7ff6dd7abb64993abb64993f7ff6dd710200008abb649935c69244c10200008"
+    },
+    {
+     "block": "80cacb8b9e535b16dbe6f6325a2f519f",
+     "texels": "7938cbcbcb381069b0384d89b0384d89cb38106994388eab94388eab8d81c2b37938cbcb8d81c2b38d81c2b38d81c2b3a66db6cfa66db6cf59aadb797296cf95"
+    },
+    {
+     "block": "808b8d532d84cc543c1dd0e76d4734e7",
+     "texels": "a955862aa955862a8e4555049b4d6d168e455504b65d9e3c9b4d6d16b65d9e3c9b4d6d169b4d6d16a955862a6a377db68e4555049e45e7ef5130499a853eb3d3"
+    },
+    {
+     "block": "808cb63619209adc5956cd65a223708d",
+     "texels": "d73496aed73496aecb23adba4d6d9696cb23adbab210cbe3912fbacab210cbe3b210cbe36e4ea7af4d6d96966e4ea7af6e4ea7af912fbacab210cbe3912fbaca"
+    },
+    {
+     "block": "800dafc53d40aa814bc0c39f4ceda865",
+     "texels": "d2534c6bd2534c6bbf2a6a53bf2a6a53bf2a6a53d2534c6bae04863cd2534c6b282059e3404d41c0404d41c071aa1079597d289c282059e371aa1079282059e3"
+    },
+    {
+     "block": "808ef07e1cab63a09d0af805a2ec4100",
+     "texels": "10380810103808105a603b355a603b3563a5bd60acbcd4af1c8ea6141c8ea614f3d3ebfbf3d3ebfb63a5bd60f3d3ebfbf3d3ebfbf3d3ebfbf3d3ebfbf3d3ebfb"
+    },
+    {
+     "block": "80cf1abf805311fd890c00fb36c33402",
+     "texels": "4816c314312ae20c4816c314312ae20c4816c3145d04a61c312ae20c4816c314312ae20c312ae20c4816c3145d04a61cb7893da6fbaa4982fbaa4982fbaa4982"
+    },
+    {
+     "block": "80903fff13436c620729005737ecfcec",
+     "texels": "b8285439772c5a1cb8285439f7244d55ff86426ab828543938306100b8285439ff86426affb6455dffb6455db8285439ff86426aff543f79ffb6455dff543f79"
+    },
+    {
+     "block": "8051be15639ea99516b85cd6bada346d",
+     "texels": "cfc7b675c7a6045db4bf7939bdb23d4cc4dda1b1c4dda1b1c9d2ac93c7a6045dcfc7b675c9d2ac93bee796cfcfc7b675c9d2ac93bee796cfc4dda1b1c9d2ac93"
+    },
+    {
+     "block": "8092e4d3622371781f8e157fbeb7a2bc",
+     "texels": "af953030e3307959af953030e3307959e3307959ca625545af953030af953030a3a3d5b096c70c1cca625545ca6255459a92fb8ab6c786ffb6c786ffca625545"
+    },
+    {
+     "block": "8053a5986473f094abc80ad748f0dc15",
+     "texels": "aecf9e968e664975c33859828e664975aecf9e96aecf9e9620c3285920c32859aecf9e96a63496aeab9c9b9e20c32859ab9c9b9eab9c9b9eab9c9b9eaecf9e96"
+    },
+    {
+     "block": "80d444c2e50becd74748a1bf998e3c0e",
+     "texels": "9acbfb9245bed71414043cd752791eef61c2e33d45bed7149acbfb9252791eef9acbfb9245bed71445bed7149acbfb9261c2e33d45bed7149acbfb929acbfb92"
+    },
+    {
+     "block": "809578a00d6c3289e191c5ab0e181b4a",
+     "texels": "34514434345144341018202010182020003008e37dc78e5d10182020598e6a4924642ed2499b57bf3451443410182020499b57bf499b57bf003008e334514434"
+    },
+    {
+     "block": "80166f143992f322ea488d33364b45fe",
+     "texels": "bb5646a7913b33bebb5646a7913b33bebb5646a7bb5646a7913b33be913b33bea2cb51c3bb5646a7e3715992bb5646a764ce43cb45cf3ccf692020d3692020d3"
+    },
+    {
+     "block": "80179198698a99934dd59026c3618348",
+     "texels": "20d371aac7c76d4d85855d836565559e20d371aa20d371aa6565559e85855d8345c37c7520d371aac7c76d4da7a7656820d371aa45c37c756db2873dc7c76d4d"
+    },
+    {
+     "block": "80d8538aa44a98395ea6841e75396848",
+     "texels": "6c6933495e8a35494438d6564438d6566c6933495e8a354951aa38495524f745794930495e8a35495e8a35494438d656794930495e8a3549794930496c693349"
+    },
+    {
+     "block": "8059468fbfea54a670fe275d33dc9947",
+     "texels": "cf7dcfff709bb1a5a08cc0d3cf7dcfffc460968041aaa279709bb1a541aaa2797d758696709bb1a5a08cc0d3709bb1a5e7559e75a06b8e8bcf7dcfffa08cc0d3"
+    },
+    {
+     "block": "809a26b335dd6ea205a2f4538f11fad1",
+     "texels": "9b8e69468e884ac59e6d2cff5cb286489b8e69469e6d2cff8e884ac5d76d4d455cb286487da368876dbe864d20d3a2499b8e69469e6d2cff8e884ac520d3a249"
+    },
+    {
+     "block": "80dbf193600f4eebf2c0a1418ddd377c",
+     "texels": "78d5966278d596629e0496d74927574778d596622038380075157790f3f3eb18f3f3eb1875157790203838003cc76d869e0496d720383800f3f3eb1878d59662"
+    },
+    {
+     "block": "805cc934f2316290deafbe1e62ea7b2d",
+     "texels": "28e3085928e30859cb1892eba218f3595da035899b3ff4658e8ef77d8e8ef77d9b3ff4659567f6718e8ef77d5da035899b3ff465cb1892eb965b65bb28e30859"
+    },
+    {
+     "block": "809d94d28c8ab63f41e55984bfa83acf",
+     "texels": "9349b7bc96ae3c9e9349b7bc9349b7bc96450c2c7678242476782424767824247678242454ac3d1c34df551496450c2c96ae3c9e96ae3c9e9218f3cb96ae3c9e"
+    },
+    {
+     "block": "80decd7e69eaf4e706459343102a9d3f",
+     "texels": "bed7ff8e8cb33b48f37130cbf37130cbc7b3ec4fc7b3ec4fc7b3ec4ff37130cbc091368bcba2e330c2c6f66fc7b3ec4f59d3410859d3410859d34108bed7ff8e"
+    },
+    {
+     "block": "801f2e45876ff744b464bc47a6d3757f",
+     "texels": "935a7fcbc70c9ecf61c17b9c9ed0535bd7df2c1cc70c9ecf935a7fcbd7df2c1c61c17b9c935a7fcb28fb41c361c17b9cd7df2c1cd7df2c1c28fb41c3935a7fcb"
+    },
+    {
+     "block": "8020fc5f4abd53e97e322b1be173f4a1",
+     "texels": "82922861ffdff796fbd3ebb292499a69aaa7687cb67ab978fbd3ebb2ffdff796d3beab97b67ab978fbd3ebb292499a6982922861ffdff796aaa7687cdbaed887"
+    },
+    {
+     "block": "80e1cf900874ac9d198bfc97db613267",
+     "texels": "fb10b210cf459ecfdd34a590cf459ecf863ccfff863ccfff24b6c75d863ccfffed21ab4fdd34a590ed21ab4fdd34a59024b6c75d863ccfff24b6c75d863ccfff"
+    },
+    {
+     "block": "8062a799f53fcefe087c6a6f7d81814d",
+     "texels": "d6f3e8e0613800baa2fbfba2852f17b9cf1c45b6efefdfffcf1c45b6bbf7f2c1d6f3e8e0cf1c45b6efefdfff852f17b9ab252eb7a2fbfba2cf1c45b6d6f3e8e0"
+    },
+    {
+     "block": "8023c3ed13d55831a6963fa0ba5078ee",
+     "texels": "61202828c75534ff9a68593c9a68593c61202828a64430b8ce6685626969301869693018ce668562c75534ff82312c6fce668562ff65ae86a64430b8c75534ff"
+    },
+    {
+     "block": "806478da15cbab57aae58d26878e1df6",
+     "texels": "2d55bed00828f3cbd7e7554595c1658195c1658175ae6d9e0828f3cb548586d62d55bed079b251dbb7d45d62d7e7554595c16581b7d45d6279b251db79b251db"
+    },
+    {
+     "block": "80657a90584bff45c6e24f1b947b86b5",
+     "texels": "59b292d540de877c49b2bac320fbb26959b292d520fbb26979b241fb82a230a262bf5b8f59b292d582a230a269b269e962bf5b8f59b292d520fbb26969b269e9"
+    },
+    {
+     "block": "80a604590f7a5336419dba95369c463a",
+     "texels": "6347995fd3713c81cf9621af9218cb38d3713c8104a634ae9218cb38cf9621af04a634aecbba08dbd3713c819218cb38cf9621af04a634ae6347995fcbba08db"
+    },
+    {
+     "block": "80274df4c9a24e5a1c512116ae27c3d6",
+     "texels": "856f4e72964aaf29856f4e727d3c455d7d3c455da29249a2964aaf29664b5440964aaf29a29249a289437944856f4e724928591089437944664b5440964aaf29"
+    },
+    {
+     "block": "80686286d6a14f90541004ccba1b94b3",
+     "texels": "4dae0c24a63c143457a173117f6e4323651c96455d4c693a57a1731130d3a20030d3a20057a17311557e392f5d4c693aa63c143430d3a200a63c14345d4c693a"
+    },
+    {
+     "block": "80a97eeaf728d17ba5cbbf22a50e9c67",
+     "texels": "b5cb79b4d3eb7992b5cb79b48b7a6b6c798a79fbb5cb79b455962c5d55962c5d55962c5dfb41eb8ab5cb79b497aa79d9fb41eb8ab5cb79b497aa79d9b5cb79b4"
+    },
+    {
+     "block": "806ad690f1373a1566b210b7d0dfcca7",
+     "texels": "cbe3a261d39e43288218308a61eb9adbd77d140cd77d140c775d53a5d77d140ccbe3a26161eb9adbcbe3a261d77d140c61eb9adb775d53a5d39e4328d39e4328"
+    },
+    {
+     "block": "80ab98d47831f777feb9d4e1bd25d41c",
+     "texels": "41add2689e14754d7fb2cecb57c7a2a67fb2cecb41add26857c7a2a6a69ef7efa69ef7ef7fb2cecb41add26830db7982a69ef7ef30db798241add26814f7ff75"
+    },
+    {
+     "block": "80aceb3ed1be3e0a0ae3f20901ce933c",
+     "texels": "71a241c3f75d55fff75d55ff71a241c382c79f69ebeb082871a241c349fbc32049fbc32071a241c399ba2e9082c79f6971a241c349fbc32049fbc32071a241c3"
+    },
+    {
+     "block": "80ed6bc4250cd785cce91fe4de765a7d",
+     "texels": "7875ace46dc786ff59696e673c766837755d759659696e676dc786ff7d4dbed73c766837755d7596729f98f2729f98f2729f98f26dc786ff755d759620826108"
+    },
+    {
+     "block": "80ee67340fcfc8eb5ec7d99dcae7a9a5",
+     "texels": "fb18798ab14deac4c038e09c65f7ef9e65f7ef9ea261f3ebcf24d77565f7ef9ea261f3ebca61a091ca61a091cf24d775c038e09cfb18798aca61a091b14deac4"
+    },
+    {
+     "block": "80efb7471c6935f4e8de4b1c1a3ff8e4",
+     "texels": "fb3882bab292f3bafb3882baca74cebab292f3ba14d7be752cbe6a3cfb3882bafb3882ba20cb955914d7be75b292f3bafb3882bae356a7baca74cebab292f3ba"
+    },
+    {
+     "block": "80b027923e57db338ce0791eac0b1429",
+     "texels": "ae7661b697954c4dae7661b62071309a97954c4d97954c4d92aa6138f37979c3f37979c397954c4dae7661b6f37979c3ae7661b6657448a7657448a7f37979c3"
+    },
+    {
+     "block": "80f1d837c4b79a3d703ce0f09e01f0b2",
+     "texels": "5c888e55df7d3c04ba5982719f83642c5c888e55ba598271ba598271ba5982711c8eb67d1c8eb67d0c6d1cc7df7d3c049f83642c1c8eb67ddf7d3c049f83642c"
+    },
+    {
+     "block": "80f24e0786ebe902bf137d630516e918",
+     "texels": "ae453e5ddf0c5d24df0c5d24df0c5d2449ba00d37a811f9a3cf7ffbedf0c5d24ae453e5d6bbef29b6bbef29b82a2eb8adf0c5d247a811f9a53dbf8addf0c5d24"
+    },
+    {
+     "block": "80f3b5ec45f4cf91f90056fdaafc6040",
+     "texels": "be8e3c04bb765a24bb765a24bb765a24b95d78457d3c3cf7b6459665bb765a2461fbcbaa61fbcbaa747b6bdebb765a24be8e3c0461fbcbaabe8e3c04bb765a24"
+    },
+    {
+     "block": "80b4d601396f43934b014f04acfa37ed",
+     "texels": "d39c76501b7a561b1b7a561bd39c76501b7a561b41085110d3f392f3d3f392f341085110d3c885a3d39c76502e405415d3c885a3d39c7650410851101b7a561b"
+    },
+    {
+     "block": "80f5f378222743fe45769ddc2f8d1e11",
+     "texels": "a555dfe7a555dfe7ba694f5aab397368cf65efdfba694f5ac7962c4da555dfe79e0c96759e0c96757d45cfefcf65efdfc7962c4dcf65efdf7d45cfefc7962c4d"
+    },
+    {
+     "block": "8036c3a2e90668e8462987d2b98676b0",
+     "texels": "65d70c5569a2514930383e46a790a56ba790a56b85b45660140434454d6e47484d6e474885b45660c76def7530383e461404344514043445c76def75a790a56b"
+    },
+    {
+     "block": "80b7453ce2d4b01fdb159609b591274f",
+     "texels": "8d9bab3b6671604ec889bb96a9a79559c889bb96b2c3f3288d9bab3ba9a795598ac37120c889bb966671604eb2c3f328414918618ac37120e76ddfcf8d9bab3b"
+    },
+    {
+     "block": "803885dc5f6ed3a2b4186eb0406a2c09",
+     "texels": "a2ba5930e3b2a230ee6b5093a2ba5930e8907a60e8907a6086e7a6e7a2ba5930ee6b5093e8907a6099c9726c8fd88dabe3b2a23099c9726ca2ba5930e3b2a230"
+    },
+    {
+     "block": "80b966da7268b9bc2aa4b582f1376613",
+     "texels": "d3e39249bed42124b2e308086586be5d6586be5d89a5b056cbc53c41d7b6555d6586be5dd3e39249b2e30808bed42124cbc53c4189a5b056d3e39249d7b6555d"
+    },
+    {
+     "block": "807a94738ede06811502449feb7575f4",
+     "texels": "8a1820009e52a1999e1c867d9e1c867d9e37938a9e37938a9e1c867d92a8652e9e37938a92a8652e96ef86458a18200092a8652e92a8652e96ef86459e52a199"
+    },
+    {
+     "block": "807bebc55853cda216c7db409f8d3aa9",
+     "texels": "968a749ceb30a2ba6db65d8e3434c704315cc126968a749c6db65d8e968a749c2f86bc4b3434c7042f86bc4bc25c8bac6db65d8e2f86bc4b2f86bc4b2f86bc4b"
+    },
+    {
+     "block": "80bcc5f8bd385e447eec9434df1ff590",
+     "texels": "b87f72abc38a4149bd845979c38a41497d7d1cd77d7d1cd7c71cf74d955d64aabd845979bd8459797d7d1cd7af3caf7ab2798adbbd845979c71cf74daf3caf7a"
+    },
+    {
+     "block": "80bddbc2f9d5b23961c524d4576e9dad",
+     "texels": "98c43779bc903962146d0c14348d2729bc903962df5d3c4d55af4240348d2729348d272975cf5d55348d272955af424098c43779df5d3c4dbc903962bc903962"
+    },
+    {
+     "block": "80fe4a576006a9c6b0663435f6d27544",
+     "texels": "54a3ce9e4e81c86e848e90ae4961c3414e81c86e59c3d3cb848e90ae4961c341848e90ae848e90ae14a6aed754a3ce9eba82829a848e90aeba82829a54a3ce9e"
+    },
+    {
+     "block": "80bfa31f91b14a879bcdd1c085c68445",
+     "texels": "8521cd73ff5ddf6d7524ef9e8521cd73a61c861cff5ddf6d961fa8478521cd73961fa847ff5ddf6dff5ddf6d41286100961fa847ff5ddf6d7f398a24ff5ddf6d"
+    }
+   ]
+  }
+ ]
+}

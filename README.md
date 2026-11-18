@@ -5,6 +5,18 @@ a surface is, a material's description, the pictures it is drawn with and their 
 response of a lit surface to its light, written once for both. It references no engine, and each
 engine implements the interfaces it declares where it binds the module.
 
+## What it holds
+
+| Type | Gives |
+|---|---|
+| `PictureRole` and `PictureLayout` | What each channel of a material's picture holds, in glTF 2.0's terms, and the color space the picture is read in, sRGB where it holds a color and linear otherwise, with the layouts glTF binds and the texture collections write, the surface's occlusion, roughness, metallic and diffuse transmission among them |
+| `MaterialPicture` | A picture a material is drawn with, its path among the engine's files and its layout |
+| `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
+| `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
+
+The decoders give what Pillow's give for 400 blocks, every partition of BC7's among them
+(`dotnet test Materials.Tests`, against the reference `scripts/blocks.py` writes).
+
 ## Taking it into an engine
 
 An engine adds the repository as a git submodule under `modules/` and references its project, here
