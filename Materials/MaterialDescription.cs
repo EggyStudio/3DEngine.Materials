@@ -11,7 +11,8 @@ namespace Materials;
 /// A factor multiplies the channel its role's picture holds, as glTF's factors do, and stands alone
 /// where no picture holds the role. A color in numbers is linear, the BT.709 primaries with a D65
 /// white and no transfer curve, where a picture of a color is sRGB. The emitted light is in
-/// candelas a square meter, so an engine whose light has other units scales it once.
+/// candelas a square meter, or glTF's unitless factor times its strength where EmissiveUnit says
+/// so, which an engine scales by a convention of its own.
 /// </para>
 /// <para>
 /// Where nothing is given the surface is a rough white dielectric, a metallic of zero and a
@@ -38,8 +39,17 @@ public sealed record MaterialDescription
     /// </summary>
     public float Reflectance { get; init; } = Materials.Reflectance.Dielectric;
 
-    /// <summary>The light the surface emits, linear RGB in candelas a square meter.</summary>
+    /// <summary>
+    /// The light the surface emits, linear RGB in the unit <see cref="EmissiveUnit"/> names,
+    /// candelas a square meter where nothing else is said.
+    /// </summary>
     public Vector3 Emissive { get; init; }
+
+    /// <summary>
+    /// What <see cref="Emissive"/> is measured in, a luminance or glTF's unitless factor times its
+    /// strength.
+    /// </summary>
+    public EmissiveUnit EmissiveUnit { get; init; } = EmissiveUnit.Luminance;
 
     /// <summary>
     /// How far the normal map tilts the surface, glTF's scale, one as the map gives it.

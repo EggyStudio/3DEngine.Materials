@@ -52,7 +52,8 @@ Vector4 BaseColor { get; init; }                         // The base color in li
 float Metallic { get; init; }                            // How metal the surface is, from zero to one
 float Roughness { get; init; }                           // glTF's perceptual roughness from zero to one, whose square is GGX's alpha
 float Reflectance { get; init; }                         // The share of light a dielectric reflects at normal incidence, from zero to below one, as Reflectance converts it, a metal taking its reflectance from its base color instead
-Vector3 Emissive { get; init; }                          // The light the surface emits, linear RGB in candelas a square meter
+Vector3 Emissive { get; init; }                          // The light the surface emits, linear RGB in the unit EmissiveUnit names, candelas a square meter where nothing else is said
+EmissiveUnit EmissiveUnit { get; init; }                 // What Emissive is measured in, a luminance or glTF's unitless factor times its strength
 float NormalScale { get; init; }                         // How far the normal map tilts the surface, glTF's scale, one as the map gives it
 float OcclusionStrength { get; init; }                   // How much the occlusion map darkens the light from all around, from zero for none to one for all it says
 float DiffuseTransmission { get; init; }                 // The share of light let through the surface and scattered, from zero to one, as glTF's KHR_materials_diffuse_transmission names it
@@ -67,6 +68,10 @@ enum AlphaMode                                           // How a material's opa
 Opaque = 0,                                              // The surface is opaque whatever its opacity says
 Mask = 1,                                                // A texel is drawn where its opacity reaches the cutoff and left out elsewhere
 Blend = 2,                                               // The surface is blended over what lies behind it by its opacity
+
+enum EmissiveUnit                                        // What a material's emitted light is measured in
+Luminance = 0,                                           // Linear RGB in candelas a square meter
+Unitless = 1,                                            // glTF's emissive factor times its KHR_materials_emissive_strength, linear RGB as they stand, with no unit
 
 class Reflectance                                        // A dielectric's reflectance at normal incidence, the share of light it reflects when lit and seen head on, and the two other forms an engine may take it in
 float Dielectric = 0.04f;                                // The reflectance of most dielectrics, 0.04, an index of refraction of 1.5

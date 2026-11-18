@@ -13,7 +13,7 @@ binds it by reading the values it gives into its own textures and materials.
 |---|---|
 | `PictureRole` and `PictureLayout` | What each channel of a material's picture holds, in glTF 2.0's terms, and the color space the picture is read in, sRGB where it holds a color and linear otherwise, with the layouts glTF binds and the texture collections write, the surface's occlusion, roughness, metallic and diffuse transmission among them |
 | `MaterialPicture` | A picture a material is drawn with, its path among the engine's files and its layout |
-| `MaterialDescription` and `AlphaMode` | What a surface is in glTF 2.0's terms, its base color, metallic, roughness, reflectance, emitted light, normal scale, occlusion strength, diffuse transmission, alpha mode and pictures, with every rule a description breaks |
+| `MaterialDescription`, `AlphaMode` and `EmissiveUnit` | What a surface is in glTF 2.0's terms, its base color, metallic, roughness, reflectance, emitted light with the unit it is measured in, normal scale, occlusion strength, diffuse transmission, alpha mode and pictures, with every rule a description breaks |
 | `Reflectance` | A dielectric's reflectance at normal incidence, 0.04 by default, with glTF's index of refraction and the perceptual reflectance whose square times 0.16 it is as functions of it |
 | `MaterialMeans` | A material's mean color in linear light and its mean surface over what its opacity covers, read through `IMaterialFiles` from a level of 64 texels a side at most |
 | `IMaterialFiles` | The one thing the module asks of an engine, a file's bytes by its path |
@@ -74,7 +74,11 @@ It stands on these conventions.
 - Roughness is glTF's perceptual roughness, whose square is the GGX distribution's alpha.
 - A color in numbers, as `MaterialDescription.BaseColor`, is linear, the BT.709 primaries with a
   D65 white and no transfer curve, and a mean of a picture's color is taken in linear light.
-- The emitted light, `MaterialDescription.Emissive`, is linear RGB in candelas a square meter.
+- The emitted light, `MaterialDescription.Emissive`, is linear RGB in candelas a square meter where
+  `MaterialDescription.EmissiveUnit` is `EmissiveUnit.Luminance`, and glTF's emissive factor times
+  its strength as they stand where it is `EmissiveUnit.Unitless`, since glTF gives the product no
+  unit, so an engine takes a luminance as it is and scales a unitless emission by a convention of
+  its own, as the luminance it gives a strength of one under its exposure.
 - A dielectric's reflectance is the share it reflects at normal incidence, 0.04 by default, and
   glTF's index of refraction and a perceptual reflectance are each one function of it in
   `Reflectance`.

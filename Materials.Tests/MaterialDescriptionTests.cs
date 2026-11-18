@@ -27,6 +27,18 @@ public class MaterialDescriptionTests
     }
 
     [Fact]
+    public void A_Gltf_Emission_Is_Kept_As_It_Stands_With_Its_Unit_Named()
+    {
+        // glTF's emissive factor times its strength has no unit, so an importer keeps the product
+        // and names it unitless, where a description of nothing says candelas a square meter.
+        var factor = new Vector3(1f, 0.5f, 0f);
+        var material = new MaterialDescription { Emissive = factor * 3f, EmissiveUnit = EmissiveUnit.Unitless };
+        Assert.Equal((new Vector3(3f, 1.5f, 0f), EmissiveUnit.Unitless), (material.Emissive, material.EmissiveUnit));
+        Assert.Equal(EmissiveUnit.Luminance, new MaterialDescription().EmissiveUnit);
+        Assert.Empty(material.Problems());
+    }
+
+    [Fact]
     public void A_Role_Is_Found_With_Its_Channel_In_The_Picture_That_Holds_It()
     {
         var surface = new MaterialPicture("bark/surface.ktx2", PictureLayout.Surface);

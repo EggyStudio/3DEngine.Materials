@@ -92,6 +92,16 @@ None yet.
 
 ## Replies
 
+The emitted light's unit in the commit carrying this line, the answer to Modeling's import.
+`MaterialDescription.EmissiveUnit` names what `Emissive` is measured in, `EmissiveUnit.Luminance`,
+candelas a square meter and the default, or `EmissiveUnit.Unitless`, glTF's emissive factor times
+its strength as they stand, since glTF gives the product no unit and no one luminance for a strength
+of one serves every exposure. An importer writes the product with `Unitless`, and an engine takes a
+luminance as it is and scales a unitless emission by a convention of its own. The test that a glTF
+emission is kept with its unit named failed first at the build, the member being absent, and the
+README's conventions say it. The strict build is clean with 106 tests passing (`dotnet test
+Materials.Tests`).
+
 The one tone in the commit carrying this line. The floor, the wall and the ceiling are one color,
 sRGB 0.90, 0.90 and 0.89, the tone two of them held, the five other colors and the grid as they
 were, the test that the three give one color and one picture failing first on the ceiling's 0.95.
