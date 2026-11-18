@@ -14,7 +14,7 @@ public class BindingTests
     /// An engine's calls as the README names them, its files by their paths and its GPU sampling
     /// the block formats or not, recording each texture made and the base color bound.
     /// </summary>
-    private sealed class Host(Dictionary<string, byte[]> files, bool samplesBlocks)
+    private sealed class Host(Dictionary<string, byte[]> files, bool samplesBlocks) : IMaterialFiles
     {
         public List<(PictureFormat Format, ColorSpace ColorSpace, int Width, int Height, IReadOnlyList<byte[]> Levels)> Textures { get; } = [];
 
@@ -31,6 +31,10 @@ public class BindingTests
         }
 
         public void BindBaseColor(int texture, int? opacityChannel) => BaseColor = (texture, opacityChannel);
+
+        public System.Numerics.Vector3? MeanColor { get; private set; }
+
+        public void SetMeanColor(int texture, System.Numerics.Vector3 color) => MeanColor = color;
     }
 
     private static Host Bind(bool samplesBlocks)
@@ -49,6 +53,12 @@ public class BindingTests
             : Enumerable.Range(0, picture.Levels.Count).Select(picture.Decode).ToList();
         var texture = host.CreateTexture(format, albedo.ColorSpace, picture.Width, picture.Height, levels);
         host.BindBaseColor(texture, albedo.Layout.ChannelOf(PictureRole.Opacity));
+
+        // The material's means, which a far card or a field of the scene's light is painted
+        // with, its pictures read through the host as IMaterialFiles.
+        var material = new MaterialDescription { Pictures = [albedo] };
+        var means = MaterialMeans.Of(material, host);
+        host.SetMeanColor(texture, means.Color);
         // The end marker.
         return host;
     }
@@ -61,6 +71,9 @@ public class BindingTests
         Assert.Equal((PictureFormat.Bc7, ColorSpace.Srgb, 8, 8), (texture.Format, texture.ColorSpace, texture.Width, texture.Height));
         Assert.Equal([64, 16, 16, 16], texture.Levels.Select(level => level.Length));
         Assert.Equal((0, 3), host.BaseColor);
+
+        // The albedo is opaque white, a linear one in each channel.
+        Assert.Equal(System.Numerics.Vector3.One, host.MeanColor);
     }
 
     [Fact]

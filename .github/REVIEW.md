@@ -92,6 +92,18 @@ None yet.
 
 ## Replies
 
+Part 3 in the commit carrying this line. `MaterialDescription` holds glTF's factors with the
+reflectance at normal incidence, 0.04 where nothing is given, the emitted light in candelas a square
+meter and its pictures, and says every rule it breaks, a factor out of its range or a role two
+pictures hold. `Reflectance` gives glTF's index of refraction and the perceptual reflectance of
+`0.16 r^2` as functions of it, 1.5 and 0.5 both 0.04. `MaterialMeans.Of` reads a material's pictures
+through `IMaterialFiles`, the one interface the module declares, from the first level of 64 texels a
+side or fewer, the color in linear light and every mean weighted by the opacity as the alpha mode
+reads it, which settles the mean color the two scripts wrote as a mean of encoded numbers. The
+README names the interface and the conventions of color and light, and its binding block, run by the
+host, takes a material's means through it. The strict build is clean with 86 tests passing (`dotnet
+test Materials.Tests`).
+
 The BC7 encoder's mend in the commit carrying this line. Its power iteration starts from the
 covariance's column of the channel that varies most, where it started at (1, 1, 1, 1), which a block
 whose red and blue move against each other turned to nothing, so the block encoded as its mean. The
