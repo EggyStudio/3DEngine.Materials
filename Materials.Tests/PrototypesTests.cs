@@ -56,8 +56,8 @@ public class PrototypesTests
     [Fact]
     public void The_Pictures_Are_The_Ones_The_Level_Editor_Shows()
     {
-        // The SHA-256 of each 512 pixel picture's RGBA, read from the PNG files BevyCSharp's
-        // Levels/TrenchBroom/textures/proto holds at 26763e87, which a level editor shows.
+        // The SHA-256 of each 512 pixel picture's RGBA, the pictures a level editor shows the
+        // prototypes by, so a change to the table, the grid or the tinting shows here.
         var hashes = new Dictionary<string, string>
         {
             ["floor"] = "2fc825d0ac583b9a478b743ab51c1e6d31960f43cdec66b2619874e327166542",

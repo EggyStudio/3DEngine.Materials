@@ -76,6 +76,35 @@ public class TexturesScriptTests
     }
 
     [NeedsPillowFact]
+    public void A_Built_Entrys_Mean_Color_Is_The_Linear_Mean_Written_In_Srgb()
+    {
+        // A tile of 8 by 8 texels, its left half white and its right half black, so its mean is a
+        // linear 0.5, which sRGB writes as 0.7354, where the mean of the encoded numbers is 0.5.
+        var folder = Directory.CreateTempSubdirectory("materials-mean-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "source"));
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "collection"));
+            var ppm = new List<byte>(System.Text.Encoding.ASCII.GetBytes("P6\n8 8\n255\n"));
+            for (int y = 0; y < 8; y++)
+            for (int x = 0; x < 8; x++)
+                ppm.AddRange(x < 4 ? [255, 255, 255] : [0, 0, 0]);
+            File.WriteAllBytes(Path.Combine(folder.FullName, "source", "halves.ppm"), [.. ppm]);
+            var manifest = Path.Combine(folder.FullName, "collection", "textures.json");
+            File.WriteAllText(manifest, """{"entries": [{"name": "halves", "source": "source", "size": [8, 8], "albedo": {"file": "halves.ppm"}}]}""");
+
+            Programs.Script("textures.py", manifest, "--sources", folder.FullName);
+            using var written = System.Text.Json.JsonDocument.Parse(File.ReadAllText(manifest));
+            var color = written.RootElement.GetProperty("entries")[0].GetProperty("color").EnumerateArray().Select(c => c.GetDouble()).ToArray();
+            Assert.Equal([0.7354, 0.7354, 0.7354], color);
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
+    [NeedsPillowFact]
     public void The_Script_Writes_The_Sample_The_Repository_Holds()
     {
         var folder = Directory.CreateTempSubdirectory("materials-sample-");

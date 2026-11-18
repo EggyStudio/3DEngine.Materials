@@ -90,8 +90,8 @@ interface IMaterialFiles                                 // The engine's files, 
 byte[] ReadAllBytes(string path);                        // The whole file at a path
 
 class SurfaceResponse                                    // How a lit surface sends its light back, the terms of a microfacet response and the two forms a probe's ray takes it in where it meets a surface, written down as they stand until a room read against its traced reference chooses between them
-float LobeRoughnessFloor = 0.045f;                       // The least perceptual roughness of Lobe's lit pass, 0.045
-float SplitSumRoughnessFloor = 0.089f;                   // The least perceptual roughness of SplitSum's lit pass, 0.089
+float LeastRoughnessFullPrecision = 0.045f;              // The least perceptual roughness a response computed in single precision takes, 0.045, as Filament's material model holds it, a smaller one's distribution passing what the precision keeps
+float LeastRoughnessHalfPrecision = 0.089f;              // The least perceptual roughness a response computed in half precision takes, 0.089, as Filament's material model holds it
 float Alpha(float roughness, float floor = 0f);          // The alpha of a perceptual roughness, held to a floor and squared
 float Distribution(float nh, float alpha);               // GGX's distribution of microfacet normals at the half way's cosine to the normal
 float Visibility(float nv, float nl, float alpha);       // Smith's height-correlated visibility, G over 4 nl nv

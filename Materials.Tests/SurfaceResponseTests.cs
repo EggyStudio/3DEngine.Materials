@@ -28,8 +28,8 @@ public class SurfaceResponseTests
     public void A_Perceptual_Roughness_Is_Held_To_Its_Floor_And_Squared()
     {
         Assert.Equal(0.25f, SurfaceResponse.Alpha(0.5f), 1e-6f);
-        Assert.Equal(0.045f * 0.045f, SurfaceResponse.Alpha(0.01f, SurfaceResponse.LobeRoughnessFloor), 1e-7f);
-        Assert.Equal(0.089f * 0.089f, SurfaceResponse.Alpha(0.01f, SurfaceResponse.SplitSumRoughnessFloor), 1e-7f);
+        Assert.Equal(0.045f * 0.045f, SurfaceResponse.Alpha(0.01f, SurfaceResponse.LeastRoughnessFullPrecision), 1e-7f);
+        Assert.Equal(0.089f * 0.089f, SurfaceResponse.Alpha(0.01f, SurfaceResponse.LeastRoughnessHalfPrecision), 1e-7f);
     }
 
     [Fact]

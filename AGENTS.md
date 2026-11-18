@@ -1,11 +1,10 @@
 # Materials
 
-Materials is a library both engines, 3DEngine and BevyCSharp, take as a git submodule, for what
-a surface is, a material's description, the pictures it is drawn with and their encoding, and the
-response of a lit surface to its light, written once for both. It references no engine, no engine's
-package and no engine's bridge (NORM.md, N 2.1). What it needs of a renderer, a world, a scheduler
-or a file system it takes through an interface it declares, which each engine implements where it
-binds the module.
+Materials is a library an engine takes as a git submodule, for what a surface is, a material's
+description, the pictures it is drawn with and their encoding, and the response of a lit surface to
+its light, in the terms of glTF 2.0 that any engine reads. It references no engine, no engine's
+package and no engine's bridge (NORM.md, N 2.1). What it needs of an engine it takes through an
+interface it declares, which the engine implements where it binds the module.
 
 ## Documents
 

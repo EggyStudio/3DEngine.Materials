@@ -16,8 +16,6 @@ picture, and as it writes it started from the column of the channel that varies 
 45.27 dB and its wallpaper goes from 46.15 to 46.16.
 
 ![](.github/assets/readings/2026-11-18-item-3-prototype-tables.webp)
-The seven prototypes, a meter's cell of the grid at 256 pixels tinted in linear light, by 3DEngine's
-table above and by BevyCSharp's below, which the module proposes; stairs, door, window and hazard
-have one color in both and read darker above for 3DEngine's grid face of 230 against 252, and floor,
-wall and ceiling are 3DEngine's grays of 79, 181 and 209 against BevyCSharp's near whites of 0.90,
-0.90 and 0.95.
+The seven prototypes of the module's one table, a meter's cell of the grid at 256 pixels tinted in
+linear light, floor and wall at sRGB 0.90, ceiling at 0.95, stairs orange, door green, window blue
+and hazard red, over a grid whose face is 0.99, its lines 0.6 and its quarters' lines 0.82.

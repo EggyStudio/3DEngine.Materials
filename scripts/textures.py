@@ -588,16 +588,18 @@ def sample_maps():
 
 def mean_color(albedo):
     """
-    The mean of the albedo's opaque texels as sRGB from zero to one, the leaves' summer color a
-    fall tint is worked out against.
+    The mean of the albedo's opaque texels in linear light, written in sRGB from zero to one, the
+    color a far card is drawn with and a leaf set's summer color a fall tint is worked out against.
+    Averaged in sRGB the mean comes out darker, since the curve bows below its chord.
     """
     alpha = albedo.getchannel("A").point(lambda value: 255 if value > 127 else 0)
     color = albedo.convert("RGB")
     count = alpha.histogram()[255]
     if count == 0:
         return [0.0, 0.0, 0.0]
-    sums = [sum(value * n for value, n in enumerate(Image.composite(band, Image.new("L", band.size), alpha).histogram())) for band in color.split()]
-    return [round(total / count / 255, 4) for total in sums]
+    linear = [value / 255 / 12.92 if value / 255 <= 0.04045 else ((value / 255 + 0.055) / 1.055) ** 2.4 for value in range(256)]
+    means = [sum(linear[value] * n for value, n in enumerate(Image.composite(band, Image.new("L", band.size), alpha).histogram())) / count for band in color.split()]
+    return [round(12.92 * mean if mean <= 0.0031308 else 1.055 * mean ** (1 / 2.4) - 0.055, 4) for mean in means]
 
 
 def mean_surface(maps):

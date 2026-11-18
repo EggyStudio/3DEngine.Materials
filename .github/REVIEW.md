@@ -92,6 +92,18 @@ None yet.
 
 ## Replies
 
+The sweep in the commit carrying this line, the module naming no engine and describing no engine's
+form or table, the package and assembly name apart. The reviewer's `git grep` found 9 lines before
+and finds none after, the README's opening and binding section, AGENTS.md's opening, the prototype
+reading's caption, the devlog drawn from it and a test's comment, and the comments of the workflow,
+`Directory.Build.props` and the library's project that spoke of the engines are reworded. The
+prototype reading shows the one table alone. `SurfaceResponse`'s floors are named for what they are,
+`LeastRoughnessFullPrecision` at 0.045 and `LeastRoughnessHalfPrecision` at 0.089, Filament's two,
+and the README says what each `HitForm` is for. `scripts/textures.py` writes a set's mean color as
+the mean of its opaque texels in linear light written in sRGB, as Vegetation's `cb2ab62` does, its
+test failing first at 0.5 where 0.7354 belongs for a tile half white and half black. The strict
+build is clean with 102 tests passing (`dotnet test Materials.Tests`).
+
 Decision line to carry: the prototype table is `Prototypes`, BevyCSharp's colors and grid tones,
 chosen by the owner on 2026-11-18 from `2026-11-18-item-3-prototype-tables.webp`. BevyCSharp's
 bridge takes it by reading the table, the grid and the pictures from the module, its look and its

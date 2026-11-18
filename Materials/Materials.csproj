@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <!-- The library both engines reference from their own projects, which knows no engine
+    <!-- The library an engine references from a project of its own, which knows no engine
          (N 2.1). -->
     <PropertyGroup>
         <AssemblyName>3DEngine.Materials</AssemblyName>

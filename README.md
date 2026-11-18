@@ -1,12 +1,11 @@
-# Materials
+[Devlog](https://github.com/EggyStudio/Materials/blob/main/DEVLOG.md) [Cheat sheet](https://github.com/EggyStudio/Materials/blob/main/CHEATSHEET.md)
 
-[Devlog](DEVLOG.md) [Cheat sheet](CHEATSHEET.md)
+# Materials
 
 Materials is a library an engine takes as a git submodule, for what a surface is, a material's
 description, the pictures it is drawn with and their encoding, and the response of a lit surface to
-its light, in the terms of glTF 2.0 that any engine reads. 3DEngine and BevyCSharp are two engines
-that take it. It references no engine, and an engine binds it by reading the values it gives into
-its own textures and materials.
+its light, in the terms of glTF 2.0 that any engine reads. It references no engine, and an engine
+binds it by reading the values it gives into its own textures and materials.
 
 ## What it holds
 
@@ -19,7 +18,7 @@ its own textures and materials.
 | `MaterialMeans` | A material's mean color in linear light and its mean surface over what its opacity covers, read through `IMaterialFiles` from a level of 64 texels a side at most |
 | `IMaterialFiles` | The one thing the module asks of an engine, a file's bytes by its path |
 | `SurfaceResponse` | How a lit surface sends its light back, GGX's distribution, Smith's height-correlated visibility, Schlick's Fresnel, Lambert's and Burley's diffuse, the reflectance at normal incidence by the metallic, Karis's fit of the split sum and the split sum integrated, and the two forms a probe's ray takes a surface in, `SurfaceResponse.HitForm` |
-| `Prototypes` | The one table of prototype materials the engines block a level out with, seven parts of a level by name, their colors, the grid of a meter's cells with its lines and its `1m` mark, a prototype's picture tinted in linear light as a level editor shows it, and a prototype as a `MaterialDescription` |
+| `Prototypes` | The one table of prototype materials a level is blocked out with, seven parts of a level by name, their colors, the grid of a meter's cells with its lines and its `1m` mark, a prototype's picture tinted in linear light as a level editor shows it, and a prototype as a `MaterialDescription` |
 | `ColorSpace` | Whether a picture's red, green and blue are sRGB or linear, its alpha linear in either |
 | `Ktx2` | A KTX2 file's format, color space, size and levels, read from its bytes, the levels kept as they are |
 | `Texels` and `PictureFormat` | RGBA8, BC1, BC4, BC5 and BC7 in its eight modes, decoded to four bytes a texel as a GPU samples them |
@@ -115,9 +114,13 @@ host.SetMeanColor(texture, means.Color);
 A desktop GPU samples BC1, BC4, BC5 and BC7 as they are, and one that does not, a phone's among
 them, takes the decoded levels. An engine binds a surface picture of `PictureLayout.Surface` as
 glTF's occlusion and metallic-roughness textures at once, since their channels are glTF's, and
-finds a role's channel in another layout by `PictureLayout.ChannelOf`. 3DEngine and BevyCSharp are
-two such bindings, the first choosing a texture's view by the slot it is bound to and the second
-taking the color space from the caller.
+finds a role's channel in another layout by `PictureLayout.ChannelOf`.
+
+A field of the scene's light that traces probes' rays reads a surface where a ray meets it by one of
+`SurfaceResponse.HitForm`'s two forms. `HitForm.Lobe` reflects a lamp by the GGX lobe and holds
+every dielectric at a reflectance of 0.04, for a field whose cells keep no reflectance of their own.
+`HitForm.SplitSum` reflects a lamp and the light from all around by the split sum's share at the
+material's reflectance, for a field whose cells keep it and a hit that needs no lobe.
 
 ## A texture collection
 

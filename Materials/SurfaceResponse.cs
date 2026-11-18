@@ -41,18 +41,24 @@ public static class SurfaceResponse
     }
 
     /// <summary>
-    /// The least perceptual roughness of <see cref="HitForm.Lobe"/>'s lit pass, 0.045.
+    /// The least perceptual roughness a response computed in single precision takes, 0.045, as
+    /// Filament's material model holds it, a smaller one's distribution passing what the precision
+    /// keeps.
     /// </summary>
-    public const float LobeRoughnessFloor = 0.045f;
+    public const float LeastRoughnessFullPrecision = 0.045f;
 
     /// <summary>
-    /// The least perceptual roughness of <see cref="HitForm.SplitSum"/>'s lit pass, 0.089.
+    /// The least perceptual roughness a response computed in half precision takes, 0.089, as
+    /// Filament's material model holds it.
     /// </summary>
-    public const float SplitSumRoughnessFloor = 0.089f;
+    public const float LeastRoughnessHalfPrecision = 0.089f;
 
     /// <summary>The alpha of a perceptual roughness, held to a floor and squared.</summary>
     /// <param name="roughness">glTF's perceptual roughness.</param>
-    /// <param name="floor">The least roughness the response takes, as a lit pass holds it.</param>
+    /// <param name="floor">
+    /// The least roughness the response takes, <see cref="LeastRoughnessFullPrecision"/> or
+    /// <see cref="LeastRoughnessHalfPrecision"/> by the precision it is computed in.
+    /// </param>
     public static float Alpha(float roughness, float floor = 0f)
     {
         var held = Math.Clamp(roughness, floor, 1f);
