@@ -326,7 +326,7 @@ public static class Texels
     // The format's partitions, each a row of sixteen texels' subsets read left to right and top to
     // bottom, and the anchor texel of each subset past the first, from the Khronos Data Format
     // Specification's tables for BC7.
-    private static readonly string[] TwoSubsets =
+    internal static readonly string[] TwoSubsets =
     [
         "0011001100110011",
         "0001000100010001",
@@ -462,7 +462,7 @@ public static class Texels
         "0111201122012220",
     ];
 
-    private static readonly byte[] SecondAnchor =
+    internal static readonly byte[] SecondAnchor =
     [
         15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
         15, 2, 8, 2, 2, 8, 8, 15, 2, 8, 2, 2, 8, 8, 2, 2,

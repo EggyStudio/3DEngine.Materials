@@ -30,6 +30,31 @@ public class Ktx2WriterTests
         Assert.Equal((PictureFormat.Bc7, ColorSpace.Srgb, 5), (read.Format, read.ColorSpace, read.Levels.Count));
     }
 
+    [Fact]
+    public void The_Writer_Writes_The_Scripts_Bytes_For_Blocks_Of_Modes_1_And_7()
+    {
+        // Three opaque colors a block, an opaque gradient and a leaf's cut edge with its vein,
+        // which the script writes in modes 1, 6 and 7.
+        var rgba = File.ReadAllBytes(Path.Combine(Reference, "source", "modes.rgba"));
+        Assert.Equal(File.ReadAllBytes(Path.Combine(Reference, "modes-albedo.ktx2")), Ktx2Writer.Encode(rgba, 16, 16, ColorSpace.Srgb));
+    }
+
+    [NeedsPillowFact]
+    public void The_Scripts_Encoding_Of_A_Raw_Picture_Writes_The_Reference()
+    {
+        var folder = Directory.CreateTempSubdirectory("materials-encode-");
+        try
+        {
+            var written = Path.Combine(folder.FullName, "modes.ktx2");
+            Programs.Script("textures.py", "--encode", Path.Combine(Reference, "source", "modes.rgba"), "16", "16", written);
+            Assert.Equal(File.ReadAllBytes(Path.Combine(Reference, "modes-albedo.ktx2")), File.ReadAllBytes(written));
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
     [NeedsPillowFact]
     public void The_Script_Writes_The_Reference_From_Its_Source()
     {

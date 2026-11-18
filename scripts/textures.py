@@ -8,6 +8,7 @@ folder, names, by the recipe the manifest gives each entry.
     scripts/textures.py MANIFEST --out DIR NAME ... # write under DIR, the collection left alone
     scripts/textures.py --sample DIR                # write an entry of no source, for the tests
     scripts/textures.py --repeat FILE DX DY         # the shift near DX, DY where a scan repeats
+    scripts/textures.py --encode RGBA W H OUT       # a raw picture as BC7 with its levels, as it is
 
 An entry is three KTX2 files with their mipmaps, and a fourth for a bark, each level's blocks kept
 as they are with no supercompression, so a reader on .NET alone and a GPU take them with no step
@@ -154,11 +155,22 @@ def main():
     parser.add_argument("--sources", metavar="DIR", help="read the sources under this folder, the repository's root where none is given")
     parser.add_argument("--sample", metavar="DIR", help="write an entry made from no source into DIR and stop")
     parser.add_argument("--repeat", nargs=3, metavar=("FILE", "DX", "DY"), help="print the shift near DX, DY at which the scan in FILE best matches itself")
+    parser.add_argument("--encode", nargs=4, metavar=("RGBA", "WIDTH", "HEIGHT", "OUT"), help="write a raw picture, four bytes a texel, as a KTX2 file of BC7 with its levels, neither bled nor cut")
+    parser.add_argument("--linear", action="store_true", help="name the --encode file's color space linear rather than sRGB")
     arguments = parser.parse_args()
 
     if arguments.sample:
         write_entry(sample_maps(), os.path.join(arguments.sample, "sample"), "bark")
         list_entry(arguments.sample, "sample", "bark")
+        return 0
+
+    if arguments.encode:
+        source, width, height, out = arguments.encode
+        with open(source, "rb") as file:
+            image = Image.frombytes("RGBA", (int(width), int(height)), file.read())
+        levels = mip_chain(image, bled=False)
+        with open(out, "wb") as file:
+            file.write(ktx2(BC7_UNORM if arguments.linear else BC7_SRGB, levels, [bc7(level) for level in levels]))
         return 0
 
     if arguments.repeat:

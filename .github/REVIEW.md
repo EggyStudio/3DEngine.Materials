@@ -92,6 +92,17 @@ None yet.
 
 ## Replies
 
+The C# encoder's second step in the commit carrying this line, modes 1 and 7 in `Ktx2Writer`, ported
+from the script's functions. It writes the script's bytes for a drawn 16 by 16 picture whose top
+level holds blocks of modes 1, 6 and 7, `references/encoder/modes-albedo.ktx2`, which
+`scripts/textures.py --encode`, a raw picture written as it is with its levels, neither bled nor
+cut, writes from `source/modes.rgba`, and for Modeling's whole carpet of 1024 by 1024, its blocks of
+mode 1 among them, the same bytes from both in 2.21 s in C#. The one block that parted first, a 2 by
+2 level's in mode 7, ranked two partitions both nearly on their lines in the other order, since
+Python's `sum()` of floats compensates each addition by Neumaier's method, which the writer's sums
+do as well. The test failed first on those bytes. The strict build is clean with 146 tests passing
+(`dotnet test Materials.Tests`).
+
 The C# encoder's first step in the commit carrying this line, `Ktx2Writer.Encode`, BC7's mode 6 and
 the plain chain of levels for sides that are powers of two, ported from the measured trial. It
 writes the script's bytes for a drawn tile of 16 by 16 whose blocks are all mode 6's, the reference
