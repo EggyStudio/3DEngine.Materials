@@ -1,5 +1,7 @@
 # Materials
 
+[DEVLOG.md](DEVLOG.md) holds what landed by day, with the pictures taken on the way.
+
 Materials is a library an engine takes as a git submodule, for what a surface is, a material's
 description, the pictures it is drawn with and their encoding, and the response of a lit surface to
 its light, in the terms of glTF 2.0 that any engine reads. 3DEngine and BevyCSharp are two engines
