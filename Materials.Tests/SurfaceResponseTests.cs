@@ -72,6 +72,17 @@ public class SurfaceResponseTests
     }
 
     [Fact]
+    public void The_Integrated_Split_Sum_Gives_The_Share_Worked_By_Hand_At_A_Roughness_Of_One()
+    {
+        // At an alpha of one GGX draws half ways weighted by their cosine, and seen head on the
+        // weight is 2 less one over the half way's cosine squared where the light is above the
+        // surface, so the share of a white metal is 2 (1 - 1/2 - ln sqrt 2), 0.3069, where Karis's
+        // fit gives 0.45.
+        var (scale, bias) = SurfaceResponse.SplitSumIntegrated(1f, 1f);
+        Assert.Equal(0.3069f, scale + bias, 2e-3f);
+    }
+
+    [Fact]
     public void Both_Hit_Forms_Agree_At_The_Default_Reflectance_And_Part_Below_It()
     {
         // A gray of 0.5 that is not metal, fully rough and seen head on, so the share is 0.04 times

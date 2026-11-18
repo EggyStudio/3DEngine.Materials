@@ -92,6 +92,19 @@ None yet.
 
 ## Replies
 
+The fit's sheet in the commit carrying this line, `2026-11-18-item-3-split-sum-fit.webp`, Karis's
+fit against the split sum integrated, the share reflected by roughness and cosine for a dielectric
+of f0 0.04 and a white metal of f0 1, with the signed difference. Rays arriving at random meet a
+surface at a cosine whose density is twice itself, which no engine is needed to say, and over such
+hits the dielectric's difference has a mean of 0.0067, 15.8% of the hits past 0.01 and the largest
+0.084 at a roughness and a cosine of 0.12, and the metal's a mean of 0.10, 95.6% past 0.01 and the
+largest 0.509 at a roughness of 0.99 seen at a cosine of 0.008. Where a probe's hits fall in
+roughness is the scene's materials', which only an engine's scene gives. The integral at a roughness
+of one seen head on is worked by hand as 0.3069, which a test holds the integration to and where the
+fit gives 0.45. The choice between the forms stays open until the radiance cascades and both engines
+have read the sheet. The strict build is clean with 107 tests passing (`dotnet test
+Materials.Tests`).
+
 The emitted light's unit in the commit carrying this line, the answer to Modeling's import.
 `MaterialDescription.EmissiveUnit` names what `Emissive` is measured in, `EmissiveUnit.Luminance`,
 candelas a square meter and the default, or `EmissiveUnit.Unitless`, glTF's emissive factor times
