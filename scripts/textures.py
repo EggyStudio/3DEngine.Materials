@@ -735,7 +735,10 @@ def write_entry(maps, folder, kind, boxes=None):
     cut = kind in ("leaves", "grass")
     for name, image in maps.items():
         cover = maps["albedo"].getchannel("A").resize(image.size, Image.Resampling.BOX) if cut and name in ("albedo", "surface") else None
-        levels = mip_chain(image, boxes if name == "albedo" and cut else None, cover, cut and name == "surface")
+        # A surface's alpha is its translucency, an opacity only where the leaves' cover stands in
+        # for it, so a surface not cut out is not bled, which would give its texels that let
+        # nothing through the occlusion, roughness and metallic of those that do.
+        levels = mip_chain(image, boxes if name == "albedo" and cut else None, cover, cut and name == "surface", name != "surface" or cut)
         format, blocks, error = encode(name, levels)
         data = ktx2(format, levels, blocks)
         path = os.path.join(folder, f"{name}.ktx2")
@@ -746,15 +749,17 @@ def write_entry(maps, folder, kind, boxes=None):
     return report
 
 
-def mip_chain(image, boxes=None, cover=None, whole=False):
+def mip_chain(image, boxes=None, cover=None, whole=False, bled=True):
     """
     The image and each level under it, half the size of the one above, down to a texel, a leaf
     atlas's opacity scaled at each level to keep the share of its leaves' boxes past one half.
     Where cover gives how much of each texel the leaves cover, a leaf atlas's opacity at the image's
     size, the color, or every channel where whole says so, as the surface's, is each level's mean
-    weighted by it (covered()), and the texels it leaves bare are bled from it.
+    weighted by it (covered()), and the texels it leaves bare are bled from it. An image whose alpha
+    is no opacity, as a surface's translucency is where nothing is cut out, is not bled, so bled
+    says so.
     """
-    if image.mode == "RGBA":
+    if image.mode == "RGBA" and bled:
         image = bleed(image, cover, whole)
     levels = [image]
     rects = [placed(box, image.size) for box in boxes] if boxes else None

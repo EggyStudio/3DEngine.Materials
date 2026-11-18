@@ -201,6 +201,38 @@ public class TexturesScriptTests
     }
 
     [NeedsPillowFact]
+    public void A_Surface_Not_Cut_Out_Keeps_Its_Channels_Where_It_Lets_Nothing_Through()
+    {
+        // A tile whose surface has a roughness of 30 over a translucency of none in its top half
+        // and 220 over a translucency of all in its bottom half, so a surface bled by its own
+        // alpha, which is its translucency, would give the top half the bottom's roughness.
+        var folder = Directory.CreateTempSubdirectory("materials-surface-");
+        try
+        {
+            var source = Path.Combine(folder.FullName, "source");
+            Directory.CreateDirectory(source);
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "collection"));
+            File.WriteAllBytes(Path.Combine(source, "albedo.ppm"), [.. System.Text.Encoding.ASCII.GetBytes("P6\n16 16\n255\n"), .. Enumerable.Repeat((byte)128, 16 * 16 * 3)]);
+            byte[] Halves(byte top, byte bottom) =>
+                [.. System.Text.Encoding.ASCII.GetBytes("P5\n8 8\n255\n"), .. Enumerable.Range(0, 64).Select(at => at < 32 ? top : bottom)];
+            File.WriteAllBytes(Path.Combine(source, "roughness.pgm"), Halves(30, 220));
+            File.WriteAllBytes(Path.Combine(source, "translucency.pgm"), Halves(0, 255));
+            var manifest = Path.Combine(folder.FullName, "collection", "textures.json");
+            File.WriteAllText(manifest, "{\"entries\": [{\"name\": \"tile\", \"source\": \"source\", \"size\": [16, 16], \"albedo\": {\"file\": \"albedo.ppm\"}, "
+                + "\"roughness\": {\"file\": \"roughness.pgm\"}, \"translucency\": {\"file\": \"translucency.pgm\"}}]}");
+            Programs.Script("textures.py", manifest, "--sources", folder.FullName);
+
+            var surface = Ktx2.Read(File.ReadAllBytes(Path.Combine(folder.FullName, "collection", "tile", "surface.ktx2"))).Decode();
+            for (int at = 0; at < 64; at++)
+                Assert.InRange(surface[at * 4 + 1], at < 32 ? 22 : 212, at < 32 ? 38 : 228);
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
+    [NeedsPillowFact]
     public void The_Script_Writes_The_Sample_The_Repository_Holds()
     {
         var folder = Directory.CreateTempSubdirectory("materials-sample-");

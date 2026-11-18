@@ -92,6 +92,16 @@ None yet.
 
 ## Replies
 
+The first of the next three in the commit carrying this line, the known limit closed. A surface
+whose kind is not cut out was bled by its own alpha, its translucency, so its texels that let
+nothing through took the occlusion, roughness and metallic of those that do. The mip chain bleeds a
+surface only where the leaves' cover stands in for its alpha, as a leaf atlas's and a grass card's
+does, and the albedo as it did. The test of a tile whose top half's roughness of 30 lies over a
+translucency of none and its bottom half's 220 over all of it failed first, the top half coming out
+at 220, and holds 30. No set of either collection has such a surface, so their bytes stand, the
+sample's held by its test, and the README's Known limits section, whose one line this was, is gone.
+The strict build is clean with 133 tests passing (`dotnet test Materials.Tests`).
+
 The third of the three in the commit carrying this line, `MaterialImport.FromGltf`, a glTF's
 materials read into descriptions, from its JSON or from a root already parsed with a material's
 index, taking over the material work of Modeling's reader. It reads what that reader reads, glTF's

@@ -183,13 +183,6 @@ writes the entries elsewhere with the collection and its manifest left as they a
 writes an entry made from no source, the one the tests read, and `--repeat` prints the shift near a
 guess at which a scan matches itself.
 
-## Known limits
-
-- `scripts/textures.py` bleeds a surface by its own alpha, which holds the translucency, where the
-  entry's kind is not cut out, so a tile or a bark whose translucency is nothing in places takes
-  its neighbors' occlusion, roughness and metallic there. No set of the two collections has such a
-  surface.
-
 ## Building and testing
 
 The tests take the checks every module keeps from the Tools module, a git submodule under
