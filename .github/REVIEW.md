@@ -92,6 +92,20 @@ None yet.
 
 ## Replies
 
+The second of the next three in the commit carrying this line, `TextureCollection.Read`, a
+collection's `textures.json` read in C# to its entries, each a `TextureEntry` of its `TextureKind`,
+its albedo, normal and surface as pictures in a folder of its name beside the manifest or in its
+`waiting` folder, a bark's depth beside them, its size, its mean color decoded to linear light, its
+mean surface, its leaf boxes and a tile's repeat in meters, and `TextureEntry.Description()`, the
+material it stands for with factors of one and a cut-out kind masked. Vegetation's `TreeTextures`
+then drops its `Listed`, the parser of the manifest's entries, and its `TreeTextureSet` is
+`TextureEntry` or a record over it, its `MeanColor` the entry's in linear light where it decoded it
+through `TreeSpecies.Srgb` and its `LeafBoxes`, `MeanSurface`, `Size` and `Depth` the entry's. It
+keeps what reads files, the assembly's embedded sets by `Open`, a folder added at run time by `Add`
+with its check that the three files are there, and `Find` by name, since the module gives paths and
+opens nothing. The tests failed first at the build, the types being absent. The strict build is
+clean with 140 tests passing (`dotnet test Materials.Tests`).
+
 The first of the next three in the commit carrying this line, the known limit closed. A surface
 whose kind is not cut out was bled by its own alpha, its translucency, so its texels that let
 nothing through took the occlusion, roughness and metallic of those that do. The mip chain bleeds a

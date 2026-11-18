@@ -92,6 +92,31 @@ class MaterialImport                                     // The materials of a g
 IReadOnlyList<MaterialDescription> FromGltf(string json, string path);  // Every material of a glTF file, in the order of its materials
 MaterialDescription FromGltf(JsonElement root, int index, string path);  // A material of a glTF file already parsed, by its index
 
+class TextureCollection                                  // A texture collection's manifest read, the textures.json scripts/textures.py builds a collection by and writes back into, or the listing it writes beside an entry built elsewhere
+IReadOnlyList<TextureEntry> Read(string json, string path);  // The entries of a manifest, in its order
+
+record TextureEntry                                      // An entry of a texture collection, its pictures and what the build wrote of it into the manifest
+TextureEntry(string Name, TextureKind Kind, MaterialPicture Albedo, MaterialPicture Normal, MaterialPicture Surface);
+string Name { get; init; }                               // The entry's name, which its folder is named by
+TextureKind Kind { get; init; }                          // The recipe it was built by
+MaterialPicture Albedo { get; init; }                    // The color and opacity, BC7 in sRGB
+MaterialPicture Normal { get; init; }                    // The tangent-space normal's X and Y, BC5
+MaterialPicture Surface { get; init; }                   // The occlusion, roughness, metallic and translucency, BC7
+MaterialPicture? Depth { get; init; }                    // A bark's depth for parallax occlusion, BC4, or nothing for another kind
+(int Width, int Height)? Size { get; init; }             // The albedo's width and height in texels, or nothing where the manifest does not say
+Vector3? MeanColor { get; init; }                        // The mean color of the albedo's opaque texels in linear numbers, or nothing where the manifest does not say
+Vector4? MeanSurface { get; init; }                      // The mean occlusion, roughness, metallic and translucency over the albedo's opaque texels, or nothing where the manifest does not say
+IReadOnlyList<(float U, float V, float Width, float Height)> LeafBoxes { get; init; }  // Where each leaf of a leaf atlas is, the share of the atlas's width and height from its left and top and the share it spans, or none where the manifest gives none
+(float Across, float Down)? Meters { get; init; }        // A tile's repeat in meters across and down, or nothing where the manifest does not say
+bool Waiting { get; init; }                              // Whether the manifest marks the entry waiting, its files in the collection's waiting folder
+MaterialDescription Description();                       // The material the entry stands for, its factors one so its pictures carry the values, masked where its kind is cut out
+
+enum TextureKind                                         // What an entry of a texture collection is drawn as, the recipe it was built by
+Tile = 0,                                                // A tile that repeats, an entry the manifest gives no kind
+Bark = 1,                                                // A bark that tiles round a stem and along it, with a depth for parallax occlusion
+Leaves = 2,                                              // An atlas of leaves cut out over nothing
+Grass = 3,                                               // A card of grass blades cut out over nothing, their roots along its bottom edge
+
 record struct MaterialMeans                              // A material's means over its surface, which a far card, a picture of many surfaces at once, or a field of the scene's light is painted with where the pictures themselves are too fine to read
 int LongestSide = 64;                                    // The longest side of the level the means are read from, the first level of each picture that fits it, so a picture's cost is a few thousand texels whatever its size
 MaterialMeans(Vector3 Color, float Opacity, float Occlusion, float Roughness, float Metallic, float DiffuseTransmission);

@@ -17,6 +17,7 @@ binds it by reading the values it gives into its own textures and materials.
 | `Reflectance` | A dielectric's reflectance at normal incidence, 0.04 by default, with glTF's index of refraction and the perceptual reflectance whose square times 0.16 it is as functions of it |
 | `MaterialFile` | A material as a JSON file of its own beside its pictures, read with its pictures' paths joined to its folder and written with them relative to it, every broken field refused with its reason |
 | `MaterialImport` | The materials of a glTF 2.0 file read into descriptions, its factors at glTF's defaults, its alpha mode, its textures by their roles with the images an ORM texture packs held as one picture, and `KHR_materials_emissive_strength`, `KHR_materials_ior` and `KHR_materials_diffuse_transmission` |
+| `TextureCollection`, `TextureEntry` and `TextureKind` | A texture collection's manifest as `scripts/textures.py` writes it, each entry's albedo, normal, surface and a bark's depth as pictures beside the manifest, its size, means, leaf boxes and repeat in meters, and the material it stands for |
 | `MaterialMeans` | A material's mean color in linear light and its mean surface over what its opacity covers, read through `IMaterialFiles` from a level of 64 texels a side at most |
 | `IMaterialFiles` | The one thing the module asks of an engine, a file's bytes by its path |
 | `SurfaceResponse` | How a lit surface sends its light back, GGX's distribution, Smith's height-correlated visibility, Schlick's Fresnel, Lambert's and Burley's diffuse, the reflectance at normal incidence by the metallic, Karis's fit of the split sum and the split sum integrated, and the two forms a probe's ray takes a surface in, `SurfaceResponse.HitForm` |
@@ -181,7 +182,8 @@ python3 -I scripts/textures.py --repeat FILE DX DY
 A source is a folder under `--sources`, the repository's root where none is given, and `--out`
 writes the entries elsewhere with the collection and its manifest left as they are. `--sample`
 writes an entry made from no source, the one the tests read, and `--repeat` prints the shift near a
-guess at which a scan matches itself.
+guess at which a scan matches itself. `TextureCollection.Read` reads the manifest back in C#, so an
+engine draws a collection's entries as materials without reading the files' JSON itself.
 
 ## Building and testing
 
