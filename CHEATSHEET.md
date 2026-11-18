@@ -1,4 +1,4 @@
-# Materials cheat sheet
+# Materials cheatsheet
 
 Every public type of `3DEngine.Materials` with its members, a line each of its declaration and the
 first sentence of its summary. A material is a `MaterialDescription` of glTF's factors and its

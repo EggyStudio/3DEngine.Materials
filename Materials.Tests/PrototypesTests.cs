@@ -16,6 +16,16 @@ public class PrototypesTests
     }
 
     [Fact]
+    public void Floor_Wall_And_Ceiling_Are_One_Color_And_One_Picture()
+    {
+        foreach (var name in new[] { "wall", "ceiling" })
+        {
+            Assert.Equal(Prototypes.SrgbColor("floor"), Prototypes.SrgbColor(name));
+            Assert.Equal(Prototypes.Picture("floor", 64), Prototypes.Picture(name, 64));
+        }
+    }
+
+    [Fact]
     public void A_Tint_Is_Its_Color_In_Linear_Numbers()
     {
         // sRGB 0.9 is a linear 0.7874, 0.22 a linear 0.0397.
@@ -62,7 +72,7 @@ public class PrototypesTests
         {
             ["floor"] = "2fc825d0ac583b9a478b743ab51c1e6d31960f43cdec66b2619874e327166542",
             ["wall"] = "2fc825d0ac583b9a478b743ab51c1e6d31960f43cdec66b2619874e327166542",
-            ["ceiling"] = "32f37abc775fd2032d2f582ffd078f20206bc57ada66add7691333a44ef965fa",
+            ["ceiling"] = "2fc825d0ac583b9a478b743ab51c1e6d31960f43cdec66b2619874e327166542",
             ["stairs"] = "610f3f1fe0f995681236e161b5321bdf5ddd7ae86d909dc95d41aed69dacd4f8",
             ["door"] = "c022bfdd61ae4a0a9481765bced1467333f40591cb149dc74380775667abb4ac",
             ["window"] = "b99bde3a4eefad8413eedcf5b6c1b5c3144b5bf750b6d8379b741efd2f49d1df",

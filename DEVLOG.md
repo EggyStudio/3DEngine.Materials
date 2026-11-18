@@ -17,5 +17,5 @@ picture, and as it writes it started from the column of the channel that varies 
 
 ![](.github/assets/readings/2026-11-18-item-3-prototype-tables.webp)
 The seven prototypes of the module's one table, a meter's cell of the grid at 256 pixels tinted in
-linear light, floor and wall at sRGB 0.90, ceiling at 0.95, stairs orange, door green, window blue
-and hazard red, over a grid whose face is 0.99, its lines 0.6 and its quarters' lines 0.82.
+linear light, floor, wall and ceiling one near white at sRGB 0.90, stairs orange, door green, window
+blue and hazard red, over a grid whose face is 0.99, its lines 0.6 and its quarters' lines 0.82.

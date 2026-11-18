@@ -9,11 +9,11 @@ namespace Materials;
 /// </summary>
 /// <remarks>
 /// <para>
-/// A floor and a wall nearly white, a ceiling whiter still, stairs, ramps and the moving parts
-/// orange, a door green, a window blue and a hazard red, as sRGB numbers a color picker shows, and
-/// any other name white, which shows the grid's own tones. The floors and walls are near white
-/// rather than gray, which reads as dull under the sky, and a wall parts from the floor it stands
-/// on by the light on each. Every prototype is rough at 0.85 and not metal, so the light shows the
+/// A floor, a wall and a ceiling one near white, stairs, ramps and the moving parts orange, a door
+/// green, a window blue and a hazard red, as sRGB numbers a color picker shows, and any other name
+/// white, which shows the grid's own tones. The floor, the wall and the ceiling are near white
+/// rather than gray, which reads as dull under the sky, and part from one another by the light on
+/// each. Every prototype is rough at 0.85 and not metal, so the light shows the
 /// shape and a highlight never hides the lines.
 /// </para>
 /// <para>
@@ -35,7 +35,7 @@ public static class Prototypes
     {
         ["floor"] = new(0.90f, 0.90f, 0.89f),
         ["wall"] = new(0.90f, 0.90f, 0.89f),
-        ["ceiling"] = new(0.95f, 0.95f, 0.96f),
+        ["ceiling"] = new(0.90f, 0.90f, 0.89f),
         ["stairs"] = new(0.96f, 0.46f, 0.13f),
         ["door"] = new(0.38f, 0.72f, 0.38f),
         ["window"] = new(0.36f, 0.62f, 0.92f),

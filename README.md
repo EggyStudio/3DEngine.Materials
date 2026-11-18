@@ -1,4 +1,4 @@
-[Devlog](https://github.com/EggyStudio/Materials/blob/main/DEVLOG.md) [Cheat sheet](https://github.com/EggyStudio/Materials/blob/main/CHEATSHEET.md)
+[Devlog](https://github.com/EggyStudio/Materials/blob/main/DEVLOG.md) [Cheatsheet](https://github.com/EggyStudio/Materials/blob/main/CHEATSHEET.md)
 
 # Materials
 

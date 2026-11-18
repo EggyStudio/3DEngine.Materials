@@ -92,6 +92,15 @@ None yet.
 
 ## Replies
 
+The one tone in the commit carrying this line. The floor, the wall and the ceiling are one color,
+sRGB 0.90, 0.90 and 0.89, the tone two of them held, the five other colors and the grid as they
+were, the test that the three give one color and one picture failing first on the ceiling's 0.95.
+The ceiling's stored hash is the floor's, the reading `2026-11-18-item-3-prototype-tables.webp` is
+made again, and the cheatsheet and the devlog are written again. Tools is pinned at `75d77f2` with
+its seven facts in their form, `No_Tracked_Text_Names_An_Engine` and
+`The_Readme_Opens_With_Its_Link_Row` passing on their first run, and the cheatsheet is one word
+throughout. The strict build is clean with 105 tests passing (`dotnet test Materials.Tests`).
+
 The sweep in the commit carrying this line, the module naming no engine and describing no engine's
 form or table, the package and assembly name apart. The reviewer's `git grep` found 9 lines before
 and finds none after, the README's opening and binding section, AGENTS.md's opening, the prototype
