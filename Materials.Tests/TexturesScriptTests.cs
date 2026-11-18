@@ -151,6 +151,56 @@ public class TexturesScriptTests
     }
 
     [NeedsPillowFact]
+    public void A_Leaf_Atlases_Cut_Edges_Keep_Their_Color()
+    {
+        // Leaves drawn as ellipses on a grid of 32, a vein down each and a gradient across, cut out
+        // over nothing, whose blocks at a cut edge hold colors off one line, which one line between
+        // two endpoints gives at 32.5 dB over the visible texels.
+        const int n = 128;
+        var color = new byte[n * n * 3];
+        var opacity = new byte[n * n];
+        for (int y = 0; y < n; y++)
+        for (int x = 0; x < n; x++)
+        {
+            int cx = x / 32 * 32 + 16, cy = y / 32 * 32 + 16;
+            double u = (x - cx) / 10.0, v = (y - cy) / 14.0;
+            if (u * u + v * v > 1) continue;
+            byte[] texel = Math.Abs(x - cx) < 1.5 ? [60, 90, 40] : [(byte)(70 + 40 * (y - cy + 14) / 28), (byte)(140 + 60 * (x - cx + 10) / 20), 50];
+            texel.CopyTo(color, (y * n + x) * 3);
+            opacity[y * n + x] = 255;
+        }
+
+        var folder = Directory.CreateTempSubdirectory("materials-leaves-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "source"));
+            Directory.CreateDirectory(Path.Combine(folder.FullName, "collection"));
+            File.WriteAllBytes(Path.Combine(folder.FullName, "source", "leaves.ppm"), [.. System.Text.Encoding.ASCII.GetBytes($"P6\n{n} {n}\n255\n"), .. color]);
+            File.WriteAllBytes(Path.Combine(folder.FullName, "source", "opacity.pgm"), [.. System.Text.Encoding.ASCII.GetBytes($"P5\n{n} {n}\n255\n"), .. opacity]);
+            var manifest = Path.Combine(folder.FullName, "collection", "textures.json");
+            File.WriteAllText(manifest, "{\"entries\": [{\"name\": \"leaves\", \"kind\": \"leaves\", \"source\": \"source\", \"size\": [128, 128], "
+                + "\"parts\": [{\"albedo\": {\"file\": \"leaves.ppm\"}, \"opacity\": {\"file\": \"opacity.pgm\"}}]}]}");
+            Programs.Script("textures.py", manifest, "--sources", folder.FullName);
+
+            var decoded = Ktx2.Read(File.ReadAllBytes(Path.Combine(folder.FullName, "collection", "leaves", "albedo.ktx2"))).Decode();
+            double squares = 0;
+            int count = 0;
+            for (int at = 0; at < n * n; at++)
+            {
+                if (opacity[at] < 128) continue;
+                for (int c = 0; c < 3; c++) squares += Math.Pow(decoded[at * 4 + c] - color[at * 3 + c], 2);
+                count += 3;
+            }
+
+            Assert.InRange(10 * Math.Log10(255.0 * 255.0 * count / squares), 40, 200);
+        }
+        finally
+        {
+            folder.Delete(recursive: true);
+        }
+    }
+
+    [NeedsPillowFact]
     public void The_Script_Writes_The_Sample_The_Repository_Holds()
     {
         var folder = Directory.CreateTempSubdirectory("materials-sample-");

@@ -42,6 +42,8 @@ taking 0.93 ms a block for 46.40 dB where it took 0.12 for 45.27.
 
 Commits that day
 
+- `fd8d83b` The tests take the Tools module at its head through its pin script, which finds no check
+  new or changed, and the devlog lists each day's commits.
 - `8c72f22` The encoder sums each color's moments once a block for mode 1's partition search, so a
   build of Modeling's collection takes 44 s where it took 94 and writes the same bytes, and the
   tests take the Tools module at its latest pin.
@@ -67,9 +69,6 @@ Commits that day
 - `1257393` The module names no engine and describes no engine's form, its floors of roughness are
   named by the precision they keep, the prototype reading shows the one table, and the texture
   script writes a mean color averaged in linear light.
-- `635dcf3` The module keeps a cheat sheet of every public type and member, written from the built
-  library by the Tools module's writer and held to it by a fifth check, linked from the README's top
-  beside the devlog.
 - `1522dc7` The module writes down how a lit surface sends its light back, the microfacet terms, the
   reflectance by the metallic and the split sum fitted and integrated, with both forms a probe's ray
   takes a surface in, and the README names the prototype table as the one both engines draw.

@@ -165,10 +165,11 @@ bark's depth in BC4, each with its levels down to a texel and none supercompress
 its size, a scan made into one from its repeat, and a bark, a leaf atlas and a grass card are parts
 placed on the picture, a cut-out's levels keeping its leaves in the distance. A BC7 block is written
 in mode 6, one line between two colors, or in mode 1's two subsets where it is opaque and its colors
-leave one line, as three colors or two gradients in a block do, which
-`2026-11-18-item-3-bc7-modes.webp` under `.github/assets/readings` shows by content. Each build
-writes the files' sizes, the encoders' error and the opaque texels' mean color and surface back into
-the manifest. It needs Python 3 and Pillow, and its docstring gives the recipe.
+leave one line, as three colors or two gradients in a block do, or in mode 7's two subsets with
+alpha where it is not opaque, as a leaf's cut edge is, which `2026-11-18-item-3-bc7-modes.webp`
+under `.github/assets/readings` shows by content. Each build writes the files' sizes, the encoders'
+error and the opaque texels' mean color and surface back into the manifest. It needs Python 3 and
+Pillow, and its docstring gives the recipe.
 
 ```bash
 python3 -I scripts/textures.py <collection>/textures.json [names] [--sources DIR] [--out DIR]

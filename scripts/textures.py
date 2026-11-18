@@ -57,10 +57,11 @@ rather than leaves apart.
 
 The encoders are written here, BC7's mode 6 with each block's endpoints along its principal axis and
 fitted again by least squares, a block opaque throughout keeping its shared bits set so its alpha
-decodes to 255, and mode 1 for an opaque block mode 6 holds worse than MODE1_ABOVE, its two subsets
-of the partition whose colors lie nearest the lines through them, which a block of three colors or
-two gradients needs, and BC4 twice for BC5, so the build needs Python 3 and Pillow and nothing else.
-The encoding is the one function encode() below, so another format is a second branch of it.
+decodes to 255, mode 1 for an opaque block mode 6 holds worse than MODE1_ABOVE and mode 7 for a
+block with alpha mode 6 holds worse than MODE7_ABOVE, each of two subsets of the partition whose
+colors lie nearest the lines through them, which a block of three colors, two gradients or a leaf's
+cut edge needs, and BC4 twice for BC5, so the build needs Python 3 and Pillow and nothing else. The
+encoding is the one function encode() below, so another format is a second branch of it.
 
 A source is a folder under the folder --sources names, the repository's root that holds the
 manifest where none is given, as the entry's source names it. An entry is written into its folder
@@ -135,6 +136,14 @@ NEAREST3 = [min(range(8), key=lambda i: abs(WEIGHTS3[i] - t)) for t in range(65)
 # tried in mode 1's two subsets as well, a mean of 4 a channel, 42 dB, so a block mode 6 holds well
 # costs nothing more.
 MODE1_ABOVE = 16 * 3 * 4
+
+# Mode 7's interpolation weights for two-bit indices, and the nearest index for each sixty-fourth.
+WEIGHTS2 = (0, 21, 43, 64)
+NEAREST2 = [min(range(4), key=lambda i: abs(WEIGHTS2[i] - t)) for t in range(65)]
+
+# The squared error over a block's sixteen texels and four channels past which a block that is not
+# opaque throughout is tried in mode 7's two subsets with alpha as well, a mean of 4 a channel.
+MODE7_ABOVE = 16 * 4 * 4
 
 
 def main():
@@ -895,11 +904,18 @@ def bc7(image):
 def bc7_block(texels):
     """
     A block in BC7, in mode 6, or in mode 1's two subsets where the block is opaque, mode 6's error
-    passes MODE1_ABOVE and mode 1 holds it closer, as a block whose colors leave one line does.
+    passes MODE1_ABOVE and mode 1 holds it closer, as a block whose colors leave one line does, or in
+    mode 7's two subsets with alpha where it is not opaque, as a leaf's cut edge is, and mode 6's
+    error passes MODE7_ABOVE.
     """
     block, error = mode6_block(texels)
-    if error > MODE1_ABOVE and all(texel[3] == 255 for texel in texels):
+    opaque = all(texel[3] == 255 for texel in texels)
+    if opaque and error > MODE1_ABOVE:
         found = mode1_block(texels)
+        if found is not None and found[1] < error:
+            return found[0]
+    if not opaque and error > MODE7_ABOVE:
+        found = mode7_block(texels)
         if found is not None and found[1] < error:
             return found[0]
     return block
@@ -1097,15 +1113,16 @@ def mode1_subset(colors):
 
 
 def principal_ends(colors):
-    """The ends of a set of colors along their principal axis, by the power method started from
-    the covariance's column of the channel that varies most."""
+    """The ends of a set of colors of any number of channels along their principal axis, by the power
+    method started from the covariance's column of the channel that varies most."""
     count = float(len(colors))
-    mean = [sum(color[c] for color in colors) / count for c in range(3)]
-    covariance = [[sum((color[i] - mean[i]) * (color[j] - mean[j]) for color in colors) for j in range(3)] for i in range(3)]
-    widest = max(range(3), key=lambda c: covariance[c][c])
+    n = len(colors[0])
+    mean = [sum(color[c] for color in colors) / count for c in range(n)]
+    covariance = [[sum((color[i] - mean[i]) * (color[j] - mean[j]) for color in colors) for j in range(n)] for i in range(n)]
+    widest = max(range(n), key=lambda c: covariance[c][c])
     axis = list(covariance[widest])
     for _ in range(6):
-        axis = [sum(covariance[i][j] * axis[j] for j in range(3)) for i in range(3)]
+        axis = [sum(covariance[i][j] * axis[j] for j in range(n)) for i in range(n)]
         largest = max(abs(value) for value in axis)
         if largest == 0.0:
             break
@@ -1113,8 +1130,8 @@ def principal_ends(colors):
     length = sum(value * value for value in axis)
     if length == 0.0:
         return mean, mean
-    places = [sum((color[c] - mean[c]) * axis[c] for c in range(3)) / length for color in colors]
-    return [mean[c] + axis[c] * min(places) for c in range(3)], [mean[c] + axis[c] * max(places) for c in range(3)]
+    places = [sum((color[c] - mean[c]) * axis[c] for c in range(n)) / length for color in colors]
+    return [mean[c] + axis[c] * min(places) for c in range(n)], [mean[c] + axis[c] * max(places) for c in range(n)]
 
 
 def mode1_quantize(endpoint, bit):
@@ -1174,6 +1191,145 @@ def least_squares_weighted(colors, indices, weights):
         return None
     return ([(a11 * b0[c] - a01 * b1[c]) / determinant for c in range(channels)],
             [(a00 * b1[c] - a01 * b0[c]) / determinant for c in range(channels)])
+
+
+def mode7_block(texels):
+    """
+    A block in BC7's mode 7, two subsets of a partition each with its RGBA endpoints of five bits a
+    channel and a bit of their own, two-bit indices, and its squared error over the four channels,
+    or nothing where its texels are one. Each of the 64 partitions is judged by how far its subsets'
+    texels lie off the lines through them, and the two nearest are encoded in full.
+    """
+    if all(texel == texels[0] for texel in texels):
+        return None
+    best = None
+    for partition in sorted(range(64), key=lambda p: off_lines4(texels, PARTITION_MASKS[p]))[:2]:
+        encoded = mode7_partition(texels, partition)
+        if best is None or encoded[1] < best[1]:
+            best = encoded
+    return best
+
+
+def off_lines4(texels, mask):
+    """How far a partition's two subsets' texels lie off the lines through them in RGBA, the spread
+    of each less the spread along its principal axis."""
+    total = 0.0
+    for subset in (0, 1):
+        members = [texels[i] for i in range(16) if (mask >> i & 1) == subset]
+        if len(members) < 2:
+            continue
+        count = float(len(members))
+        mean = [sum(m[c] for m in members) / count for c in range(4)]
+        covariance = [[sum((m[i] - mean[i]) * (m[j] - mean[j]) for m in members) for j in range(4)] for i in range(4)]
+        trace = sum(covariance[c][c] for c in range(4))
+        widest = max(range(4), key=lambda c: covariance[c][c])
+        axis = list(covariance[widest])
+        for _ in range(4):
+            axis = [sum(covariance[i][j] * axis[j] for j in range(4)) for i in range(4)]
+            largest = max(abs(value) for value in axis)
+            if largest == 0.0:
+                break
+            axis = [value / largest for value in axis]
+        length = sum(value * value for value in axis)
+        along = 0.0 if length == 0.0 else sum(axis[i] * sum(covariance[i][j] * axis[j] for j in range(4)) for i in range(4)) / length
+        total += trace - along
+    return total
+
+
+def mode7_partition(texels, partition):
+    """The block in mode 7 at a partition, and its squared error over the four channels."""
+    subsets = [[i for i in range(16) if PARTITIONS[partition][i] == str(s)] for s in (0, 1)]
+    anchors = (0, SECOND_ANCHORS[partition])
+    endpoints, indices, error = [None, None], [0] * 16, 0
+    for s in (0, 1):
+        members = [texels[i] for i in subsets[s]]
+        ends, chosen, subset_error = mode7_subset(members)
+        # The anchor's index keeps its top bit clear, so the subset's ends are turned over where it
+        # is set.
+        if chosen[subsets[s].index(anchors[s])] >= 2:
+            ends = (ends[1], ends[0])
+            chosen = [3 - index for index in chosen]
+        endpoints[s] = ends
+        for i, index in zip(subsets[s], chosen):
+            indices[i] = index
+        error += subset_error
+
+    bits = 1 << 7
+    shift = 8
+    bits |= partition << shift
+    shift += 6
+    for c in range(4):
+        for s in (0, 1):
+            for e in (0, 1):
+                bits |= endpoints[s][e][0][c] << shift
+                shift += 5
+    for s in (0, 1):
+        for e in (0, 1):
+            bits |= endpoints[s][e][1] << shift
+            shift += 1
+    for i in range(16):
+        width = 1 if i in anchors else 2
+        bits |= indices[i] << shift
+        shift += width
+    return bits.to_bytes(16, "little"), error
+
+
+def mode7_subset(texels):
+    """A subset's ends, each five bits a channel with a bit of its own, its two-bit indices and its
+    squared error, along its texels' principal axis and fitted again by least squares."""
+    low, high = principal_ends(texels)
+    ends = (mode7_quantize(low), mode7_quantize(high))
+    chosen = mode7_indices(texels, ends)
+    best = (ends, chosen, mode7_error(texels, ends, chosen))
+    refit = least_squares_weighted(texels, chosen, WEIGHTS2)
+    if refit is not None:
+        others = (mode7_quantize(refit[0]), mode7_quantize(refit[1]))
+        chosen = mode7_indices(texels, others)
+        error = mode7_error(texels, others, chosen)
+        if error < best[2]:
+            best = (others, chosen, error)
+    return best
+
+
+def mode7_quantize(endpoint):
+    """An end's five bits a channel and its own bit, the pair nearest it."""
+    best = None
+    for bit in (0, 1):
+        values = []
+        for c in endpoint:
+            c = max(0.0, min(255.0, c))
+            values.append(min(range(max(0, int(c / 8) - 1), min(31, int(c / 8) + 1) + 1), key=lambda v: abs(mode7_expand(v, bit) - c)))
+        error = sum((mode7_expand(v, bit) - max(0.0, min(255.0, c))) ** 2 for v, c in zip(values, endpoint))
+        if best is None or error < best[0]:
+            best = (error, values, bit)
+    return best[1], best[2]
+
+
+def mode7_expand(value, bit):
+    """Five bits and the end's own bit widened to eight, the top bits repeated below them."""
+    six = value << 1 | bit
+    return six << 2 | six >> 4
+
+
+def mode7_indices(texels, ends):
+    c0 = [mode7_expand(v, ends[0][1]) for v in ends[0][0]]
+    c1 = [mode7_expand(v, ends[1][1]) for v in ends[1][0]]
+    d = [b - a for a, b in zip(c0, c1)]
+    dd = sum(value * value for value in d)
+    if dd == 0:
+        return [0] * len(texels)
+    return [NEAREST2[max(0, min(64, int(sum((texel[c] - c0[c]) * d[c] for c in range(4)) * 64 / dd + 0.5)))] for texel in texels]
+
+
+def mode7_error(texels, ends, indices):
+    c0 = [mode7_expand(v, ends[0][1]) for v in ends[0][0]]
+    c1 = [mode7_expand(v, ends[1][1]) for v in ends[1][0]]
+    error = 0
+    for texel, index in zip(texels, indices):
+        w = WEIGHTS2[index]
+        for c in range(4):
+            error += (((64 - w) * c0[c] + w * c1[c] + 32 >> 6) - texel[c]) ** 2
+    return error
 
 
 def quantize(endpoint, bits=(0, 1)):
@@ -1297,8 +1453,35 @@ def psnr_bc7(image, blocks):
 
 
 def bc7_decoded(block):
-    """A block's sixteen texels as RGBA, decoded in mode 6 or mode 1, the two the encoder writes."""
+    """A block's sixteen texels as RGBA, decoded in mode 6, mode 1 or mode 7, those the encoder
+    writes."""
     bits = int.from_bytes(block, "little")
+    if bits & 1 << 7 and not bits & 127:
+        partition = bits >> 8 & 63
+        shift = 14
+        raw = [[[0] * 4, [0] * 4], [[0] * 4, [0] * 4]]
+        for c in range(4):
+            for s in (0, 1):
+                for e in (0, 1):
+                    raw[s][e][c] = bits >> shift & 31
+                    shift += 5
+        own = [[0, 0], [0, 0]]
+        for s in (0, 1):
+            for e in (0, 1):
+                own[s][e] = bits >> shift & 1
+                shift += 1
+        anchors = (0, SECOND_ANCHORS[partition])
+        texels = []
+        for i in range(16):
+            width = 1 if i in anchors else 2
+            index = bits >> shift & (1 << width) - 1
+            shift += width
+            s = int(PARTITIONS[partition][i])
+            c0 = [mode7_expand(v, own[s][0]) for v in raw[s][0]]
+            c1 = [mode7_expand(v, own[s][1]) for v in raw[s][1]]
+            w = WEIGHTS2[index]
+            texels.append(tuple((64 - w) * a + w * b + 32 >> 6 for a, b in zip(c0, c1)))
+        return texels
     if bits & 1 << 6 and not bits & 63:
         shift = 7
         c0, c1 = [], []

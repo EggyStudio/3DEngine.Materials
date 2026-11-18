@@ -92,6 +92,27 @@ None yet.
 
 ## Replies
 
+The second of the three in the commit carrying this line, BC7's mode 7 for a block with alpha.
+Measured first, Vegetation's leaf sets decoded and encoded again come back at 63 to 68 dB, which
+measures nothing, their blocks being mode 6's lines already, and its manifest records their first
+encoding from the sources at 29.6 to 35.7 dB, the silver birch at 46.1. A drawn atlas of leaves with
+veins and a gradient, cut out and bled as the build bleeds them, gave 32.46 dB over its visible
+texels' color with mode 6 alone, its alpha at 56.43. A block that is not opaque throughout whose
+mode 6 error passes a mean of 4 a channel is tried in mode 7's two subsets with alpha, each end five
+bits a channel and a bit of its own, of the two partitions whose texels lie nearest the lines
+through them in RGBA, and kept where mode 7 holds it closer. The atlas's visible color goes to 44.20
+dB and its RGBA from 28.35 to 34.26, its alpha to 47.67, far inside what a cutoff of one half reads,
+and lettering over a see-through ground goes from 27.22 to 35.93 dB over RGBA, its alpha from 23.49
+to 34.99, before mode 5 is tried. A block tried in mode 7 costs about 13 times what mode 6 alone
+does, measured under a load of 28 that slowed every timing alike. As an estimate and no measurement,
+Vegetation's leaves rebuilt from their sources should rise by about the drawn atlas's 6 dB over
+RGBA, to about 35 to 42 dB. The test of the drawn atlas at 40 dB or more over visible color through
+a leaves manifest failed first at 32.46, Pillow decodes mode 7's blocks as the encoder means them,
+and Modeling's six files keep their bytes, opaque throughout. The sample's albedo changes at its
+hole's edge and is written again. Tools is pinned at `1e1ec63` by its pin script, no check new or
+changed, and the devlog leaves out the old sentence of two words. The strict build is clean with 124
+tests passing (`dotnet test Materials.Tests`).
+
 The first of the next three in the commit carrying this line, the build's time read before anything
 is ported. Under the profiler Modeling's build spent 65% in mode 1's partition search, which for
 each of 64 partitions summed each subset's covariance from its colors, 19% in mode 6 and 10% in mode
