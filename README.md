@@ -94,6 +94,28 @@ finds a role's channel in another layout by `PictureLayout.ChannelOf`. 3DEngine 
 two such bindings, the first choosing a texture's view by the slot it is bound to and the second
 taking the color space from the caller.
 
+## A texture collection
+
+`scripts/textures.py` builds a collection of KTX2 pictures from the sources its manifest names, a
+`textures.json` in the collection's folder, by the recipe it gives each entry. An entry is an albedo
+in BC7 and sRGB, a normal in BC5 and a surface in BC7 laid out as `PictureLayout.Surface`, with a
+bark's depth in BC4, each with its levels down to a texel and none supercompressed. A tile tiles at
+its size, a scan made into one from its repeat, and a bark, a leaf atlas and a grass card are parts
+placed on the picture, a cut-out's levels keeping its leaves in the distance. Each build writes the
+files' sizes, the encoders' error and the opaque texels' mean color and surface back into the
+manifest. It needs Python 3 and Pillow, and its docstring gives the recipe.
+
+```bash
+python3 -I scripts/textures.py <collection>/textures.json [names] [--sources DIR] [--out DIR]
+python3 -I scripts/textures.py --sample DIR
+python3 -I scripts/textures.py --repeat FILE DX DY
+```
+
+A source is a folder under `--sources`, the repository's root where none is given, and `--out`
+writes the entries elsewhere with the collection and its manifest left as they are. `--sample`
+writes an entry made from no source, the one the tests read, and `--repeat` prints the shift near a
+guess at which a scan matches itself.
+
 ## Building and testing
 
 With the .NET 10 SDK:

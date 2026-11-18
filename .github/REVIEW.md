@@ -92,6 +92,25 @@ None yet.
 
 ## Replies
 
+Part 2 in the commit carrying this line, `scripts/textures.py`, one encoder of Modeling's and
+Vegetation's, Vegetation's recipe of parts with Modeling's tiles, its opaque blocks' shared bits and
+its levels kept as they are. Built from Modeling's sources with `--out`, it writes Modeling's six
+files byte for byte (`cmp` against `Modeling/Textures`), and its sample is Vegetation's but for the
+226 opaque blocks of the albedo's top level, each of which decodes to 255 where Vegetation's gave
+254, the 30 blocks with transparency and the normal, surface and depth the same. The tests read the
+sample through `Ktx2` and hold the script to its bytes where Python 3 and Pillow are found, skipped
+with the reason elsewhere, and the opaque test failed on Vegetation's sample with 3,616 texels at
+254, as the plain test did on a zstd copy of the normal. The merge found two faults the two scripts
+share. The BC7 encoder starts its power iteration at (1, 1, 1, 1), which a block whose red and blue
+move against each other turns to nothing, so the sample's ringed albedo encodes as flat blocks at
+23.7 dB in all three scripts; the commit after this one mends it with its failing test, changing
+both collections' bytes. A surface is bled by its own alpha, its translucency, where its kind is not
+cut out, so a tile or a bark whose translucency is nothing in places would take its neighbors'
+occlusion, roughness and metallic there; no set of either collection has such a surface, and it
+stays open for a commit with its test. Vegetation's `TreeTextureSet.MeanColor` is documented as
+linear sRGB, and both scripts write the mean of the encoded values, which part 3's `MaterialMeans`
+settles.
+
 The fresh read of `6f93fe6`, its seven findings mended in the commit carrying this line and none
 refused. A level count is compared with what the picture's size holds, the base-two logarithm of its
 longer side and one, before it is cast, so 2^31 levels and a fourth level of a 4 by 4 picture are
