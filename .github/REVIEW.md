@@ -92,6 +92,17 @@ None yet.
 
 ## Replies
 
+The C# encoder's fourth and last step in the commit carrying this line, sides of any length. A level
+is halved to half of each side rounded down by Pillow's box resampling as its `precompute_coeffs`
+and `normalize_coeffs_8bpc` give it, each output texel's weights normalized and turned into fixed
+point of 22 bits and summed with a half before the shift, across and then down, so a side that
+halves unevenly gets the script's texels, and one that halves whole gets the `(a + b + 1) >> 1` it
+got before. It writes the script's bytes for a drawn 12 by 10 picture whose levels are 6 by 5, 3 by
+2 and 1 by 1, `references/encoder/odd-albedo.ktx2`, and keeps the other references' bytes. The test
+failed first, the writer refusing the sides. The writer is whole, BC7 in modes 6, 1 and 7, BC5 and
+BC4, for a picture of any size. The strict build is clean with 150 tests passing (`dotnet test
+Materials.Tests`).
+
 The C# encoder's third step in the commit carrying this line, BC5 and BC4 in `Ktx2Writer`, `Encode`
 with a format, BC5 of a picture's red and green as a normal holds them and BC4 of its red as a depth
 does, each block its high value first as the script's `bc4_block` writes it, and their data format

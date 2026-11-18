@@ -19,8 +19,8 @@ namespace Materials;
 /// <para>
 /// A block whose colors leave one line is written in mode 1's or mode 7's two subsets where the
 /// script would write it so, and every floating sum is Python's, compensated, so two partitions as
-/// near as each other rank as they do there. Both sides are powers of two, so every halving is
-/// whole.
+/// near as each other rank as they do there. A side that halves unevenly is resampled by Pillow's
+/// box weights in its fixed point, so a picture of any size gets the script's levels.
 /// </para>
 /// </remarks>
 public static class Ktx2Writer
@@ -30,11 +30,11 @@ public static class Ktx2Writer
 
     /// <summary>A picture as a KTX2 file of BC7 blocks with all its levels.</summary>
     /// <param name="rgba">The texels, four bytes each, rows from the top.</param>
-    /// <param name="width">The width in texels, a power of two.</param>
-    /// <param name="height">The height in texels, a power of two.</param>
+    /// <param name="width">The width in texels, one or more.</param>
+    /// <param name="height">The height in texels, one or more.</param>
     /// <param name="colorSpace">The color space the file names, sRGB for a color and linear
     /// otherwise.</param>
-    /// <exception cref="ArgumentException">A side is no power of two, or the texels are not its
+    /// <exception cref="ArgumentException">A side is below one, or the texels are not its
     /// size.</exception>
     public static byte[] Encode(byte[] rgba, int width, int height, ColorSpace colorSpace) =>
         Encode(rgba, width, height, PictureFormat.Bc7, colorSpace);
@@ -44,21 +44,21 @@ public static class Ktx2Writer
     /// BC4 of its red as a depth does, with all its levels.
     /// </summary>
     /// <param name="rgba">The texels, four bytes each, rows from the top.</param>
-    /// <param name="width">The width in texels, a power of two.</param>
-    /// <param name="height">The height in texels, a power of two.</param>
+    /// <param name="width">The width in texels, one or more.</param>
+    /// <param name="height">The height in texels, one or more.</param>
     /// <param name="format">BC7, BC5 or BC4.</param>
     /// <param name="colorSpace">The color space BC7's file names, sRGB or linear; BC5 and BC4 are
     /// linear.</param>
     /// <exception cref="ArgumentException">
-    /// A side is no power of two, the texels are not its size, or the format is none of the three.
+    /// A side is below one, the texels are not its size, or the format is none of the three.
     /// </exception>
     public static byte[] Encode(byte[] rgba, int width, int height, PictureFormat format, ColorSpace colorSpace)
     {
         if (format is not (PictureFormat.Bc7 or PictureFormat.Bc5 or PictureFormat.Bc4))
             throw new ArgumentException($"The writer writes BC7, BC5 and BC4, and {format} was asked for.", nameof(format));
         ArgumentNullException.ThrowIfNull(rgba);
-        if (width < 1 || height < 1 || (width & (width - 1)) != 0 || (height & (height - 1)) != 0)
-            throw new ArgumentException($"A picture of {width} by {height} is encoded where each side is a power of two, so every level halves whole.");
+        if (width < 1 || height < 1)
+            throw new ArgumentException($"A picture of {width} by {height} has no texels to encode.");
         if (rgba.Length != 4L * width * height)
             throw new ArgumentException($"A picture of {width} by {height} holds {4L * width * height} bytes, and {rgba.Length} were given.", nameof(rgba));
 
@@ -75,24 +75,82 @@ public static class Ktx2Writer
         return File(vkFormat, width, height, blocks);
     }
 
-    // A level halved where its side is more than one, across and then down, each pass a half up.
+    // A level halved where its side is more than one, to half of it rounded down, across and then
+    // down, each pass Pillow's box resampling, so a side that halves unevenly gets the script's
+    // texels as one that halves whole does.
     private static (byte[] Rgba, int Width, int Height) Halved(byte[] rgba, int width, int height)
     {
         int w = Math.Max(width / 2, 1), h = Math.Max(height / 2, 1);
-        var across = new byte[w * height * 4];
-        for (int y = 0; y < height; y++)
-        for (int x = 0; x < w; x++)
-        for (int c = 0; c < 4; c++)
-            across[(y * w + x) * 4 + c] = width == 1 ? rgba[(y * width + x) * 4 + c]
-                : (byte)((rgba[(y * width + 2 * x) * 4 + c] + rgba[(y * width + 2 * x + 1) * 4 + c] + 1) >> 1);
+        var across = w == width ? rgba : new byte[w * height * 4];
+        if (w != width)
+        {
+            var (bounds, weights) = Coefficients(width, w);
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < w; x++)
+            for (int c = 0; c < 4; c++)
+            {
+                int sum = 1 << (Precision - 1);
+                for (int k = 0; k < bounds[x].Count; k++) sum += rgba[(y * width + bounds[x].First + k) * 4 + c] * weights[x][k];
+                across[(y * w + x) * 4 + c] = Clip(sum);
+            }
+        }
+
+        if (h == height) return (across, w, h);
+        var (rows, rowWeights) = Coefficients(height, h);
         var down = new byte[w * h * 4];
         for (int y = 0; y < h; y++)
         for (int x = 0; x < w; x++)
         for (int c = 0; c < 4; c++)
-            down[(y * w + x) * 4 + c] = height == 1 ? across[(y * w + x) * 4 + c]
-                : (byte)((across[(2 * y * w + x) * 4 + c] + across[((2 * y + 1) * w + x) * 4 + c] + 1) >> 1);
+        {
+            int sum = 1 << (Precision - 1);
+            for (int k = 0; k < rows[y].Count; k++) sum += across[((rows[y].First + k) * w + x) * 4 + c] * rowWeights[y][k];
+            down[(y * w + x) * 4 + c] = Clip(sum);
+        }
+
         return (down, w, h);
     }
+
+    // The bits of a weight's fraction in Pillow's resampling of eight-bit channels.
+    private const int Precision = 22;
+
+    // Each output texel's first source texel, how many it reads and their weights, for a box
+    // filter resampling a side of one length to another, as Pillow's precompute_coeffs and
+    // normalize_coeffs_8bpc give them.
+    private static ((int First, int Count)[] Bounds, int[][] Weights) Coefficients(int inSize, int outSize)
+    {
+        double scale = (double)inSize / outSize, filterscale = Math.Max(scale, 1.0);
+        double support = 0.5 * filterscale, inverse = 1.0 / filterscale;
+        var bounds = new (int, int)[outSize];
+        var weights = new int[outSize][];
+        for (int x = 0; x < outSize; x++)
+        {
+            double center = (x + 0.5) * scale;
+            int first = Math.Max(0, (int)(center - support + 0.5));
+            int last = Math.Min(inSize, (int)(center + support + 0.5));
+            int count = last - first;
+            var raw = new double[count];
+            double total = 0.0;
+            for (int k = 0; k < count; k++)
+            {
+                double at = (k + first - center + 0.5) * inverse;
+                raw[k] = at > -0.5 && at <= 0.5 ? 1.0 : 0.0;
+                total += raw[k];
+            }
+
+            weights[x] = new int[count];
+            for (int k = 0; k < count; k++)
+            {
+                double share = total != 0.0 ? raw[k] / total : raw[k];
+                weights[x][k] = share < 0 ? (int)(-0.5 + share * (1 << Precision)) : (int)(0.5 + share * (1 << Precision));
+            }
+
+            bounds[x] = (first, count);
+        }
+
+        return (bounds, weights);
+    }
+
+    private static byte Clip(int sum) => sum >= 1 << Precision << 8 ? (byte)255 : sum <= 0 ? (byte)0 : (byte)(sum >> Precision);
 
     // A level's blocks in rows from the top, a level smaller than a block repeating its edge.
     private static byte[] Blocks(byte[] rgba, int width, int height, PictureFormat format)

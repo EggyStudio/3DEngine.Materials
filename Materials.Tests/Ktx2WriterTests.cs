@@ -101,12 +101,20 @@ public class Ktx2WriterTests
         }
     }
 
-    [Theory]
-    [InlineData(12, 16)]
-    [InlineData(16, 6)]
-    public void A_Side_That_Is_No_Power_Of_Two_Is_Refused(int width, int height)
+    [Fact]
+    public void The_Writer_Writes_The_Scripts_Bytes_For_Sides_That_Halve_Unevenly()
     {
-        var thrown = Assert.Throws<ArgumentException>(() => Ktx2Writer.Encode(new byte[width * height * 4], width, height, ColorSpace.Linear));
-        Assert.Contains("power of two", thrown.Message);
+        // 12 by 10, its levels 6 by 5, 3 by 2 and 1 by 1, each halved by the box Pillow resamples
+        // with, two texels to one, five to two and three to one.
+        var rgba = File.ReadAllBytes(Path.Combine(Reference, "source", "odd.rgba"));
+        Assert.Equal(File.ReadAllBytes(Path.Combine(Reference, "odd-albedo.ktx2")), Ktx2Writer.Encode(rgba, 12, 10, ColorSpace.Srgb));
+    }
+
+    [Theory]
+    [InlineData(0, 16)]
+    [InlineData(16, -4)]
+    public void A_Side_Below_One_Is_Refused(int width, int height)
+    {
+        Assert.Throws<ArgumentException>(() => Ktx2Writer.Encode([], width, height, ColorSpace.Linear));
     }
 }
