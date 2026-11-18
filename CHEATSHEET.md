@@ -177,6 +177,9 @@ IReadOnlyList<byte[]> Levels { get; }                    // Each level's texels 
 byte[] Decode(int level = 0);                            // A level decoded to four bytes a texel, as Decode gives it
 Ktx2 Read(ReadOnlySpan<byte> file);                      // Reads a KTX2 file from its bytes
 
+class Ktx2Writer                                         // A picture written as a KTX2 file of BC7 blocks with its levels down to a texel, the bytes scripts/textures.py writes for the same picture, so an engine makes a texture at run time without the script
+byte[] Encode(byte[] rgba, int width, int height, ColorSpace colorSpace);  // A picture as a KTX2 file of BC7 blocks with all its levels
+
 class Texels                                             // A picture's texels in a PictureFormat, their size and their decoding to four bytes a texel
 int BlockBytes(PictureFormat format);                    // How many bytes a block of the format holds, or 4 for a texel of Rgba8
 long ByteCount(PictureFormat format, int width, int height);  // How many bytes a picture of the size holds in the format, in whole blocks

@@ -92,6 +92,15 @@ None yet.
 
 ## Replies
 
+The C# encoder's first step in the commit carrying this line, `Ktx2Writer.Encode`, BC7's mode 6 and
+the plain chain of levels for sides that are powers of two, ported from the measured trial. It
+writes the script's bytes for a drawn tile of 16 by 16 whose blocks are all mode 6's, the reference
+`references/encoder/gradient-albedo.ktx2` the script writes from `source/gradient.ppm`, which a
+second test holds the script to where Python and Pillow run. Its files name `build/textures.py` as
+their writer, as the script's do, so the bytes stay one. Modes 1 and 7, BC5 and BC4 and odd sides
+are each a later step. The tests failed first at the build. The strict build is clean with 144 tests
+passing (`dotnet test Materials.Tests`).
+
 Handoff, for a session that takes the module up again. The module holds a material's description in
 glTF's terms with its file of its own and its import from glTF, the pictures' roles, layouts and
 color spaces, a KTX2 reader and decoders of RGBA8, BC1, BC4, BC5 and every mode of BC7, a material's
