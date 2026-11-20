@@ -1,4 +1,4 @@
-[Devlog](https://github.com/EggyStudio/Materials/blob/main/DEVLOG.md) [Cheatsheet](https://github.com/EggyStudio/Materials/blob/main/CHEATSHEET.md)
+[Devlog](https://github.com/EggyStudio/3DEngine.Materials/blob/main/DEVLOG.md) [Cheatsheet](https://github.com/EggyStudio/3DEngine.Materials/blob/main/CHEATSHEET.md)
 
 # Materials
 
@@ -37,7 +37,7 @@ An engine adds the repository as a git submodule under `modules/` and references
 from a project one folder below the engine's root.
 
 ```bash
-git submodule add https://github.com/EggyStudio/Materials.git modules/Materials
+git submodule add https://github.com/EggyStudio/3DEngine.Materials.git modules/Materials
 ```
 
 ```xml

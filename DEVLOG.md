@@ -6,6 +6,15 @@ under `.github/assets/readings` as WebP files named by their day, each on the da
 the notes written beside them as Markdown files named the same way. A line under Done names the item
 of .github/REVIEW.md or .github/REVIEW-ARCHIVE.md and the commit that closed it.
 
+## 2026-11-19
+
+Commits that day
+
+- `f6b99fe` The C# writer halves a side of any length by the box weights Pillow resamples with, so a
+  picture of any size is written in the bytes the texture script writes.
+- `f1c4a2c` The C# writer encodes BC5 of a picture's red and green and BC4 of its red as the texture
+  script does, so a normal and a depth are made at run time in the bytes the build writes.
+
 ## 2026-11-18
 
 ![](.github/assets/readings/2026-11-18-item-3-bc7-axis.webp)
@@ -42,6 +51,24 @@ taking 0.93 ms a block for 46.40 dB where it took 0.12 for 45.27.
 
 Commits that day
 
+- `880743e` The C# writer encodes a block whose colors leave one line in BC7's modes 1 and 7 as the
+  texture script does, its floating sums compensated as Python's are, so a whole carpet comes out
+  the same bytes from both.
+- `207d568` A picture whose sides are powers of two is written in C# as a KTX2 file of BC7 blocks in
+  mode 6 with all its levels, the bytes the texture script writes for a tile whose blocks are mode
+  6's.
+- `7bd4dbc` A texture collection's manifest is read in C# to its entries, their pictures, sizes,
+  means, leaf boxes and repeats, each standing for a material, so an engine draws what the texture
+  script built without reading its JSON itself.
+- `83dd8d1` The encoder bleeds a surface only where the leaves' cover stands in for its alpha, so a
+  surface not cut out keeps its occlusion, roughness and metallic where it lets nothing through, and
+  the README's one known limit is gone.
+- `70679ed` The materials of a glTF file are read into descriptions at glTF's defaults with its
+  emissive strength, index of refraction and diffuse transmission, an image an ORM texture packs
+  held as one picture.
+- `e170bf0` The encoder writes a block with alpha whose texels leave one line in BC7's mode 7 of two
+  subsets, a drawn leaf atlas's visible color going from 32 to 44 dB, and the tests take the Tools
+  module at its head.
 - `fd8d83b` The tests take the Tools module at its head through its pin script, which finds no check
   new or changed, and the devlog lists each day's commits.
 - `8c72f22` The encoder sums each color's moments once a block for mode 1's partition search, so a
