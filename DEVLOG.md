@@ -6,6 +6,20 @@ under `.github/assets/readings` as WebP files named by their day, each on the da
 the notes written beside them as Markdown files named the same way. A line under Done names the item
 of .github/REVIEW.md or .github/REVIEW-ARCHIVE.md and the commit that closed it.
 
+## 2026-11-22
+
+![](.github/assets/readings/2026-11-22-item-4-spheres.webp)
+Fourteen spheres lit by one light and a sky, drawn on the CPU by the response in the library, a
+dielectric in red above and a metal in gold below, their roughness from 0.08 on the left to 1 on the
+right, so the highlight is seen to widen and fade.
+
+## 2026-11-21
+
+Commits that day
+
+- `66047b4` The Tools module is taken at its newer pin, and the norm gains its sentence that one
+  script is the only gate to the GPU lock.
+
 ## 2026-11-20
 
 Commits that day

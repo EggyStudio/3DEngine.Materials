@@ -2,6 +2,10 @@
 
 # Materials
 
+![Spheres lit across roughness, a dielectric in red above and a metal in gold below](.github/assets/readings/2026-11-22-item-4-spheres.webp)
+
+Lit spheres across roughness and metal, drawn on the CPU by the module's response.
+
 Materials is a library an engine takes as a git submodule, for what a surface is, a material's
 description, the pictures it is drawn with and their encoding, and the response of a lit surface to
 its light, in the terms of glTF 2.0 that any engine reads. It references no engine, and an engine
