@@ -142,7 +142,7 @@ encoder, rebuilding their sets by the commands of the Reply on the BC7 start vec
 material import, dropping its `Look` for `MaterialImport.FromGltf`, and Vegetation
 `TextureCollection` in place of its manifest parser. A fresh session reads AGENTS.md, this file's
 head, its Decisions and the newest Replies down to this one, then README.md and CHEATSHEET.md, and
-builds through the shared lock with a restore first, as NORM.md's N 7.9 asks.
+restores first and builds and tests with no lock, since neither opens a device (NORM.md, N 7.9).
 
 The C# encoder measured and held, not built, until the owner or an engine needs textures made at run
 time. BC7's mode 6 ported in a throwaway test with the script's arithmetic in its order writes all
